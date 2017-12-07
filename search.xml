@@ -1233,6 +1233,12 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
     </entry>
     
     <entry>
+      <title><![CDATA[all-archives]]></title>
+      <url>http://geekarl.com/all-archives/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[博主信息]]></title>
       <url>http://geekarl.com/about/index.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><style type="text/css">
@@ -1327,12 +1333,6 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
 <iframe scrolling="auto" frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height="330" src="http://music.163.com/outchain/player?type=0&id=10460189&auto=0&height=430"></iframe>
 </div>
 <ul class="ds-recent-visitors" data-num-items="30" data-avatar-size="60"></ul>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[all-archives]]></title>
-      <url>http://geekarl.com/all-archives/index.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
