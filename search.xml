@@ -6,9 +6,7 @@
     <entry>
       <title><![CDATA[MAC系统下的相关优秀软件搜集]]></title>
       <url>http://geekarl.com/2017/12/06/mac-software/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><blockquote>
-<p>mac下优秀软件搜集，希望增加工作效率，写出更优雅的代码~</p>
-</blockquote>
+      <content type="html"><![CDATA[<!-- excerpt -->
 <h3>软件包管理</h3>
 <ul>
 <li><a href="https://brew.sh/" target="_blank" rel="external">Homebrew</a> 绝对的包管理神器 已使用</li>
@@ -62,14 +60,14 @@
 <li><a href="https://itunes.apple.com/cn/app/id734383760?mt=12" target="_blank" rel="external">每日英语学习</a> 最好的一款英语学习软件</li>
 </ul>
 <p><em>github上的<a href="https://github.com/kayo5994/UI-Development-Environment-on-Mac" target="_blank" rel="external">repo</a>针对前端的使用，可以多看看</em></p>
-<p>软件的收集和使用是个积累的过程，因此有好的发现会在博客中同步更新，小的方面就会放在评论中。</p>
-]]></content>
+<p>软件的收集和使用是个积累的过程，因此有好的发现会在博客中同步更新，小的方面就会放在评论中。</p>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[js线程机制的介绍和练习]]></title>
       <url>http://geekarl.com/2017/12/02/js-process-mechanism/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><blockquote>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<blockquote>
 <p>给定的几行代码，我们需要知道其输出内容和顺序。JavaScript是一门单线程语言，但有其独特的线程机制</p>
 </blockquote>
 <p>热身代码：</p>
@@ -122,14 +120,14 @@ micro-task(微任务)：Promise，process.nextTick<br>
 <li>JavaScript是一门单线程语言</li>
 <li>Event Loop是JavaScript的执行机制</li>
 <li>针对Promise的知识，<a href="https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html" target="_blank" rel="external">这里</a>推荐一篇文章，非常值得一看</li>
-</ul>
-]]></content>
+</ul>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[fiddler抓包工具(windows)]]></title>
       <url>http://geekarl.com/2017/11/04/learnFiddler/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>在打开fiddler后，会在客户端和服务器之间自动增加一层127.0.0.1:8090的代理层，其表征为客户端的所有请求都要先经过Fiddler，然后转发到相应的服务器，反之，服务器端的所有响应，也都会先经过Fiddler然后发送到客户端。此时IE和chrome的浏览器相应代理设置将自动更改，其他浏览器要进行代理设置</p>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<p>在打开fiddler后，会在客户端和服务器之间自动增加一层127.0.0.1:8090的代理层，其表征为客户端的所有请求都要先经过Fiddler，然后转发到相应的服务器，反之，服务器端的所有响应，也都会先经过Fiddler然后发送到客户端。此时IE和chrome的浏览器相应代理设置将自动更改，其他浏览器要进行代理设置</p>
 <p>默认情况下fiddler只能获取http请求，需在菜单项 Tools-&gt;Fiddler Options-&gt;HTTPS的选项卡中 CaptureHTTPS CONNECTs是默认勾选的，要手动勾选Decrypt HTTPS traffic和Ignore servercertificate errors两项（首次点击会弹出是否信任fiddler证书和安全提示，直接点击yes就行）</p>
 <p>如果要启用手机端抓包，需要额外设置  Tools-&gt;Fiddler Options-&gt;Connections 中勾选allow remote computers to connect，并确认默认监听端口(8090),如果端口号有更改，需要重启生效，否则会出现无法上网的问题。对手机端的设置步骤如下：</p>
 <ol>
@@ -139,14 +137,14 @@ micro-task(微任务)：Promise，process.nextTick<br>
 <li>此时可以通过让手机和电脑在一个局域网中，手机连上相应wlan后，设置次wifi的代理，主机名为电脑的ip，端口为fiddler的代理端口，点击确定即可</li>
 </ol>
 <p>如果需要停止代理，手机上直接重置wifi的代理，并在设置——安全——受信任的凭证——用户 里点击相关安装证书删除即可。</p>
-<p><a href="http://blog.csdn.net/gld824125233/article/details/52588275" target="_blank" rel="external">参考链接</a></p>
-]]></content>
+<p><a href="http://blog.csdn.net/gld824125233/article/details/52588275" target="_blank" rel="external">参考链接</a></p>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[接触到的git的三个重要知识点]]></title>
       <url>http://geekarl.com/2017/08/16/My-Git-Knowledge/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h2>git配置多个SSH-Key</h2>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<h2>git配置多个SSH-Key</h2>
 <ol>
 <li>
 <p>生成第一个需要的SSH-Key(比如公司用的)</p>
@@ -205,7 +203,8 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[学习git常用及高阶命令]]></title>
       <url>http://geekarl.com/2017/07/09/gitLearn/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><blockquote>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<blockquote>
 <p>几个常用的git命令情景</p>
 </blockquote>
 <ul>
@@ -259,9 +258,7 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[纯前端json数据生成excel下载的实现]]></title>
       <url>http://geekarl.com/2017/06/09/excel/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><blockquote>
-<p>本需求是将页面已经获取到的json数据按照产品给的逻辑导出为excel文件，在查阅资料的过程中放弃了使用jQuery的实现方法，决定利用现在浏览器广泛支持的Blob对象和FileSaver插件来实现。</p>
-</blockquote>
+      <content type="html"><![CDATA[<!-- excerpt -->
 <h3>引入工具</h3>
 <p>本项目是使用vue2.0的后端项目, 用的ES6的模块化语法。<br>
 <a href="https://github.com/eligrey/FileSaver.js" target="_blank" rel="external">file-saver</a></p>
@@ -286,14 +283,14 @@ micro-task(微任务)：Promise，process.nextTick<br>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line">methods: &#123;</div><div class="line">    generateJson() &#123;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">        startTime = startTime ? moment(startTime, <span class="string">'YYYYMMDDHHmmss'</span>).format(<span class="string">'YYYY-MM-DD HH:mm:ss'</span>) : <span class="string">" "</span>;</div><div class="line">        endTime = endTime ? moment(endTime, <span class="string">'YYYYMMDDHHmmss'</span>).format(<span class="string">'YYYY-MM-DD HH:mm:ss'</span>) : <span class="string">" "</span>;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">    &#125;,</div><div class="line">    dataToExcel(data) &#123;</div><div class="line">        <span class="keyword">let</span> style = <span class="string">"color:Black;background-color:White;border-color:#CCCCCC;border-width:1px;border-style:None;width:100%;border-collapse:collapse;font-size:12pt;text-align:center;"</span>;</div><div class="line">        <span class="keyword">let</span> excel = <span class="string">'&lt;table cellspacing="0" rules="rows" border="1" style='</span> + style + <span class="string">'&gt;'</span>;</div><div class="line">        <span class="keyword">let</span> titleArr = [<span class="string">'节目类型'</span>, <span class="string">'节目名称'</span>, <span class="string">'开始时间'</span>, <span class="string">'结束时间'</span>, <span class="string">'直播流id'</span>];</div><div class="line">        <span class="keyword">let</span> dataKeys = [<span class="string">'type'</span>, <span class="string">'name'</span>, <span class="string">'startTime'</span>, <span class="string">'endTime'</span>, <span class="string">'liveStreamId'</span>];</div><div class="line">        <span class="keyword">let</span> row = <span class="string">'&lt;tr style="font-size:15pt;font-weight:700;text-align:center;"&gt;'</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; titleArr.length; i++) &#123;</div><div class="line">            row += <span class="string">"&lt;td&gt;"</span> + titleArr[i] + <span class="string">"&lt;/td&gt;"</span>;</div><div class="line">        &#125;</div><div class="line">        excel += row + <span class="string">"&lt;/tr&gt;"</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; data.length; j++) &#123;</div><div class="line">            <span class="keyword">let</span> row = <span class="string">"&lt;tr&gt;"</span>;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; dataKeys.length; i++) &#123;</div><div class="line">                <span class="comment">// 处理时间丢失0的问题</span></div><div class="line">                <span class="keyword">if</span> (dataKeys[i] === <span class="string">'startTime'</span> || dataKeys[i] === <span class="string">'endTime'</span>) &#123;</div><div class="line">                    row += <span class="string">"&lt;td&gt;&amp;nbsp;"</span> + data[j][dataKeys[i]] + <span class="string">"&lt;/td&gt;"</span>;</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    row += <span class="string">"&lt;td&gt;"</span> + data[j][dataKeys[i]] + <span class="string">"&lt;/td&gt;"</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            excel += row + <span class="string">"&lt;/tr&gt;"</span>;</div><div class="line">        &#125;</div><div class="line">        excel += <span class="string">"&lt;/table&gt;"</span>;</div><div class="line">        <span class="keyword">return</span> excel;</div><div class="line">    &#125;,</div><div class="line">    generateExcel(excel) &#123;</div><div class="line">        <span class="keyword">var</span> excelFile = <span class="string">"&lt;html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:excel' xmlns='http://www.w3.org/TR/REC-html40'&gt;"</span>;</div><div class="line">        excelFile += <span class="string">'&lt;meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"&gt;'</span>;</div><div class="line">        excelFile += <span class="string">'&lt;meta http-equiv="content-type" content="application/vnd.ms-excel'</span>;</div><div class="line">        excelFile += <span class="string">'; charset=UTF-8"&gt;'</span>;</div><div class="line">        excelFile += <span class="string">"&lt;head&gt;"</span>;</div><div class="line">        excelFile += <span class="string">"&lt;!--[if gte mso 9]&gt;"</span>;</div><div class="line">        excelFile += <span class="string">"&lt;xml&gt;"</span>;</div><div class="line">        excelFile += <span class="string">"&lt;x:ExcelWorkbook&gt;"</span>;</div><div class="line">        excelFile += <span class="string">"&lt;x:ExcelWorksheets&gt;"</span>;</div><div class="line">        excelFile += <span class="string">"&lt;x:ExcelWorksheet&gt;"</span>;</div><div class="line">        excelFile += <span class="string">"&lt;x:Name&gt;"</span>;</div><div class="line">        excelFile += <span class="string">"&#123;worksheet&#125;"</span>;</div><div class="line">        excelFile += <span class="string">"&lt;/x:Name&gt;"</span>;</div><div class="line">        excelFile += <span class="string">"&lt;x:WorksheetOptions&gt;"</span>;</div><div class="line">        excelFile += <span class="string">"&lt;x:DisplayGridlines/&gt;"</span>;</div><div class="line">        excelFile += <span class="string">"&lt;/x:WorksheetOptions&gt;"</span>;</div><div class="line">        excelFile += <span class="string">"&lt;/x:ExcelWorksheet&gt;"</span>;</div><div class="line">        excelFile += <span class="string">"&lt;/x:ExcelWorksheets&gt;"</span>;</div><div class="line">        excelFile += <span class="string">"&lt;/x:ExcelWorkbook&gt;"</span>;</div><div class="line">        excelFile += <span class="string">"&lt;/xml&gt;"</span>;</div><div class="line">        excelFile += <span class="string">"&lt;![endif]--&gt;"</span>;</div><div class="line">        excelFile += <span class="string">"&lt;/head&gt;"</span>;</div><div class="line">        excelFile += <span class="string">"&lt;body&gt;"</span>;</div><div class="line">        excelFile += excel;</div><div class="line">        excelFile += <span class="string">"&lt;/body&gt;"</span>;</div><div class="line">        excelFile += <span class="string">"&lt;/html&gt;"</span>;</div><div class="line">        <span class="keyword">return</span> excelFile;</div><div class="line">    &#125;</div><div class="line">    getExcel() &#123;</div><div class="line">        <span class="keyword">let</span> dataJson = <span class="keyword">this</span>.generateJson();</div><div class="line">        <span class="keyword">let</span> excelContent = <span class="keyword">this</span>.dataToExcel(dataJson);</div><div class="line">        <span class="keyword">let</span> today = moment().format(<span class="string">'YYYY-MM-DD'</span>);</div><div class="line">        <span class="keyword">let</span> excelName = today + <span class="string">"直播.xls"</span>;</div><div class="line">        <span class="keyword">let</span> excel = <span class="keyword">this</span>.generateExcel(excelContent);</div><div class="line">        saveAs(</div><div class="line">            <span class="keyword">new</span> Blob([excel], &#123;<span class="attr">type</span>: <span class="string">"application/vnd.ms-excel;charset=utf-8"</span>&#125;),</div><div class="line">            excelName</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 在vue中 点击按钮触发getExcel函数即可进行下载</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><em>参考链接奉上：<a href="http://blog.csdn.net/educast/article/details/52775559" target="_blank" rel="external">http://blog.csdn.net/educast/article/details/52775559</a></em></p>
 <p>使用node做后端来返回excel文件 参考此库<a href="https://github.com/rikkertkoppes/json2xls" target="_blank" rel="external">json2xls</a>。</p>
-<p>心得: 这个过程有人已经封装为jquery插件，不过我是没有采用jquery依赖实现的,从<a href="https://github.com/kayalshri/tableExport.jquery.plugin" target="_blank" rel="external">github-tableExport</a>中获得不少启发。 另外还有<a href="https://www.npmjs.com/package/xlsx" target="_blank" rel="external">npm-xlsx</a>基本上要把Excel玩坏了  各种来回读取，有时间可以看看。文件的本质就是各种数据流的操作，现在浏览器真心是越来越强大，期待HTML5的文件API被广为支持的一天。</p>
-]]></content>
+<p>心得: 这个过程有人已经封装为jquery插件，不过我是没有采用jquery依赖实现的,从<a href="https://github.com/kayalshri/tableExport.jquery.plugin" target="_blank" rel="external">github-tableExport</a>中获得不少启发。 另外还有<a href="https://www.npmjs.com/package/xlsx" target="_blank" rel="external">npm-xlsx</a>基本上要把Excel玩坏了  各种来回读取，有时间可以看看。文件的本质就是各种数据流的操作，现在浏览器真心是越来越强大，期待HTML5的文件API被广为支持的一天。</p>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[前端性能优化总结(简略)]]></title>
       <url>http://geekarl.com/2017/06/03/fontend-optimize/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h3>静态资源优化</h3>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<h3>静态资源优化</h3>
 <p><em>这方面主要是减少静态资源的加载时间 减少http请求的数量和时间上来考虑</em></p>
 <ul>
 <li>合并压缩css、js文件，制作雪碧图 压缩图片：减少http的请求次数，节省网络请求时间</li>
@@ -315,16 +312,13 @@ micro-task(微任务)：Promise，process.nextTick<br>
 <li>恰当的DOM结构 从而减少DOM元素的数量 减少DOM树的复杂度</li>
 <li>img标签设置宽高，避免回流和重绘的影响(先有占位)</li>
 <li>React和Vue等框架中虚拟DOM的渲染方案，减少了dom的开销</li>
-</ul>
-]]></content>
+</ul>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[在Windows上切换node版本的实践]]></title>
       <url>http://geekarl.com/2017/03/23/nvm-windows-learning/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><blockquote>
-<p>因工作需要，下载了nvm-windows对node进行不同版本的切换来满足不同项目的需求，不料踩坑若干，分享如下</p>
-</blockquote>
+      <content type="html"><![CDATA[<!-- excerpt -->
 <h3>下载node切换软件</h3>
 <p>在MAC下有大名鼎鼎的nvm，网上有很多成熟的教程。windows下也有“著名”的<a href="https://github.com/coreybutler/nvm-windows/releases" target="_blank" rel="external">nvm-windows</a> 实打实来说，这个挺好用的，不过我的打开方式有点歪~  现在来看一下这个go语言写成的工具有哪些需要注意的地方。<br>
 项目的github链接为：<a href="https://github.com/coreybutler/nvm-windows/" target="_blank" rel="external">nvm-windows</a> 可以点击上一段的链接下载1.1.3版本的切换软件，如果更新了，那就要按照github中给出的最新文档来，这次有点费力就是吃了没看英文文档的亏。</p>
@@ -343,14 +337,14 @@ micro-task(微任务)：Promise，process.nextTick<br>
 </ul>
 <h3>补回失去的全局模块</h3>
 <p>对照第二步中的截图，一般情况下，在国内全局安装的第一个包都是cnpm，所以直接<code>npm install cnpm -g</code>即可，接下来就是对照自己的项目需要，全局安装各种包即可，不过要记住每个版本都需要安装一遍，别嫌烦，切换就用use命令就行，然后cnpm各种包就好了。</p>
-<p><em>到这里就基本结束了，后面发现bug，则此博文未完待续···</em></p>
-]]></content>
+<p><em>到这里就基本结束了，后面发现bug，则此博文未完待续···</em></p>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[学习科学上网]]></title>
       <url>http://geekarl.com/2017/03/23/ShadowSocks-Learning/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p><em>不过这个并非对非程序出身的人的教程，详细学习可以参考最后的《SS不完全指南》一文</em></p>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<p><em>不过这个并非对非程序出身的人的教程，详细学习可以参考最后的《SS不完全指南》一文</em></p>
 <blockquote>
 <p>今天经过一番探索，对shadowsocks的使用方式有了一定理解，虽然没到用代码控制那一层，不过对于平时应用足矣<br>
 核心是使用ShadowSocks来进行网络代理，但具体的服务器可以有某些<strong>分享网址</strong>上可用，寻找适合的服务器就好，大部分免费的额度已经够了，不过随着时间的发展，或许需要部分资金支持。</p>
@@ -379,17 +373,13 @@ micro-task(微任务)：Promise，process.nextTick<br>
 <ul>
 <li><a href="http://www.auooo.com/2015/06/26/shadowsocks%EF%BC%88%E5%BD%B1%E6%A2%AD%EF%BC%89%E4%B8%8D%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/#serverconfiguration" target="_blank" rel="external">ShadowSocks不完全指南</a></li>
 </ul>
-<p><em>在此声明，这个是个人笔记，不作为分享~</em></p>
-]]></content>
+<p><em>在此声明，这个是个人笔记，不作为分享~</em></p>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[SHELL脚本的学习和制作]]></title>
       <url>http://geekarl.com/2017/03/20/bash-learning/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h2>shell脚本的学习</h2>
-<blockquote>
-<p>因前端工程的自动化构建，在webpack打包后需要将index.html、dist和static三个文件上传到部署的linux环境中，之前一直是用windows通过tr上传到跳板机而后scp到发布机器上，近来部署了jenkins，可直接在jenkins部署的机器上进行shell脚本的触发自动化操作</p>
-</blockquote>
+      <content type="html"><![CDATA[<!-- excerpt -->
 <h3>本地的PACK构建shell脚本</h3>
 <p>首先是在在package.json中的scripts键值中加入release</p>
 <p><code>&quot;release&quot;: &quot;sh build/pack.sh&quot;</code></p>
@@ -415,17 +405,13 @@ micro-task(微任务)：Promise，process.nextTick<br>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$DEPLOY_SERVERS</span></div><div class="line">VERSION=`cat ../output/version.txt`</div><div class="line"><span class="built_in">echo</span> <span class="string">"版本号: "</span><span class="variable">$VERSION</span></div><div class="line"><span class="built_in">cd</span> <span class="variable">$WORKSPACE</span>/lesports-fe-cms</div><div class="line"><span class="comment"># 下面这个是讲$DEPLOY_SERVERS用','分隔为数组并存入ADDR</span></div><div class="line">IFS=<span class="string">','</span> <span class="built_in">read</span> -ra ADDR &lt;&lt;&lt; <span class="string">"<span class="variable">$DEPLOY_SERVERS</span>"</span></div><div class="line"><span class="comment"># 循环数组读取每一个变量</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">"<span class="variable">$&#123;ADDR[@]&#125;</span>"</span>; <span class="keyword">do</span></div><div class="line">    <span class="comment"># 先通过scp把包上传到要部署的机器上</span></div><div class="line">    scp output/qmt.tgz root@<span class="variable">$i</span>:/tmp</div><div class="line">    ssh root@<span class="variable">$i</span> <span class="string">"mkdir -p /letv/leapps/tags &amp;&amp; \</span></div><div class="line">    cd /letv/leapps/tags &amp;&amp; \</div><div class="line">    mkdir -p qmt.<span class="variable">$VERSION</span> &amp;&amp; \</div><div class="line">    cd qmt.<span class="variable">$VERSION</span> &amp;&amp; \</div><div class="line">    tar zxvf /tmp/qmt.tgz -C . &amp;&amp; \</div><div class="line">    rm -f /tmp/qmt.tgz &amp;&amp; \</div><div class="line">    ls -rthl &amp;&amp; \</div><div class="line">    cd ../../ &amp;&amp; \</div><div class="line">    rm -fr qmt-cms-static &amp;&amp; \</div><div class="line">    ln -s tags/qmt.<span class="variable">$VERSION</span> qmt-cms-static</div><div class="line">    "</div><div class="line"><span class="keyword">done</span></div><div class="line"><span class="comment"># mkdir -p qmt.$VERSION 为建立带版本号的文件夹(在tags文件夹下)</span></div><div class="line"><span class="comment"># cd进入带版本号的文件夹,把包解压到当前文件夹下</span></div><div class="line"><span class="comment"># ls -rthl 为显示目录内容列表</span></div><div class="line"><span class="comment"># 回退到 /letv/leapps文件夹中 此处已有qmt-cms-static这个文件夹，ln -s tags/qmt.$VERSION qmt-cms-static 就是把这个文件夹软连接到最新的带tag的文件夹上。</span></div></pre></td></tr></table></figure>
 <h2>优化脚本-取消版本号并增加错误提示</h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="keyword">if</span> [ ! <span class="string">"<span class="variable">$1</span>"</span> ]; <span class="keyword">then</span></div><div class="line">    <span class="built_in">echo</span> <span class="string">"版本号是必须的"</span></div><div class="line">    <span class="built_in">exit</span> 1</div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="comment"># 用于当本地的tag已存在时的提示信息</span></div><div class="line">curTag=`git tag | grep v<span class="variable">$1</span>`</div><div class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$curTag</span>"</span> == <span class="string">"v<span class="variable">$1</span>"</span> ]; <span class="keyword">then</span></div><div class="line">    <span class="built_in">echo</span> <span class="string">"版本号已存在"</span></div><div class="line">    <span class="built_in">exit</span> 1</div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"DIST编译中....."</span></div><div class="line">npm run dist</div><div class="line"><span class="comment">#</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"压缩打包中......"</span></div><div class="line">mkdir -p output</div><div class="line">tar zcvf qmt.tgz dist/ index.html static/</div><div class="line">mv qmt.tgz output</div><div class="line"><span class="built_in">echo</span> <span class="string">"打包完毕"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"提交、添加tag，并push到gitlab"</span></div><div class="line">git add output/</div><div class="line">git add src/components/_global/footer/index.vue</div><div class="line">git commit <span class="_">-a</span> -v -m <span class="string">"new release v<span class="variable">$1</span>"</span></div><div class="line">git tag <span class="_">-a</span> v<span class="string">"<span class="variable">$1</span>"</span></div><div class="line"><span class="comment"># 捕捉错误并提示出错信息</span></div><div class="line">git push -u origin release || &#123; <span class="built_in">echo</span> <span class="string">"本地推送失败，请pull后再执行"</span>; <span class="built_in">exit</span> 1; &#125;</div><div class="line">git push origin v<span class="string">"<span class="variable">$1</span>"</span> || &#123; <span class="built_in">echo</span> <span class="string">"tag push failed"</span>; <span class="built_in">exit</span> 1; &#125;</div></pre></td></tr></table></figure>
-<p><em>这些shell脚本的难度都不是很大，主要是练习，毕竟也不是专业的运维，否则最起码也要有定时执行一类的，不过工作需要的运维东西不算多，慢慢积累吧。</em></p>
-]]></content>
+<p><em>这些shell脚本的难度都不是很大，主要是练习，毕竟也不是专业的运维，否则最起码也要有定时执行一类的，不过工作需要的运维东西不算多，慢慢积累吧。</em></p>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[使用SSR来模拟后端mock数据]]></title>
       <url>http://geekarl.com/2017/03/11/ssr-introduction/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h2>SSR</h2>
-<blockquote>
-<p>introduction:将一个目录设置成一个静态服务器，ssr相当于是搭建了一个 Mock Server ，构建假数据，然后把这些假数据存到 JSON 文件上，Mock Server 可以响应请求或者生成页面，当然也可以顺便生成 API 文档。</p>
-</blockquote>
+      <content type="html"><![CDATA[<!-- excerpt -->
 <h3>特点</h3>
 <ul>
 <li>可强制跨域访问（ajax不报错，方便调试）</li>
@@ -458,14 +444,14 @@ micro-task(微任务)：Promise，process.nextTick<br>
 <p>这样只要约定好数据格式, 后端端口不会影响前端调试, Mock Server 可以相应请求</p>
 <blockquote>
 <p>PS: 前提是开发页面的web环境必须是有服务器的~否则没法跨域发送ajax的。</p>
-</blockquote>
-]]></content>
+</blockquote>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[回首——爱乐之城]]></title>
       <url>http://geekarl.com/2017/02/18/comment-about-LALALAND/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p><strong>文艺类的电影看的不多，不过这一部不愧是经典，最重要的就是每个人都在其中能找到自己的视角。</strong> <strong>——by卡少</strong></p>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<p><strong>文艺类的电影看的不多，不过这一部不愧是经典，最重要的就是每个人都在其中能找到自己的视角。</strong> <strong>——by卡少</strong></p>
 <p><img src="http://image13.m1905.cn/uploadfile/2016/0714/20160714103140105045.jpg" alt="Banner"></p>
 <p>首先是夸张的开场舞，让我有一种看文艺表演的感觉，不得不说上来这么high的表演，歌词中却透漏出了之后的剧情，不过据说这是对另外一部电影的致敬，无论如何，这开场白确实铺垫的不错，得以跟随导演顺畅浸入剧情。</p>
 <p>接下来就是寻常爱情片的套路，偶遇——缘起——相守——缘灭，单这个影片不是走的爱情片的路线，最重要的还是其中歌舞的穿插，台词即歌词，情感表现更充分，也更容易调动起观众的情绪，不得不说是大家手笔。其中主线还按照季节来分段，也更预示了感情线的发展。</p>
@@ -482,7 +468,8 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[情人节专题~你的谜底，我来揭开]]></title>
       <url>http://geekarl.com/2017/02/14/For-My-Lover/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><style type="text/css">
+      <content type="html"><![CDATA[<!-- excerpt -->
+<style type="text/css">
 .show-heart{
     background-color: rgba(235, 159, 171, 0.4);
 }
@@ -536,14 +523,14 @@ micro-task(微任务)：Promise，process.nextTick<br>
 <p><img src="http://i1.piimg.com/567571/b18a81ccd80d4ef2.jpg" alt=""></p>
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="298" height="52" src="//music.163.com/outchain/player?type=2&id=287035&auto=1&height=32"></iframe>
 <p><strong>亲爱的，我收到了你的回复 好感动，谢谢你的礼物</strong><br>
-<strong>从此以后，我的奋斗更增加一份动力了，加油ing</strong></p>
-]]></content>
+<strong>从此以后，我的奋斗更增加一份动力了，加油ing</strong></p>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[样式代码编写习惯约定——高逼格]]></title>
       <url>http://geekarl.com/2017/02/12/CSS-Good-Technique/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h2>CSS代码规范</h2>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<h2>CSS代码规范</h2>
 <p><strong>写在最前面的一句话：sass不要嵌套过深，不允许超过3层</strong></p>
 <h3><strong>命名规范</strong></h3>
 <p><strong>RULE1.  命名</strong>全部<strong>小写</strong>，不允许出现大写或者驼峰命名，使用<strong>短中划线</strong>，不允许出现下划线命名</p>
@@ -673,14 +660,14 @@ micro-task(微任务)：Promise，process.nextTick<br>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">.content &#123;</div><div class="line">  /* 定位 */</div><div class="line">  display: block;</div><div class="line">  position: absolute;</div><div class="line">  left: 0;</div><div class="line">  top: 0;</div><div class="line">  /* 盒模型 */</div><div class="line">  width: 50px;</div><div class="line">  height: 50px;</div><div class="line">  margin: 10px;</div><div class="line">  border: 1px solid black;</div><div class="line">  / *其他* /</div><div class="line">  color: #efefef;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>按照这样的顺序书写可见提升浏览器渲染dom的性能<br>
 简单举个例子，网页中的图片，如果没有设置width和height，在图片载入之前，他所占的空间为0，但是当他加载完毕之后，那块为0的空间突然被撑开了，这样会导致，他下面的元素重新排列和渲染，造成重绘（repaint）和回流（reflow）。我们在写css的时候，把元素的定位放在前头，首先让浏览器知道该元素是在文本流内还是外，具体在页面的哪个部位，接着让浏览器知道他们的宽度和高度，border等这些占用空间的属性，其他的属性都是在这个固定的区域内渲染的，差不多就是这个意思吧~ （这个咱们遵守的最不好的，以后注意书写顺序，做一个有逼格的csser）</p>
-<p>另外，大家多挖掘sass，发挥他的威力，别以为只是一个方便嵌套的玩意，for，each map等能带来很多书写的便利提升效率</p>
-]]></content>
+<p>另外，大家多挖掘sass，发挥他的威力，别以为只是一个方便嵌套的玩意，for，each map等能带来很多书写的便利提升效率</p>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[代码整洁之道——JS]]></title>
       <url>http://geekarl.com/2017/02/11/JS-nice-habit/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><blockquote>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<blockquote>
 <p>本文转载自：<a href="http://www.zcfy.cc" target="_blank" rel="external">众成翻译</a><br>
 译者：<a href="http://www.zcfy.cc/@jamesfancy" target="_blank" rel="external">边城</a><br>
 链接：<a href="http://www.zcfy.cc/article/2273" target="_blank" rel="external">http://www.zcfy.cc/article/2273</a><br>
@@ -1027,14 +1014,14 @@ micro-task(微任务)：Promise，process.nextTick<br>
 <p><strong>不好:</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">The MIT License (MIT)</div><div class="line"></div><div class="line">Copyright (c) 2016 Ryan McDermott</div><div class="line"></div><div class="line">Permission is hereby granted, free of charge, to any person obtaining a copy</div><div class="line">of this software and associated documentation files (the &quot;Software&quot;), to deal</div><div class="line">in the Software without restriction, including without limitation the rights</div><div class="line">to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</div><div class="line">copies of the Software, and to permit persons to whom the Software is</div><div class="line">furnished to do so, subject to the following conditions:</div><div class="line"></div><div class="line">The above copyright notice and this permission notice shall be included in all</div><div class="line">copies or substantial portions of the Software.</div><div class="line"></div><div class="line">THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</div><div class="line">IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</div><div class="line">FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</div><div class="line">AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</div><div class="line">LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</div><div class="line">OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</div><div class="line">SOFTWARE</div><div class="line">*/</div><div class="line"></div><div class="line">function calculateBill() &#123;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>好</strong>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function calculateBill() &#123;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-]]></content>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function calculateBill() &#123;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[卡少2016年终总结]]></title>
       <url>http://geekarl.com/2016/12/31/personal-summarize/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1>个人2016年终总结</h1>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<h1>个人2016年终总结</h1>
 <hr>
 <h3>在2016年里发生了很多事情，从最开始1月3号的经历和拜别，春节期间的决心，四月份的离职，脱产学习，并找项目练手，学习各种前沿技术，一转眼已经在北京入职两个月了，期间种种，真是令人唏嘘不已。</h3>
 <h2><p style="text-indent:32px;">2016年在前端领域有了长足的进步，虽然相关的资料都是在2015年准备的，但真正下决心去做，还是在2016年，过往经历让这个时间段的心比任何时候都平稳的多，也多亏了家人的支持和鼓励，使我一个人的探索和求知之旅也不显得那么的沉重和迷茫。</p></h2>
@@ -1049,7 +1036,8 @@ PS: 新的一年，积攒人品，期待爆发 哦哦]]></content>
     <entry>
       <title><![CDATA[techniques about VsCode]]></title>
       <url>http://geekarl.com/2016/10/25/techniques-about-VsCode/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h2>VScode的插件记录</h2>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<h2>VScode的插件记录</h2>
 <hr>
 <article>
     <p>用VS code来做网页web开发，目前安装的插件有
@@ -1074,14 +1062,14 @@ PS: 新的一年，积攒人品，期待爆发 哦哦]]></content>
     *在新电脑上配置VS的内容如上，也希望能给他人一个参考，有新发现随时补充。*
 &lt;/p&gt;
 </code></pre>
-</p></article>
-]]></content>
+</p></article>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[用CSS实现居中的总结]]></title>
       <url>http://geekarl.com/2016/09/14/CSS-center/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h3>行内或者行内块元素居中</h3>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<h3>行内或者行内块元素居中</h3>
 <p>1.单行竖直居中</p>
 <blockquote>
 <p>给行内元素添加上下相同大小的<code>padding</code>值即可<br>
@@ -1123,14 +1111,14 @@ PS: 新的一年，积攒人品，期待爆发 哦哦]]></content>
 <p>2.HACK的全兼容全居中代码<br>
 IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居中，而font-size的方法则适用于IE6和IE7，结合这两者的代码如下：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">.parent&#123;</div><div class="line">    *font-size:175.4px; /*fontsize的值为元素高度除以1.14所得结果，适合IE6、7*/</div><div class="line">    height:200px; width:200px; text-align: center;/*标准浏览器的方法*/</div><div class="line">    display: table-cell; vertical-align:middle;</div><div class="line">&#125;</div><div class="line">.child&#123;</div><div class="line">    display:inline-block;</div><div class="line">    *zoom:1; *display:inline; /*在ie6和7中实现inline-block的方法*/</div><div class="line">    *vertical-align:middle; /*使用font-size方法必须*/</div><div class="line">    font-size:12px; /*改回正常的font-size数值*/</div><div class="line">    width:50px; height:50px; background:#00f;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>注意<code>vertical-align:middle</code>写在父元素中才行。</p>
-]]></content>
+<p>注意<code>vertical-align:middle</code>写在父元素中才行。</p>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[使用HEXO搭建个人博客遇到的几个问题]]></title>
       <url>http://geekarl.com/2016/08/13/firstHEXO/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><style>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<style>
     .text{
         text-indent:32px;
         display: inline-block;
@@ -1143,26 +1131,26 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
 </ol>
 <p><span class="text">我在本地搭建好整体的博客框架之后，通过<code>hexo clear &amp;&amp; hexo g</code>在bash中运行后已经在本地可以预览到，但是通过deoloy却提示失败，通过索引相关的提示错误信息，将hexo配置文件中的部署地址由<code>https://github.com/用户名/用户名.github.io</code>改为<code>git@github.com:用户名/用户名.github.com</code>.问题得到解决，成功部署到了github上。</span></p>
 <p><span class="text">域名更改这块的内容，我主要参考的是简书上的一篇文章，同时对域名这块的知识点补了补课: <a href="http://www.jianshu.com/p/00a19bb425cb" target="_blank" rel="external">自定义域名设置</a>; 尤其是在命令行里输入ping <a href="http://username.github.io" target="_blank" rel="external">username.github.io</a>（请将username换成你的用户名）来获取IP的思维值得借鉴，不过这里我用的是github给出的那两个IP地址也没问题，所以两种方法都是可以的。建议通过阿里云万网购买的域名都可以按照这个思路来设置，截图如下:</span></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1830662-b76412650c334b19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="设置图"></p>
-]]></content>
+<p><img src="http://upload-images.jianshu.io/upload_images/1830662-b76412650c334b19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="设置图"></p>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[对列表hover效果的小探讨]]></title>
       <url>http://geekarl.com/2016/05/14/nav-hover/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h2>有hover效果的页面导航的制作思路</h2>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<h2>有hover效果的页面导航的制作思路</h2>
 <p style="text-indent:32px;">在做顶部页面导航时，很多情况下网站需要鼠标悬停的底部高亮线的效果。这部分nav一般是采用ul+lian+a的方式来做，li设置display为行内块元素。今天的想法是让这个悬停产生的线如何跟这个字的宽度相同，而不是li的宽度？</p>
 <p style="text-indent:32px;">这个想法的关键在于这个悬停线统一是用伪元素来实现的，伪元素的宽度就是这个悬停线的宽度，因此css类选择器应该是 .nav ul li a:hover::after的格式。但还是出现了一些小问题，比如这个a的宽度只能是被里面文字撑开的宽度，不能设置值 一般对a就设置width:100%即可。 但导航的文字之间是有空隙的，这个是个技巧，也就是设置li的margin值，从而让导航按钮之间有个等大的间隔。 具体实现代码如下：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"nav"</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>特卖<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>儿童<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>学习机<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>加入我们<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>APP下载<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.nav</span>&#123;<span class="attribute">width</span>:<span class="number">450px</span>; <span class="attribute">height</span>:<span class="number">26px</span>; <span class="attribute">position</span>:absolute; <span class="attribute">right</span>:<span class="number">24%</span>; <span class="attribute">bottom</span>:<span class="number">18px</span>;&#125;</div><div class="line"><span class="selector-class">.nav</span> <span class="selector-tag">ul</span><span class="selector-pseudo">::after</span>&#123;<span class="attribute">content</span>: <span class="string">""</span>; <span class="attribute">display</span>: block; <span class="attribute">clear</span>:both;&#125;</div><div class="line"><span class="selector-class">.nav</span> <span class="selector-tag">ul</span> <span class="selector-tag">li</span>&#123; <span class="attribute">float</span>: left; <span class="attribute">height</span>:<span class="number">26px</span>; <span class="attribute">line-height</span>: <span class="number">26px</span>; <span class="attribute">position</span>:relative;<span class="attribute">margin</span>:<span class="number">0</span> <span class="number">12px</span>;&#125;</div><div class="line"><span class="selector-class">.nav</span> <span class="selector-tag">ul</span> <span class="selector-tag">li</span> <span class="selector-tag">a</span>&#123;<span class="attribute">font-size</span>:<span class="number">18px</span>; <span class="attribute">color</span>:<span class="number">#464646</span>; <span class="attribute">display</span>: block; &#125;</div><div class="line"><span class="selector-class">.nav</span> <span class="selector-tag">ul</span> <span class="selector-tag">li</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span><span class="selector-pseudo">::after</span>&#123;<span class="attribute">content</span>:<span class="string">""</span>;<span class="attribute">width</span>:<span class="number">100%</span>; </div><div class="line"><span class="attribute">border-bottom</span>:<span class="number">2px</span> solid <span class="number">#49d7e7</span>; <span class="attribute">position</span>: absolute;</div><div class="line"><span class="attribute">left</span>:<span class="number">0</span>; <span class="attribute">bottom</span>:-<span class="number">18px</span>;&#125;</div></pre></td></tr></table></figure>
-<p><em>一点小记录，希望对新人有启示作用。</em></p>
-]]></content>
+<p><em>一点小记录，希望对新人有启示作用。</em></p>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[Hello World]]></title>
       <url>http://geekarl.com/2016/04/13/hello-world/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2>Quick Start</h2>
 <h3>Create a new post</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
@@ -1175,8 +1163,7 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
 <h3>Deploy to remote sites</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>]]></content>
     </entry>
     
   
@@ -1340,6 +1327,24 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
 <iframe scrolling="auto" frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height="330" src="http://music.163.com/outchain/player?type=0&id=10460189&auto=0&height=430"></iframe>
 </div>
 <ul class="ds-recent-visitors" data-num-items="30" data-avatar-size="60"></ul>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[all-archives]]></title>
+      <url>http://geekarl.com/all-archives/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[all-categories]]></title>
+      <url>http://geekarl.com/all-categories/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[all-tags]]></title>
+      <url>http://geekarl.com/all-tags/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
