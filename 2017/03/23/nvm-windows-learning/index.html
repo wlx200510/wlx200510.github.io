@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="卡少" />
+
+
+
+<meta name="description" content="这是一篇踩坑心得，切换node版本在工作中很常用，记录下了以备不时只需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Windows上切换node版本的实践">
+<meta property="og:url" content="http://geekarl.com/2017/03/23/nvm-windows-learning/index.html">
+<meta property="og:site_name" content="卡少技术博客">
+<meta property="og:description" content="这是一篇踩坑心得，切换node版本在工作中很常用，记录下了以备不时只需">
+<meta property="og:updated_time" content="2017-03-23T14:41:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在Windows上切换node版本的实践">
+<meta name="twitter:description" content="这是一篇踩坑心得，切换node版本在工作中很常用，记录下了以备不时只需">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="卡少技术博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>在Windows上切换node版本的实践 | 卡少技术博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">卡少</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">我已不念过往，亦不惧将来。</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:wanglixing@outlook.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" href="/sina weibo" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/wlx200510" title="GitHub"></a>
+                            
+                                <a class="fa 网易云音乐" href="http://music.163.com/#/user/home?id=12281858" title="网易云音乐"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VsCode/">VsCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fiddler/">fiddler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heart/">heart</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/honey/">honey</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/promise/">promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后端/">后端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/域名/">域名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作/">工作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思考/">思考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技巧/">技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译器/">编译器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路径补全/">路径补全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件/">软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">热爱读书，好钻研，对node/VUE/ES6兴趣较高，抽时间要多研究React,现在组件化开发太火了。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">卡少</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">卡少</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">我已不念过往，亦不惧将来。</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:wanglixing@outlook.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="/sina weibo" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/wlx200510" title="GitHub"></a>
+                            
+                                <a class="fa 网易云音乐" target="_blank" href="http://music.163.com/#/user/home?id=12281858" title="网易云音乐"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-nvm-windows-learning" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/23/nvm-windows-learning/" class="article-date">
+      <time datetime="2017-03-23T14:27:43.000Z" itemprop="datePublished">2017-03-23</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在Windows上切换node版本的实践
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/nodeJS/">nodeJS</a><a class="article-category-link" href="/categories/nodeJS/软件/">软件</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工作/">工作</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote>
+<p>因工作需要，下载了nvm-windows对node进行不同版本的切换来满足不同项目的需求，不料踩坑若干，分享如下</p>
+</blockquote>
+<h3>下载node切换软件</h3>
+<p>在MAC下有大名鼎鼎的nvm，网上有很多成熟的教程。windows下也有“著名”的<a href="https://github.com/coreybutler/nvm-windows/releases" target="_blank" rel="external">nvm-windows</a> 实打实来说，这个挺好用的，不过我的打开方式有点歪~  现在来看一下这个go语言写成的工具有哪些需要注意的地方。<br>
+项目的github链接为：<a href="https://github.com/coreybutler/nvm-windows/" target="_blank" rel="external">nvm-windows</a> 可以点击上一段的链接下载1.1.3版本的切换软件，如果更新了，那就要按照github中给出的最新文档来，这次有点费力就是吃了没看英文文档的亏。</p>
+<h3>卸载电脑上已有的NODEJS和全局安装包</h3>
+<p>重要的事儿本来该说三遍，这里只说一遍(管不着我~)，在控制面板中删除了nodejs后，一定要到<code>C:\Users\wanglixing\AppData\Roaming</code> 下搜罗下npm文件夹，这是nodejs的全局安装包的位置，打开最好截个图，从而得知之前安装了啥，很有可能各个项目都有依赖!!<br>
+截图后删除npm文件夹，给nvm一个干净的安装环境，这一点网上有些教程就略去了，所以要注意这些提前工作，截图是为了安装好nvm-nodejs后给补回来。 这一步推荐看<a href="http://www.w2bc.com/article/189615" target="_blank" rel="external">这篇文章</a>，个人觉得是一堆文章里的一股清流，mac和windows下的提前准备工作都说的比较清楚。 可惜我是安装完了才删除的，提前工作没做好~。</p>
+<h3>安装NVM软件</h3>
+<p>这一步其实没啥技术含量，下载好软件，以管理员身份运行，规定安装到<code>C:\nvm</code>下，一直下一步就行了，没有什么需要警惕的全家桶(大雾)，安装好之后，我就百度了一下使用方法，get了几个指令，推荐看这个知乎上的教程：<a href="https://zhuanlan.zhihu.com/p/24698499" target="_blank" rel="external">安装管理多个版本的node.js</a>。如install、use、list之类的简单指令，其实用这个切换一点也不复杂，这几个够用了，不过用起来可费了一番力气。若教程失效，其实直接看github上的文档就行，这块的说明很简单的。</p>
+<h3>切换安装源</h3>
+<p>这就是最大的坑，我看了几篇教程，打开setting文件各种设置都不管用，最后返璞归真，从github的文档中才发现如何在国内切换到正确的安装源上。<br>
+我一开始没切换，结果使用nvm install命令总是报连不上服务器，没法获取版本地址，大概试了10次，后来在说明文档上发现需要用命令进行设置，其实本质也是写到setting文件中，具体为：</p>
+<ul>
+<li><code>nvm node_mirror https://npm.taobao.org/mirrors/node/</code> 切换到淘宝的node镜像</li>
+<li><code>nvm npm_mirror https://npm.taobao.org/mirrors/npm/</code> 切换到淘宝的npm镜像<br>
+这之后就顺畅多了，基本一路安装，我安装了4.4.4和6.10.1两个版本</li>
+</ul>
+<h3>补回失去的全局模块</h3>
+<p>对照第二步中的截图，一般情况下，在国内全局安装的第一个包都是cnpm，所以直接<code>npm install cnpm -g</code>即可，接下来就是对照自己的项目需要，全局安装各种包即可，不过要记住每个版本都需要安装一遍，别嫌烦，切换就用use命令就行，然后cnpm各种包就好了。</p>
+<p><em>到这里就基本结束了，后面发现bug，则此博文未完待续···</em></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/03/23/nvm-windows-learning/">在Windows上切换node版本的实践</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">卡少</a></p>
+        <p><span>发布时间:</span>2017-03-23, 22:27:43</p>
+        <p><span>最后更新:</span>2017-03-23, 22:41:06</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/03/23/nvm-windows-learning/" title="在Windows上切换node版本的实践">http://geekarl.com/2017/03/23/nvm-windows-learning/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://geekarl.com/2017/03/23/nvm-windows-learning/　　作者: 卡少" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/06/03/fontend-optimize/">
+                    前端性能优化总结(简略)
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/03/23/ShadowSocks-Learning/">
+                    学习科学上网
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">下载node切换软件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">卸载电脑上已有的NODEJS和全局安装包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">安装NVM软件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">切换安装源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">补回失去的全局模块</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"在Windows上切换node版本的实践　| 卡少技术博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2116365';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/06/03/fontend-optimize/" title="上一篇: 前端性能优化总结(简略)">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/03/23/ShadowSocks-Learning/" title="下一篇: 学习科学上网">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/06/mac-software/">MAC系统下的相关优秀软件搜集</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/02/js-process-mechanism/">js线程机制的介绍和练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/04/learnFiddler/">fiddler抓包工具(windows)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/16/My-Git-Knowledge/">接触到的git的三个重要知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/09/gitLearn/">学习git常用及高阶命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/09/excel/">纯前端json数据生成excel下载的实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/03/fontend-optimize/">前端性能优化总结(简略)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/23/nvm-windows-learning/">在Windows上切换node版本的实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/23/ShadowSocks-Learning/">学习科学上网</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/bash-learning/">SHELL脚本的学习和制作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/ssr-introduction/">使用SSR来模拟后端mock数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/18/comment-about-LALALAND/">回首——爱乐之城</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/14/For-My-Lover/">情人节专题~你的谜底，我来揭开</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/CSS-Good-Technique/">样式代码编写习惯约定——高逼格</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/JS-nice-habit/">代码整洁之道——JS</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/31/personal-summarize/">卡少2016年终总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/25/techniques-about-VsCode/">techniques about VsCode</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/14/CSS-center/">用CSS实现居中的总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/13/firstHEXO/">使用HEXO搭建个人博客遇到的几个问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/nav-hover/">对列表hover效果的小探讨</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/13/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 卡少
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 4;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = " " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "Here back the King" + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+  </div>
+</body>
+</html>

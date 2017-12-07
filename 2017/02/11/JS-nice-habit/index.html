@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="卡少" />
+
+
+
+<meta name="description" content="《代码整洁之道》一书的诸多原则同时适用于JS，为了在工作中编写的代码有更多的可维护性，应该常常回顾此文章，思考并进步。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码整洁之道——JS">
+<meta property="og:url" content="http://geekarl.com/2017/02/11/JS-nice-habit/index.html">
+<meta property="og:site_name" content="卡少技术博客">
+<meta property="og:description" content="《代码整洁之道》一书的诸多原则同时适用于JS，为了在工作中编写的代码有更多的可维护性，应该常常回顾此文章，思考并进步。">
+<meta property="og:image" content="http://p0.qhimg.com/t01cb6a971284a41620.jpg">
+<meta property="og:updated_time" content="2017-02-12T03:53:24.753Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="代码整洁之道——JS">
+<meta name="twitter:description" content="《代码整洁之道》一书的诸多原则同时适用于JS，为了在工作中编写的代码有更多的可维护性，应该常常回顾此文章，思考并进步。">
+<meta name="twitter:image" content="http://p0.qhimg.com/t01cb6a971284a41620.jpg">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="卡少技术博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>代码整洁之道——JS | 卡少技术博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">卡少</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">我已不念过往，亦不惧将来。</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:wanglixing@outlook.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" href="/sina weibo" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/wlx200510" title="GitHub"></a>
+                            
+                                <a class="fa 网易云音乐" href="http://music.163.com/#/user/home?id=12281858" title="网易云音乐"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VsCode/">VsCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fiddler/">fiddler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heart/">heart</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/honey/">honey</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/promise/">promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后端/">后端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/域名/">域名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作/">工作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思考/">思考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技巧/">技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译器/">编译器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路径补全/">路径补全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件/">软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">热爱读书，好钻研，对node/VUE/ES6兴趣较高，抽时间要多研究React,现在组件化开发太火了。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">卡少</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">卡少</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">我已不念过往，亦不惧将来。</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:wanglixing@outlook.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="/sina weibo" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/wlx200510" title="GitHub"></a>
+                            
+                                <a class="fa 网易云音乐" target="_blank" href="http://music.163.com/#/user/home?id=12281858" title="网易云音乐"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-JS-nice-habit" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/02/11/JS-nice-habit/" class="article-date">
+      <time datetime="2017-02-11T01:03:33.000Z" itemprop="datePublished">2017-02-11</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      代码整洁之道——JS
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/工作总结/">工作总结</a><a class="article-category-link" href="/categories/工作总结/转载/">转载</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技巧/">技巧</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote>
+<p>本文转载自：<a href="http://www.zcfy.cc" target="_blank" rel="external">众成翻译</a><br>
+译者：<a href="http://www.zcfy.cc/@jamesfancy" target="_blank" rel="external">边城</a><br>
+链接：<a href="http://www.zcfy.cc/article/2273" target="_blank" rel="external">http://www.zcfy.cc/article/2273</a><br>
+原文：<a href="https://github.com/ryanmcdermott/clean-code-javascript/blob/master/README.md" target="_blank" rel="external">https://github.com/ryanmcdermott/clean-code-javascript/blob/master/README.md</a></p>
+</blockquote>
+<h2><a href="#introduction"></a>概述</h2>
+<p><a href="http://p0.qhimg.com/t01cb6a971284a41620.jpg" target="_blank" rel="external"><img src="http://p0.qhimg.com/t01cb6a971284a41620.jpg" alt="一张幽默的图片：软件质量通过你在阅读代码的时候有多少报怨来进行评估"></a></p>
+<p>Robert C. Martin 在<br>
+<a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882" target="_blank" rel="external"><em>《代码整洁之道》</em></a> 中提到的软件工程原则，同样适用于 JavaScript。这不是一个风格参考。它指导如何用 JavaScript 编写可读、可复用、可重构的软件。</p>
+<p>并不是每一个原则都必须严格遵循，甚至很少得到大家的认同。它们仅用于参考，不过要知道这些原则都是_《代码整洁之道》_的作者们累积多年的集体经验。</p>
+<p>我们在软件工程方面的技术发展刚刚超过 50 年，我们仍然在学习很多东西。当软件架构和架构本身一样古老的时候，我们应该遵循更为严格规则。现在，对于你和你的团队编写的 JavaScript 代码，不妨依据这些准则来进行质量评估。</p>
+<p>还有一件事：知道这些不会马上让你成为更好的软件开发者，在工作中常年使用这些准则不能让你避免错误。每一段代码都从最初的草图开始到最终成型，就像为湿粘土塑形一样。最后，当我们与同行一起审查的时候，再把不完美的地方消除掉。不要因为初稿需要改善而否定自己，需要要否定的只是那些代码！</p>
+<h2><a href="#variables"></a><strong>变量</strong></h2>
+<h3><a href="#use-meaningful-and-pronounceable-variable-names"></a>使用有准确意义的变量名</h3>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var yyyymmdstr = moment().format(&apos;YYYY/MM/DD&apos;);</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var yearMonthDay = moment().format(&apos;YYYY/MM/DD&apos;);</div></pre></td></tr></table></figure>
+<h3><a href="#use-es6-constants-when-variable-values-do-not-change"></a>在变量的值不会改变时使用 ES6 的常量</h3>
+<p>在不好的示例中，变量可以被改变。如果你申明一个常量，它会在整个程序中始终保持不变。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var FIRST_US_PRESIDENT = &quot;George Washington&quot;;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">const FIRST_US_PRESIDENT = &quot;George Washington&quot;;</div></pre></td></tr></table></figure>
+<h3><a href="#use-the-same-vocabulary-for-the-same-type-of-variable"></a>对同一类型的变量使用相同的词汇</h3>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">getUserInfo();</div><div class="line">getClientData();</div><div class="line">getCustomerRecord();</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getUser();</div></pre></td></tr></table></figure>
+<h3><a href="#use-searchable-names"></a>使用可检索的名称</h3>
+<p>我们阅读的代码永远比写的折。写可读性强、易于检索的的代码非常重要。在程序中使用_无_明确意义的变量名会难以理解，对读者造成伤害。所以，把名称定义成可检索的。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 见鬼，525600 是个啥？</div><div class="line">for (var i = 0; i &lt; 525600; i++) &#123;</div><div class="line">  runCronJob();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 用 `var` 申明为大写的全局变量</div><div class="line">var MINUTES_IN_A_YEAR = 525600;</div><div class="line">for (var i = 0; i &lt; MINUTES_IN_A_YEAR; i++) &#123;</div><div class="line">  runCronJob();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#use-explanatory-variables"></a>使用解释性的变量</h3>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">const cityStateRegex = /^(.+)[,\\s]+(.+?)\s*(\d&#123;5&#125;)?$/;</div><div class="line">saveCityState(cityStateRegex.match(cityStateRegex)[1], cityStateRegex.match(cityStateRegex)[2]);</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">const cityStateRegex = /^(.+)[,\\s]+(.+?)\s*(\d&#123;5&#125;)?$/;</div><div class="line">const match = cityStateRegex.match(cityStateRegex)</div><div class="line">const city = match[1];</div><div class="line">const state = match[2];</div><div class="line">saveCityState(city, state);</div></pre></td></tr></table></figure>
+<h3><a href="#avoid-mental-mapping"></a>避免暗示</h3>
+<p>显式优于隐式。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var locations = [&apos;Austin&apos;, &apos;New York&apos;, &apos;San Francisco&apos;];</div><div class="line">locations.forEach((l) =&gt; &#123;</div><div class="line">  doStuff();</div><div class="line">  doSomeOtherStuff();</div><div class="line">  ...</div><div class="line">  ...</div><div class="line">  ...</div><div class="line">  // 等等，`l` 又是什么？</div><div class="line">  dispatch(l);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var locations = [&apos;Austin&apos;, &apos;New York&apos;, &apos;San Francisco&apos;];</div><div class="line">locations.forEach((location) =&gt; &#123;</div><div class="line">  doStuff();</div><div class="line">  doSomeOtherStuff();</div><div class="line">  ...</div><div class="line">  ...</div><div class="line">  ...</div><div class="line">  dispatch(location);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3><a href="#dont-add-unneeded-context"></a>不要添加没必要的上下文</h3>
+<p>如果你的类名称/对象名称已经说明了它们是什么，不要在(属性)变量名里重复。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var Car = &#123;</div><div class="line">  carMake: &apos;Honda&apos;,</div><div class="line">  carModel: &apos;Accord&apos;,</div><div class="line">  carColor: &apos;Blue&apos;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">function paintCar(car) &#123;</div><div class="line">  car.carColor = &apos;Red&apos;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var Car = &#123;</div><div class="line">  make: &apos;Honda&apos;,</div><div class="line">  model: &apos;Accord&apos;,</div><div class="line">  color: &apos;Blue&apos;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">function paintCar(car) &#123;</div><div class="line">  car.color = &apos;Red&apos;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#short-circuiting-is-cleaner-than-conditionals"></a>短路语法比条件语句更清晰</h3>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function createMicrobrewery(name) &#123;</div><div class="line">  var breweryName;</div><div class="line">  if (name) &#123;</div><div class="line">    breweryName = name;</div><div class="line">  &#125; else &#123;</div><div class="line">    breweryName = &apos;Hipster Brew Co.&apos;;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function createMicrobrewery(name) &#123;</div><div class="line">  var breweryName = name || &apos;Hipster Brew Co.&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2><a href="#functions"></a><strong>函数</strong></h2>
+<h3><a href="#function-arguments-2-or-less-ideally"></a>函数参数 (理论上少于等于2个)</h3>
+<p>限制函数参数的数量极为重要，它会让你更容易测试函数。超过3个参数会导致组合膨胀，以致于你必须根据不同的参数对大量不同的情况进行测试。</p>
+<p>理想情况下是没有参数。有一个或者两个参数也还好，三个就应该避免了。多于那个数量就应该考虑合并。通常情况下，如果你有多于2个参数，你的函数会尝试做太多事情。如果不是这样，大多数时候可以使用一个高阶对象作为参数使用。</p>
+<p>既然 JavaScript 允许我们在运行时随意创建对象，而不需要预先定义样板，那么你在需要很多参数的时候就可以使用一个对象来处理。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function createMenu(title, body, buttonText, cancellable) &#123;</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var menuConfig = &#123;</div><div class="line">  title: &apos;Foo&apos;,</div><div class="line">  body: &apos;Bar&apos;,</div><div class="line">  buttonText: &apos;Baz&apos;,</div><div class="line">  cancellable: true</div><div class="line">&#125;</div><div class="line"></div><div class="line">function createMenu(menuConfig) &#123;</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#functions-should-do-one-thing"></a>一个函数只做一件事</h3>
+<p>目前这是软件工程中最重要的原则。如果函数做了较多的事情，它就难以组合、测试和推测。当你让函数只做一件事情的时候，它们就很容易重构，而且代码读起来也会清晰得多。你只需要遵循本指南的这一条，就能领先于其他很多开发者。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function emailClients(clients) &#123;</div><div class="line">  clients.forEach(client =&gt; &#123;</div><div class="line">    let clientRecord = database.lookup(client);</div><div class="line">    if (clientRecord.isActive()) &#123;</div><div class="line">      email(client);</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">function emailClients(clients) &#123;</div><div class="line">  clients.forEach(client =&gt; &#123;</div><div class="line">    emailClientIfNeeded(client);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">function emailClientIfNeeded(client) &#123;</div><div class="line">  if (isClientActive(client)) &#123;</div><div class="line">    email(client);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function isClientActive(client) &#123;</div><div class="line">  let clientRecord = database.lookup(client);</div><div class="line">  return clientRecord.isActive();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#function-names-should-say-what-they-do"></a>函数名称要说明它做的事</h3>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function dateAdd(date, month) &#123;</div><div class="line">  // ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">let date = new Date();</div><div class="line"></div><div class="line">// 很难从函数名了解到加了什么</div><div class="line">dateAdd(date, 1);</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function dateAddMonth(date, month) &#123;</div><div class="line">  // ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">let date = new Date();</div><div class="line">dateAddMonth(date, 1);</div></pre></td></tr></table></figure>
+<h3><a href="#functions-should-only-be-one-level-of-abstraction"></a>函数应该只抽象一个层次</h3>
+<p>如果你有多个层次的抽象，那么你的函数通常做了太多事情，此时应该拆分函数使其易于复用和易于测试。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">function parseBetterJSAlternative(code) &#123;</div><div class="line">  let REGEXES = [</div><div class="line">    // ...</div><div class="line">  ];</div><div class="line"></div><div class="line">  let statements = code.split(&apos; &apos;);</div><div class="line">  let tokens;</div><div class="line">  REGEXES.forEach((REGEX) =&gt; &#123;</div><div class="line">    statements.forEach((statement) =&gt; &#123;</div><div class="line">      // ...</div><div class="line">    &#125;)</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  let ast;</div><div class="line">  tokens.forEach((token) =&gt; &#123;</div><div class="line">    // lex...</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  ast.forEach((node) =&gt; &#123;</div><div class="line">    // parse...</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">function tokenize(code) &#123;</div><div class="line">  let REGEXES = [</div><div class="line">    // ...</div><div class="line">  ];</div><div class="line"></div><div class="line">  let statements = code.split(&apos; &apos;);</div><div class="line">  let tokens;</div><div class="line">  REGEXES.forEach((REGEX) =&gt; &#123;</div><div class="line">    statements.forEach((statement) =&gt; &#123;</div><div class="line">      // ...</div><div class="line">    &#125;)</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  return tokens;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function lexer(tokens) &#123;</div><div class="line">  let ast;</div><div class="line">  tokens.forEach((token) =&gt; &#123;</div><div class="line">    // lex...</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  return ast;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function parseBetterJSAlternative(code) &#123;</div><div class="line">  let tokens = tokenize(code);</div><div class="line">  let ast = lexer(tokens);</div><div class="line">  ast.forEach((node) =&gt; &#123;</div><div class="line">    // parse...</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#remove-duplicate-code"></a>删除重复代码</h3>
+<p>任何情况下，都不要有重复的代码。没有任何原因，它很可能是阻碍你成为专业开发者的最糟糕的一件事。重复代码意味着你要修改某些逻辑的时候要修改不止一个地方的代码。JavaScript 是弱类型语句，所以它很容易写通用性强的函数。记得利用这一点！</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">function showDeveloperList(developers) &#123;</div><div class="line">  developers.forEach(developers =&gt; &#123;</div><div class="line">    var expectedSalary = developer.calculateExpectedSalary();</div><div class="line">    var experience = developer.getExperience();</div><div class="line">    var githubLink = developer.getGithubLink();</div><div class="line">    var data = &#123;</div><div class="line">      expectedSalary: expectedSalary,</div><div class="line">      experience: experience,</div><div class="line">      githubLink: githubLink</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    render(data);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">function showManagerList(managers) &#123;</div><div class="line">  managers.forEach(manager =&gt; &#123;</div><div class="line">    var expectedSalary = manager.calculateExpectedSalary();</div><div class="line">    var experience = manager.getExperience();</div><div class="line">    var portfolio = manager.getMBAProjects();</div><div class="line">    var data = &#123;</div><div class="line">      expectedSalary: expectedSalary,</div><div class="line">      experience: experience,</div><div class="line">      portfolio: portfolio</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    render(data);</div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">function showList(employees) &#123;</div><div class="line">  employees.forEach(employee =&gt; &#123;</div><div class="line">    var expectedSalary = employee.calculateExpectedSalary();</div><div class="line">    var experience = employee.getExperience();</div><div class="line">    var portfolio;</div><div class="line"></div><div class="line">    if (employee.type === &apos;manager&apos;) &#123;</div><div class="line">      portfolio = employee.getMBAProjects();</div><div class="line">    &#125; else &#123;</div><div class="line">      portfolio = employee.getGithubLink();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    var data = &#123;</div><div class="line">      expectedSalary: expectedSalary,</div><div class="line">      experience: experience,</div><div class="line">      portfolio: portfolio</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    render(data);</div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#use-default-arguments-instead-of-short-circuiting"></a>使用默认参数代替短路表达式</h3>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function writeForumComment(subject, body) &#123;</div><div class="line">  subject = subject || &apos;No Subject&apos;;</div><div class="line">  body = body || &apos;No text&apos;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function writeForumComment(subject = &apos;No subject&apos;, body = &apos;No text&apos;) &#123;</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#set-default-objects-with-objectassign"></a>用 Object.assign 设置默认对象</h3>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var menuConfig = &#123;</div><div class="line">  title: null,</div><div class="line">  body: &apos;Bar&apos;,</div><div class="line">  buttonText: null,</div><div class="line">  cancellable: true</div><div class="line">&#125;</div><div class="line"></div><div class="line">function createMenu(config) &#123;</div><div class="line">  config.title = config.title || &apos;Foo&apos;</div><div class="line">  config.body = config.body || &apos;Bar&apos;</div><div class="line">  config.buttonText = config.buttonText || &apos;Baz&apos;</div><div class="line">  config.cancellable = config.cancellable === undefined ? config.cancellable : true;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">createMenu(menuConfig);</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">var menuConfig = &#123;</div><div class="line">  title: &apos;Order&apos;,</div><div class="line">  // User did not include &apos;body&apos; key</div><div class="line">  buttonText: &apos;Send&apos;,</div><div class="line">  cancellable: true</div><div class="line">&#125;</div><div class="line"></div><div class="line">function createMenu(config) &#123;</div><div class="line">  config = Object.assign(&#123;</div><div class="line">    title: &apos;Foo&apos;,</div><div class="line">    body: &apos;Bar&apos;,</div><div class="line">    buttonText: &apos;Baz&apos;,</div><div class="line">    cancellable: true</div><div class="line">  &#125;, config);</div><div class="line"></div><div class="line">  // 现在 config 等于: &#123;title: &quot;Foo&quot;, body: &quot;Bar&quot;, buttonText: &quot;Baz&quot;, cancellable: true&#125;</div><div class="line">  // ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">createMenu(menuConfig);</div></pre></td></tr></table></figure>
+<h3><a href="#dont-use-flags-as-function-parameters"></a>不要把标记用作函数参数</h3>
+<p>标记告诉你的用户这个函数做的事情不止一件。但是函数应该只做一件事。如果你的函数中会根据某个布尔参数产生不同的分支，那就拆分这个函数。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function createFile(name, temp) &#123;</div><div class="line">  if (temp) &#123;</div><div class="line">    fs.create(&apos;./temp/&apos; + name);</div><div class="line">  &#125; else &#123;</div><div class="line">    fs.create(name);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function createTempFile(name) &#123;</div><div class="line">  fs.create(&apos;./temp/&apos; + name);</div><div class="line">&#125;</div><div class="line"></div><div class="line">function createFile(name) &#123;</div><div class="line">  fs.create(name);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#avoid-side-effects"></a>避免副作用</h3>
+<p>如果一个函数不是获取一个输入的值并返回其它值，它就有可能产生副作用。这些副作用可能是写入文件、修改一些全局变量，或者意外地把你所有钱转给一个陌生人。</p>
+<p>现在你确实需要在程序中有副作用。像前面提到的那样，你可能需要写入文件。现在你需要做的事情是搞清楚在哪里集中完成这件事情。不要使用几个函数或类来完成写入某个特定文件的工作。采用一个，就一个服务来完成。</p>
+<p>关键点是避免觉的陷阱，比如在没有结构的对象间共享状态，使用可以被任意修改的易变的数据类型，没有集中处理发生的副作用等。如果你能做到，你就能比其他大多数程序员更愉快。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 下面的函数使用了全局变量。</div><div class="line">// 如果有另一个函数在使用 name，现在可能会因为 name 变成了数组而不能正常运行。</div><div class="line">var name = &apos;Ryan McDermott&apos;;</div><div class="line"></div><div class="line">function splitIntoFirstAndLastName() &#123;</div><div class="line">  name = name.split(&apos; &apos;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">splitIntoFirstAndLastName();</div><div class="line"></div><div class="line">console.log(name); // [&apos;Ryan&apos;, &apos;McDermott&apos;];</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function splitIntoFirstAndLastName(name) &#123;</div><div class="line">  return name.split(&apos; &apos;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">var name = &apos;Ryan McDermott&apos;</div><div class="line">var newName = splitIntoFirstAndLastName(name);</div><div class="line"></div><div class="line">console.log(name); // &apos;Ryan McDermott&apos;;</div><div class="line">console.log(newName); // [&apos;Ryan&apos;, &apos;McDermott&apos;];</div></pre></td></tr></table></figure>
+<h3><a href="#dont-write-to-global-functions"></a>不要写入全局函数</h3>
+<p>JavaScript 中全局污染是一件糟糕的事情，因为它可能和另外库发生冲突，然而使用你 API 的用户却不会知道——直到他们在生产中遇到一个异常。来思考一个例子：你想扩展 JavaScript 的原生 Array，使之拥有一个 <code>diff</code> 方法，用来展示两数据之前的区别，这时你会怎么做？你可以给 <code>Array.prototype</code> 添加一个新的函数，但它可能会与其它想做同样事情的库发生冲突。如果那个库实现的 <code>diff</code> 只是比如数组中第一个元素和最后一个元素的异同会发生什么事情呢？这就是为什么最好是使用 ES6 的类语法从全局的 <code>Array</code> 派生一个类来做这件事。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Array.prototype.diff = function(comparisonArray) &#123;</div><div class="line">  var values = [];</div><div class="line">  var hash = &#123;&#125;;</div><div class="line"></div><div class="line">  for (var i of comparisonArray) &#123;</div><div class="line">    hash[i] = true;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  for (var i of this) &#123;</div><div class="line">    if (!hash[i]) &#123;</div><div class="line">      values.push(i);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  return values;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">class SuperArray extends Array &#123;</div><div class="line">  constructor(...args) &#123;</div><div class="line">    super(...args);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  diff(comparisonArray) &#123;</div><div class="line">    var values = [];</div><div class="line">    var hash = &#123;&#125;;</div><div class="line"></div><div class="line">    for (var i of comparisonArray) &#123;</div><div class="line">      hash[i] = true;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    for (var i of this) &#123;</div><div class="line">      if (!hash[i]) &#123;</div><div class="line">        values.push(i);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return values;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#favor-functional-programming-over-imperative-programming"></a>喜欢上命令式编程之上的函数式编程</h3>
+<p>如果 Haskell 是 IPA 那么 JavaScript 就是 O’Douls。就是说，与 Haskell 不同，JavaScript 不是函数式编程语言，不过它仍然有一点函数式的意味。函数式语言更整洁也更容易测试，所以你最好能喜欢上这种编程风格。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">const programmerOutput = [</div><div class="line">  &#123;</div><div class="line">    name: &apos;Uncle Bobby&apos;,</div><div class="line">    linesOfCode: 500</div><div class="line">  &#125;, &#123;</div><div class="line">    name: &apos;Suzie Q&apos;,</div><div class="line">    linesOfCode: 1500</div><div class="line">  &#125;, &#123;</div><div class="line">    name: &apos;Jimmy Gosling&apos;,</div><div class="line">    linesOfCode: 150</div><div class="line">  &#125;, &#123;</div><div class="line">    name: &apos;Gracie Hopper&apos;,</div><div class="line">    linesOfCode: 1000</div><div class="line">  &#125;</div><div class="line">];</div><div class="line"></div><div class="line">var totalOutput = 0;</div><div class="line"></div><div class="line">for (var i = 0; i &lt; programmerOutput.length; i++) &#123;</div><div class="line">  totalOutput += programmerOutput[i].linesOfCode;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">const programmerOutput = [</div><div class="line">  &#123;</div><div class="line">    name: &apos;Uncle Bobby&apos;,</div><div class="line">    linesOfCode: 500</div><div class="line">  &#125;, &#123;</div><div class="line">    name: &apos;Suzie Q&apos;,</div><div class="line">    linesOfCode: 1500</div><div class="line">  &#125;, &#123;</div><div class="line">    name: &apos;Jimmy Gosling&apos;,</div><div class="line">    linesOfCode: 150</div><div class="line">  &#125;, &#123;</div><div class="line">    name: &apos;Gracie Hopper&apos;,</div><div class="line">    linesOfCode: 1000</div><div class="line">  &#125;</div><div class="line">];</div><div class="line"></div><div class="line">var totalOutput = programmerOutput</div><div class="line">  .map((programmer) =&gt; programmer.linesOfCode)</div><div class="line">  .reduce((acc, linesOfCode) =&gt; acc + linesOfCode, 0);</div></pre></td></tr></table></figure>
+<h3><a href="#encapsulate-conditionals"></a>封装条件</h3>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (fsm.state === &apos;fetching&apos; &amp;&amp; isEmpty(listNode)) &#123;</div><div class="line">  /// ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function shouldShowSpinner(fsm, listNode) &#123;</div><div class="line">  return fsm.state === &apos;fetching&apos; &amp;&amp; isEmpty(listNode);</div><div class="line">&#125;</div><div class="line"></div><div class="line">if (shouldShowSpinner(fsmInstance, listNodeInstance)) &#123;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#avoid-negative-conditionals"></a>避免否定条件</h3>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function isDOMNodeNotPresent(node) &#123;</div><div class="line">  // ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">if (!isDOMNodeNotPresent(node)) &#123;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function isDOMNodePresent(node) &#123;</div><div class="line">  // ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">if (isDOMNodePresent(node)) &#123;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#avoid-conditionals"></a>避免条件</h3>
+<p>这似乎是个不可能完成的任务。大多数人第一次听到这个的时候会说，“没有 <code>if</code> 语句我该怎么办？”回答是在多数情况下都可以使用多态来实现相同的任务。第二个问题通常是，“那太好了，不过我为什么要这么做呢？”答案在于我们之前了解过整洁的概念：一个函数应该只做一件事情。如果你的类和函数有 <code>if</code> 语句，就意味着你的函数做了更多的事。记住，只做一件事。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class Airplane &#123;</div><div class="line">  //...</div><div class="line">  getCruisingAltitude() &#123;</div><div class="line">    switch (this.type) &#123;</div><div class="line">      case &apos;777&apos;:</div><div class="line">        return getMaxAltitude() - getPassengerCount();</div><div class="line">      case &apos;Air Force One&apos;:</div><div class="line">        return getMaxAltitude();</div><div class="line">      case &apos;Cessna&apos;:</div><div class="line">        return getMaxAltitude() - getFuelExpenditure();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">class Airplane &#123;</div><div class="line">  //...</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Boeing777 extends Airplane &#123;</div><div class="line">  //...</div><div class="line">  getCruisingAltitude() &#123;</div><div class="line">    return getMaxAltitude() - getPassengerCount();</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class AirForceOne extends Airplane &#123;</div><div class="line">  //...</div><div class="line">  getCruisingAltitude() &#123;</div><div class="line">    return getMaxAltitude();</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Cessna extends Airplane &#123;</div><div class="line">  //...</div><div class="line">  getCruisingAltitude() &#123;</div><div class="line">    return getMaxAltitude() - getFuelExpenditure();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#avoid-type-checking-part-1"></a>避免类型检查(第1部分)</h3>
+<p>JavaScript 是无类型的，也就是说函数可以获取任意类型的参数。有时候你会觉得这种自由是种折磨，因而会不由自主地在函数中使用类型检查。有很多种方法可以避免类型检查。首先要考虑的就是 API 的一致性。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function travelToTexas(vehicle) &#123;</div><div class="line">  if (vehicle instanceof Bicycle) &#123;</div><div class="line">    vehicle.peddle(this.currentLocation, new Location(&apos;texas&apos;));</div><div class="line">  &#125; else if (vehicle instanceof Car) &#123;</div><div class="line">    vehicle.drive(this.currentLocation, new Location(&apos;texas&apos;));</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function travelToTexas(vehicle) &#123;</div><div class="line">  vehicle.move(this.currentLocation, new Location(&apos;texas&apos;));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#avoid-type-checking-part-2"></a>避免类型检查(第2部分)</h3>
+<p>如果你在处理基本类型的数据，比如字符串，整数和数组，又不能使用多态，这时你会觉得需要使用类型检查，那么可以考虑 TypeScript。这是普通 JavaScript 的完美替代品，它在标准的 JavaScript 语法之上提供了静态类型。普通 JavaScript 手工检查类型的问题在于这样会写很多废话，而人为的“类型安全”并不能弥补损失的可读性。让你的 JavaScript 保持整洁，写很好的测试，并保持良好的代码审查。否则让 TypeScript (我说过，这是很好的替代品)来做所有事情。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function combine(val1, val2) &#123;</div><div class="line">  if (typeof val1 == &quot;number&quot; &amp;&amp; typeof val2 == &quot;number&quot; ||</div><div class="line">      typeof val1 == &quot;string&quot; &amp;&amp; typeof val2 == &quot;string&quot;) &#123;</div><div class="line">    return val1 + val2;</div><div class="line">  &#125; else &#123;</div><div class="line">    throw new Error(&apos;Must be of type String or Number&apos;);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function combine(val1, val2) &#123;</div><div class="line">  return val1 + val2;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#dont-over-optimize"></a>不要过度优化</h3>
+<p>现在浏览器在运行时悄悄地做了很多优化工作。很多时候你的优化都是在浪费时间。<a href="https://github.com/petkaantonov/bluebird/wiki/Optimization-killers" target="_blank" rel="external">这里有很好的资源</a> 可以看看哪些优化比较缺乏。把它们作为目标，直到他们能固定下来的时候。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 在旧浏览器中，每次循环的成本都比较高，因为每次都会重算 `len`。</div><div class="line">// 现在浏览器中，这已经被优化了。</div><div class="line">for (var i = 0, len = list.length; i &lt; len; i++) &#123;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for (var i = 0; i &lt; list.length; i++) &#123;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#remove-dead-code"></a>删除不用的代码</h3>
+<p>不用的代码和重复的代码一样糟糕。在代码库中保留无用的代码是毫无道理的事情。如果某段代码用不到，那就删掉它！如果你以后需要它，仍然可以从代码库的历史版本中找出来。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">function oldRequestModule(url) &#123;</div><div class="line">  // ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">function newRequestModule(url) &#123;</div><div class="line">  // ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">var req = newRequestModule;</div><div class="line">inventoryTracker(&apos;apples&apos;, req, &apos;www.inventory-awesome.io&apos;);</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function newRequestModule(url) &#123;</div><div class="line">  // ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">var req = newRequestModule;</div><div class="line">inventoryTracker(&apos;apples&apos;, req, &apos;www.inventory-awesome.io&apos;);</div></pre></td></tr></table></figure>
+<h2><a href="#objects-and-data-structures"></a><strong>对象和数据结构</strong></h2>
+<h3><a href="#use-getters-and-setters"></a>使用 getter 和 setter</h3>
+<p>JavaScript 没有接口或者类型，也没有像 <code>public</code> 和 <code>private</code> 这样的关键字，所以很难应用设计模式。实事上，在对象上使用 getter 和 setter 访问数据远好于直接查找对象属性。“为什么？”你可能会这样问。那好，下面列出了原因：</p>
+<ol>
+<li>
+<p>你想在获取对象属性的时候做更多的事，不必在代码中寻找所有访问的代码来逐个修改。</p>
+</li>
+<li>
+<p>在进行 <code>set</code> 的时候可以进行额外的数据检验。</p>
+</li>
+<li>
+<p>封装内部表现。</p>
+</li>
+<li>
+<p>在获取或设置的时候易于添加日志和错误处理。</p>
+</li>
+<li>
+<p>继承当前类，可以重写默认功能。</p>
+</li>
+<li>
+<p>可以对对象属性进行懒加载，比如说从服务器获取属性的数据。</p>
+</li>
+</ol>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class BankAccount &#123;</div><div class="line">  constructor() &#123;</div><div class="line">       this.balance = 1000;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let bankAccount = new BankAccount();</div><div class="line"></div><div class="line">// 买鞋...</div><div class="line">bankAccount.balance = bankAccount.balance - 100;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">class BankAccount &#123;</div><div class="line">  constructor() &#123;</div><div class="line">       this.balance = 1000;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // It doesn&apos;t have to be prefixed with `get` or `set` to be a getter/setter</div><div class="line">  withdraw(amount) &#123;</div><div class="line">    if (verifyAmountCanBeDeducted(amount)) &#123;</div><div class="line">      this.balance -= amount;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let bankAccount = new BankAccount();</div><div class="line"></div><div class="line">// 买鞋...</div><div class="line">bankAccount.withdraw(100);</div></pre></td></tr></table></figure>
+<h3><a href="#make-objects-have-private-members"></a>让对象拥有私有成员</h3>
+<p>这可以通过闭包实现(ES5以之前的版本)。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var Employee = function(name) &#123;</div><div class="line">  this.name = name;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Employee.prototype.getName = function() &#123;</div><div class="line">  return this.name;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var employee = new Employee(&apos;John Doe&apos;);</div><div class="line">console.log(&apos;Employee name: &apos; + employee.getName()); // Employee name: John Doe</div><div class="line">delete employee.name;</div><div class="line">console.log(&apos;Employee name: &apos; + employee.getName()); // Employee name: undefined</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var Employee = (function() &#123;</div><div class="line">  function Employee(name) &#123;</div><div class="line">    this.getName = function() &#123;</div><div class="line">      return name;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  return Employee;</div><div class="line">&#125;());</div><div class="line"></div><div class="line">var employee = new Employee(&apos;John Doe&apos;);</div><div class="line">console.log(&apos;Employee name: &apos; + employee.getName()); // Employee name: John Doe</div><div class="line">delete employee.name;</div><div class="line">console.log(&apos;Employee name: &apos; + employee.getName()); // Employee name: John Doe</div></pre></td></tr></table></figure>
+<h2><a href="#classes"></a><strong>类</strong></h2>
+<h3><a href="#single-responsibility-principle-srp"></a>单一职责原则 (SRP)</h3>
+<p>正如《代码整洁之道》所说，“不应该有超过一个原因来改变类”。往一个类里塞进许多功能是件诱人的事情，就像在坐飞机的时候只带一个手提箱一样。这带来的问题是，你的类不会在概念上有凝聚力，会有很多因素造成对它的改变。让你的类需要改变的次数最少是件非常重要的事情。这是因为如果一个类里塞入了太多功能，你只修改它的一部分，可能会让人难以理解它为何会影响代码库中其它相关模块。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">class UserSettings &#123;</div><div class="line">  constructor(user) &#123;</div><div class="line">    this.user = user;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  changeSettings(settings) &#123;</div><div class="line">    if (this.verifyCredentials(user)) &#123;</div><div class="line">      // ...</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  verifyCredentials(user) &#123;</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">class UserAuth &#123;</div><div class="line">  constructor(user) &#123;</div><div class="line">    this.user = user;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  verifyCredentials() &#123;</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class UserSettings &#123;</div><div class="line">  constructor(user) &#123;</div><div class="line">    this.user = user;</div><div class="line">    this.auth = new UserAuth(user)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  changeSettings(settings) &#123;</div><div class="line">    if (this.auth.verifyCredentials()) &#123;</div><div class="line">      // ...</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#openclosed-principle-ocp"></a>开放封装原则(OCP)</h3>
+<p>正如 Bertrand Meyer 所说，“软件实体(类、模块、函数等)应该对扩展开放，对修改封闭。”这是什么意思呢？这个原则基本上规定了你应该允许用户扩展你的模块，但不需要打开 <code>.js</code> 源代码文件来进行编辑。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class AjaxRequester &#123;</div><div class="line">  constructor() &#123;</div><div class="line">    // 如果我们需要另一个 HTTP 方法，比如 DELETE，该怎么办？</div><div class="line">    // 我们必须打开这个文件然后手工把它加进去</div><div class="line">    this.HTTP_METHODS = [&apos;POST&apos;, &apos;PUT&apos;, &apos;GET&apos;];</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  get(url) &#123;</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class AjaxRequester &#123;</div><div class="line">  constructor() &#123;</div><div class="line">    this.HTTP_METHODS = [&apos;POST&apos;, &apos;PUT&apos;, &apos;GET&apos;];</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  get(url) &#123;</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  addHTTPMethod(method) &#123;</div><div class="line">    this.HTTP_METHODS.push(method);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#liskov-substitution-principle-lsp"></a>里氏替换原则(LSP)</h3>
+<p>这是一个吓人的术语，但描述的却是个简单的概念。它的正式定义为“如果 S 是 T 的子类，那所有 T 类型的对象都可以替换为 S 类型的对象(即 S 类型的对象可以替代 T 类型的对象)，这个替换不会改变程序的任何性质(正确性、任务执行等)。”这确实是个吓人的定义。</p>
+<p>对此最好的解释是，如果你有父类和子类，那么父类和子类可以交替使用而不会造成不正确的结果。这可能仍然让人感到疑惑，那么让我们看看经典的正方形和矩形的例子。在数学上，正方形也是矩形，但是如果你在模型中通过继承使用 “is-a” 关系，你很快就会陷入困境。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line">class Rectangle &#123;</div><div class="line">  constructor() &#123;</div><div class="line">    this.width = 0;</div><div class="line">    this.height = 0;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  setColor(color) &#123;</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  render(area) &#123;</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  setWidth(width) &#123;</div><div class="line">    this.width = width;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  setHeight(height) &#123;</div><div class="line">    this.height = height;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  getArea() &#123;</div><div class="line">    return this.width * this.height;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Square extends Rectangle &#123;</div><div class="line">  constructor() &#123;</div><div class="line">    super();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  setWidth(width) &#123;</div><div class="line">    this.width = width;</div><div class="line">    this.height = width;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  setHeight(height) &#123;</div><div class="line">    this.width = height;</div><div class="line">    this.height = height;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function renderLargeRectangles(rectangles) &#123;</div><div class="line">  rectangles.forEach((rectangle) =&gt; &#123;</div><div class="line">    rectangle.setWidth(4);</div><div class="line">    rectangle.setHeight(5);</div><div class="line">    let area = rectangle.getArea(); // 不好：这里对正方形会返回 25，但应该是 20.</div><div class="line">    rectangle.render(area);</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">let rectangles = [new Rectangle(), new Rectangle(), new Square()];</div><div class="line">renderLargeRectangles(rectangles);</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">class Shape &#123;</div><div class="line">  constructor() &#123;&#125;</div><div class="line"></div><div class="line">  setColor(color) &#123;</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  render(area) &#123;</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Rectangle extends Shape &#123;</div><div class="line">  constructor() &#123;</div><div class="line">    super();</div><div class="line">    this.width = 0;</div><div class="line">    this.height = 0;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  setWidth(width) &#123;</div><div class="line">    this.width = width;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  setHeight(height) &#123;</div><div class="line">    this.height = height;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  getArea() &#123;</div><div class="line">    return this.width * this.height;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Square extends Shape &#123;</div><div class="line">  constructor() &#123;</div><div class="line">    super();</div><div class="line">    this.length = 0;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  setLength(length) &#123;</div><div class="line">    this.length = length;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  getArea() &#123;</div><div class="line">    return this.length * this.length;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function renderLargeShapes(shapes) &#123;</div><div class="line">  shapes.forEach((shape) =&gt; &#123;</div><div class="line">    switch (shape.constructor.name) &#123;</div><div class="line">      case &apos;Square&apos;:</div><div class="line">        shape.setLength(5);</div><div class="line">      case &apos;Rectangle&apos;:</div><div class="line">        shape.setWidth(4);</div><div class="line">        shape.setHeight(5);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    let area = shape.getArea();</div><div class="line">    shape.render(area);</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">let shapes = [new Rectangle(), new Rectangle(), new Square()];</div><div class="line">renderLargeShapes(shapes);</div></pre></td></tr></table></figure>
+<h3><a href="#interface-segregation-principle-isp"></a>接口隔离原则(ISP)</h3>
+<p>JavaScript 中没有接口，所以实行这个原则不能像其它语言那样严格。然而即使对 JavaScript 的弱类型系统来说，它仍然是重要的相关。</p>
+<p>ISP 指出，“客户不应该依赖于那些他们不使用的接口。” 由于 Duck Typing 理论，接口在 JavaScript 中是个隐性契约。</p>
+<p>在 JavaScript 中有一个很好的例子来演示这个原则，即一个拥有巨大设置对象的类。比较好的做法是不要求客户设置大量的选项，因为多数时候他们不需要所有设置。让这些选项成为可选的有助于防止“胖接口”。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">class DOMTraverser &#123;</div><div class="line">  constructor(settings) &#123;</div><div class="line">    this.settings = settings;</div><div class="line">    this.setup();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  setup() &#123;</div><div class="line">    this.rootNode = this.settings.rootNode;</div><div class="line">    this.animationModule.setup();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  traverse() &#123;</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let $ = new DOMTraverser(&#123;</div><div class="line">  rootNode: document.getElementsByTagName(&apos;body&apos;),</div><div class="line">  animationModule: function() &#123;&#125; // 多数时候我们不需要动画</div><div class="line">  // ...</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">class DOMTraverser &#123;</div><div class="line">  constructor(settings) &#123;</div><div class="line">    this.settings = settings;</div><div class="line">    this.options = settings.options;</div><div class="line">    this.setup();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  setup() &#123;</div><div class="line">    this.rootNode = this.settings.rootNode;</div><div class="line">    this.setupOptions();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  setupOptions() &#123;</div><div class="line">    if (this.options.animationModule) &#123;</div><div class="line">      // ...</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  traverse() &#123;</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let $ = new DOMTraverser(&#123;</div><div class="line">  rootNode: document.getElementsByTagName(&apos;body&apos;),</div><div class="line">  options: &#123;</div><div class="line">    animationModule: function() &#123;&#125;</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3><a href="#dependency-inversion-principle-dip"></a>依赖倒置原则(DIP)</h3>
+<p>这个原则说明了两个基本问题：</p>
+<p>1. 上层模块不应该依赖下层模块，两者都应该依赖抽象。</p>
+<p>2. 抽象不应该依赖于具体实现，具体实现应该依赖于抽象。</p>
+<p>这一开始可能很难理解，但是如果你使用 Angular.js，你已经看到了对这个原则的一种实现形式：依赖注入(DI)。虽然它们不是完全相同的概念，DIP 阻止上层模块去了解下层模块的细节并设置它们。它可以通过 DI 来实现。这带来的巨大好处降低了模块间的耦合。耦合是种非常不好的开发模式，因为它让代码难以重构。</p>
+<p>前提已经提到，JavaScript 没有接口，因此抽象依赖于隐性契约。也就是说，一个对象/类会把方法和属性暴露给另一个对象/类。在下面的例子中，隐性契约是任何用于 <code>InventoryTracker</code> 的 Request 模块都应该拥有 <code>requestItems</code> 方法。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">class InventoryTracker &#123;</div><div class="line">  constructor(items) &#123;</div><div class="line">    this.items = items;</div><div class="line"></div><div class="line">    // 不好：我们创建了一个依赖于特定请求的实现。</div><div class="line">    // 我们应该只依赖请求方法：`request` 的 requestItems</div><div class="line">    this.requester = new InventoryRequester();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  requestItems() &#123;</div><div class="line">    this.items.forEach((item) =&gt; &#123;</div><div class="line">      this.requester.requestItem(item);</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class InventoryRequester &#123;</div><div class="line">  constructor() &#123;</div><div class="line">    this.REQ_METHODS = [&apos;HTTP&apos;];</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  requestItem(item) &#123;</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let inventoryTracker = new InventoryTracker([&apos;apples&apos;, &apos;bananas&apos;]);</div><div class="line">inventoryTracker.requestItems();</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">class InventoryTracker &#123;</div><div class="line">  constructor(items, requester) &#123;</div><div class="line">    this.items = items;</div><div class="line">    this.requester = requester;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  requestItems() &#123;</div><div class="line">    this.items.forEach((item) =&gt; &#123;</div><div class="line">      this.requester.requestItem(item);</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class InventoryRequesterV1 &#123;</div><div class="line">  constructor() &#123;</div><div class="line">    this.REQ_METHODS = [&apos;HTTP&apos;];</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  requestItem(item) &#123;</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class InventoryRequesterV2 &#123;</div><div class="line">  constructor() &#123;</div><div class="line">    this.REQ_METHODS = [&apos;WS&apos;];</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  requestItem(item) &#123;</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 通过构建外部依赖并注入它们，我们很容易把请求模块替换成</div><div class="line">// 一个使用 WebSocket 的新模块。</div><div class="line">let inventoryTracker = new InventoryTracker([&apos;apples&apos;, &apos;bananas&apos;], new InventoryRequesterV2());</div><div class="line">inventoryTracker.requestItems();</div></pre></td></tr></table></figure>
+<h3><a href="#prefer-es6-classes-over-es5-plain-functions"></a>多用 ES6 类语法，少用 ES5 构造函数语法</h3>
+<p>在经典的 ES5 的类定义中，很难找到易读的继承、构造、方法定义等。如果你需要继承(你会发现做不到)，那就应该使用类语法。不过，应该尽可能使用小函数而不是类，直到你需要更大更复杂的对象。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">var Animal = function(age) &#123;</div><div class="line">    if (!(this instanceof Animal)) &#123;</div><div class="line">        throw new Error(&quot;Instantiate Animal with `new`&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    this.age = age;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">Animal.prototype.move = function() &#123;&#125;;</div><div class="line"></div><div class="line">var Mammal = function(age, furColor) &#123;</div><div class="line">    if (!(this instanceof Mammal)) &#123;</div><div class="line">        throw new Error(&quot;Instantiate Mammal with `new`&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    Animal.call(this, age);</div><div class="line">    this.furColor = furColor;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">Mammal.prototype = Object.create(Animal.prototype);</div><div class="line">Mammal.prototype.constructor = Mammal;</div><div class="line">Mammal.prototype.liveBirth = function() &#123;&#125;;</div><div class="line"></div><div class="line">var Human = function(age, furColor, languageSpoken) &#123;</div><div class="line">    if (!(this instanceof Human)) &#123;</div><div class="line">        throw new Error(&quot;Instantiate Human with `new`&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    Mammal.call(this, age, furColor);</div><div class="line">    this.languageSpoken = languageSpoken;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">Human.prototype = Object.create(Mammal.prototype);</div><div class="line">Human.prototype.constructor = Human;</div><div class="line">Human.prototype.speak = function() &#123;&#125;;</div></pre></td></tr></table></figure>
+<p><strong>好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">class Animal &#123;</div><div class="line">    constructor(age) &#123;</div><div class="line">        this.age = age;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    move() &#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Mammal extends Animal &#123;</div><div class="line">    constructor(age, furColor) &#123;</div><div class="line">        super(age);</div><div class="line">        this.furColor = furColor;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    liveBirth() &#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Human extends Mammal &#123;</div><div class="line">    constructor(age, furColor, languageSpoken) &#123;</div><div class="line">        super(age, furColor);</div><div class="line">        this.languageSpoken = languageSpoken;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    speak() &#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#use-method-chaining"></a>使用方法链</h3>
+<p>在这里我的意见与《代码整洁之道》的观点不同。有人认为方法链不整洁，而且违反了<a href="https://en.wikipedia.org/wiki/Law_of_Demeter" target="_blank" rel="external">得墨忒耳定律</a>。也许他们是对的，但这个模式在 JavaScript 中非常有用，你可以很多库中看到，比如 jQuery 和 Lodash。它让代码变得既简洁又有表现力。在类中，只需要在每个函数结束前返回 <code>this</code>，就实现了链式调用的类方法。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">class Car &#123;</div><div class="line">  constructor() &#123;</div><div class="line">    this.make = &apos;Honda&apos;;</div><div class="line">    this.model = &apos;Accord&apos;;</div><div class="line">    this.color = &apos;white&apos;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  setMake(make) &#123;</div><div class="line">    this.name = name;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  setModel(model) &#123;</div><div class="line">    this.model = model;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  setColor(color) &#123;</div><div class="line">    this.color = color;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  save() &#123;</div><div class="line">    console.log(this.make, this.model, this.color);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let car = new Car();</div><div class="line">car.setColor(&apos;pink&apos;);</div><div class="line">car.setMake(&apos;Ford&apos;);</div><div class="line">car.setModel(&apos;F-150&apos;)</div><div class="line">car.save();</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">class Car &#123;</div><div class="line">  constructor() &#123;</div><div class="line">    this.make = &apos;Honda&apos;;</div><div class="line">    this.model = &apos;Accord&apos;;</div><div class="line">    this.color = &apos;white&apos;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  setMake(make) &#123;</div><div class="line">    this.name = name;</div><div class="line">    // NOTE: 返回 this 以实现链式调用</div><div class="line">    return this;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  setModel(model) &#123;</div><div class="line">    this.model = model;</div><div class="line">    // NOTE: 返回 this 以实现链式调用</div><div class="line">    return this;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  setColor(color) &#123;</div><div class="line">    this.color = color;</div><div class="line">    // NOTE: 返回 this 以实现链式调用</div><div class="line">    return this;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  save() &#123;</div><div class="line">    console.log(this.make, this.model, this.color);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let car = new Car()</div><div class="line">  .setColor(&apos;pink&apos;)</div><div class="line">  .setMake(&apos;Ford&apos;)</div><div class="line">  .setModel(&apos;F-150&apos;)</div><div class="line">  .save();</div></pre></td></tr></table></figure>
+<h3><a href="#prefer-composition-over-inheritance"></a>多用组合，少用继承</h3>
+<p>大家都知道 GoF 的<a href="https://en.wikipedia.org/wiki/Design_Patterns" target="_blank" rel="external"><em>设计模式</em></a>，其中提到应该多用组合而不是继承。对于继承和组合，都有大量的理由在支撑，但这个准则的要点在于，你的想法本能地会想到继承，但这时候不防多思考一下用组合是否能更好的处理问题——某些时候，的确能。</p>
+<p>你可能会考虑：“我什么时候该用继承？”这取决于你遇到的问题。这里有一个不错的清单说明了什么时候用继承比用组合更合适：</p>
+<ol>
+<li>
+<p>你的继承是一个“is-a”关系，而不是“has-a”关系(Animal-&gt;Human 对比 User-&gt;UserDetails)。</p>
+</li>
+<li>
+<p>可以从基础复用代码 (人可以像所有动物一样移动)。</p>
+</li>
+<li>
+<p>你想通过修改基础来实现对所有子类的全局性更改。(改变动物移动时的热量消耗)。</p>
+</li>
+</ol>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">class Employee &#123;</div><div class="line">  constructor(name, email) &#123;</div><div class="line">    this.name = name;</div><div class="line">    this.email = email;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 这样不好，因为 Employees &quot;拥有&quot; 税务数据。EmployeeTaxData 不是属于 Employee 的一个类型</div><div class="line">class EmployeeTaxData extends Employee &#123;</div><div class="line">  constructor(ssn, salary) &#123;</div><div class="line">    super();</div><div class="line">    this.ssn = ssn;</div><div class="line">    this.salary = salary;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">class Employee &#123;</div><div class="line">  constructor(name, email) &#123;</div><div class="line">    this.name = name;</div><div class="line">    this.email = email;</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  setTaxData(ssn, salary) &#123;</div><div class="line">    this.taxData = new EmployeeTaxData(ssn, salary);</div><div class="line">  &#125;</div><div class="line">  // ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">class EmployeeTaxData &#123;</div><div class="line">  constructor(ssn, salary) &#123;</div><div class="line">    this.ssn = ssn;</div><div class="line">    this.salary = salary;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2><a href="#testing"></a><strong>测试</strong></h2>
+<p>测试比生产更重要。如果你不进行测试，或者测试的量不够，那你就不能肯定你写的代码不会造成破坏。测试数量依靠你的开发团队来决定，但 100% 覆盖率(所有语句和分支)能让你拥有巨大的信心，也能使程序员们安心。也就是说，你需要一个不错的测试框架，还需要一个<a href="http://gotwarlost.github.io/istanbul/" target="_blank" rel="external">好的覆盖检查工具</a>.</p>
+<p>没有什么理由可以让你不写测试。这里有 <a href="http://jstherightway.org/#testing-tools" target="_blank" rel="external">大量不错的 JS 测试框架</a>，可以去找个你们团队喜欢的来用。如果你找一个适合在你的团队中使用的工作，就把为每个新产生的特性/方法添加测试作为目标。如果你喜欢测试驱动开发(TDD)的方法，非常好，但要注意在让你的测试覆盖所有特性，或者重构过的代码。</p>
+<h3><a href="#single-concept-per-test"></a>每次测试一个概念</h3>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">const assert = require(&apos;assert&apos;);</div><div class="line"></div><div class="line">describe(&apos;MakeMomentJSGreatAgain&apos;, function() &#123;</div><div class="line">  it(&apos;handles date boundaries&apos;, function() &#123;</div><div class="line">    let date;</div><div class="line"></div><div class="line">    date = new MakeMomentJSGreatAgain(&apos;1/1/2015&apos;);</div><div class="line">    date.addDays(30);</div><div class="line">    date.shouldEqual(&apos;1/31/2015&apos;);</div><div class="line"></div><div class="line">    date = new MakeMomentJSGreatAgain(&apos;2/1/2016&apos;);</div><div class="line">    date.addDays(28);</div><div class="line">    assert.equal(&apos;02/29/2016&apos;, date);</div><div class="line"></div><div class="line">    date = new MakeMomentJSGreatAgain(&apos;2/1/2015&apos;);</div><div class="line">    date.addDays(28);</div><div class="line">    assert.equal(&apos;03/01/2015&apos;, date);</div><div class="line">  &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">const assert = require(&apos;assert&apos;);</div><div class="line"></div><div class="line">describe(&apos;MakeMomentJSGreatAgain&apos;, function() &#123;</div><div class="line">  it(&apos;handles 30-day months&apos;, function() &#123;</div><div class="line">    let date = new MakeMomentJSGreatAgain(&apos;1/1/2015&apos;);</div><div class="line">    date.addDays(30);</div><div class="line">    date.shouldEqual(&apos;1/31/2015&apos;);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  it(&apos;handles leap year&apos;, function() &#123;</div><div class="line">    let date = new MakeMomentJSGreatAgain(&apos;2/1/2016&apos;);</div><div class="line">    date.addDays(28);</div><div class="line">    assert.equal(&apos;02/29/2016&apos;, date);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  it(&apos;handles non-leap year&apos;, function() &#123;</div><div class="line">    let date = new MakeMomentJSGreatAgain(&apos;2/1/2015&apos;);</div><div class="line">    date.addDays(28);</div><div class="line">    assert.equal(&apos;03/01/2015&apos;, date);</div><div class="line">  &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2><a href="#concurrency"></a><strong>Concurrency</strong></h2>
+<h3><a href="#use-promises-not-callbacks"></a>使用 Promise 而不是回调</h3>
+<p>回调并不整洁，它会导致过多的嵌套。ES6 的 Promise 是个内置的全局类型。使用它！</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">require(&apos;request&apos;).get(&apos;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&apos;, function(err, response) &#123;</div><div class="line">  if (err) &#123;</div><div class="line">    console.error(err);</div><div class="line">  &#125;</div><div class="line">  else &#123;</div><div class="line">    require(&apos;fs&apos;).writeFile(&apos;article.html&apos;, response.body, function(err) &#123;</div><div class="line">      if (err) &#123;</div><div class="line">        console.error(err);</div><div class="line">      &#125; else &#123;</div><div class="line">        console.log(&apos;File written&apos;);</div><div class="line">      &#125;</div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">require(&apos;request-promise&apos;).get(&apos;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&apos;)</div><div class="line">  .then(function(response) &#123;</div><div class="line">    return require(&apos;fs-promise&apos;).writeFile(&apos;article.html&apos;, response);</div><div class="line">  &#125;)</div><div class="line">  .then(function() &#123;</div><div class="line">    console.log(&apos;File written&apos;);</div><div class="line">  &#125;)</div><div class="line">  .catch(function(err) &#123;</div><div class="line">    console.error(err);</div><div class="line">  &#125;)</div></pre></td></tr></table></figure>
+<h3><a href="#asyncawait-are-even-cleaner-than-promises"></a>async/await 比 Promise 还整洁</h3>
+<p>与回调相当，Promise 已经相当整洁了，但 ES7 带来了更整洁的解决方案 —— async 和 await。你要做的事情就是在一个函数前加上 <code>async</code> 关键字，然后写下命令形式的逻辑，而不再需要 <code>then</code> 链。现在可以使用这个 ES7 特性带来的便利！</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">require(&apos;request-promise&apos;).get(&apos;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&apos;)</div><div class="line">  .then(function(response) &#123;</div><div class="line">    return require(&apos;fs-promise&apos;).writeFile(&apos;article.html&apos;, response);</div><div class="line">  &#125;)</div><div class="line">  .then(function() &#123;</div><div class="line">    console.log(&apos;File written&apos;);</div><div class="line">  &#125;)</div><div class="line">  .catch(function(err) &#123;</div><div class="line">    console.error(err);</div><div class="line">  &#125;)</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">async function getCleanCodeArticle() &#123;</div><div class="line">  try &#123;</div><div class="line">    var request = await require(&apos;request-promise&apos;)</div><div class="line">    var response = await request.get(&apos;https://en.wikipedia.org/wiki/Robert_Cecil_Martin&apos;);</div><div class="line">    var fileHandle = await require(&apos;fs-promise&apos;);</div><div class="line"></div><div class="line">    await fileHandle.writeFile(&apos;article.html&apos;, response);</div><div class="line">    console.log(&apos;File written&apos;);</div><div class="line">  &#125; catch(err) &#123;</div><div class="line">      console.log(err);</div><div class="line">    &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<h2><a href="#error-handling"></a><strong>错误处理</strong></h2>
+<p>抛出错误是件好事！这表示运行时已经成功检测到程序出错了，它停止当前调用框上的函数执行，并中止进程(在 Node 中)，最后在控制台通知你，并输出栈跟踪信息。</p>
+<h3><a href="#dont-ignore-caught-errors"></a>不要忽略捕捉到的错误</h3>
+<p>捕捉到错误却什么也不错，你就失去了纠正错误的机会。多数情况下把错误记录到控制台(<code>console.log</code>)也不比忽略它好多少，因为在少量的控制台信息中很难发现这一条。如果尝试在 <code>try/catch</code> 中封装代码，就意味着你知道这里可能发生错，你应该在错误发生的时候有应对的计划、或者处理办法。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">try &#123;</div><div class="line">  functionThatMightThrow();</div><div class="line">&#125; catch (error) &#123;</div><div class="line">  console.log(error);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">try &#123;</div><div class="line">  functionThatMightThrow();</div><div class="line">&#125; catch (error) &#123;</div><div class="line">  // 选择之一(比 console.log 更闹心)：</div><div class="line">  console.error(error);</div><div class="line">  // 另一个选择：</div><div class="line">  notifyUserOfError(error);</div><div class="line">  // 另一个选择：</div><div class="line">  reportErrorToService(error);</div><div class="line">  // 或者所有上述三种选择！</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#dont-ignore-rejected-promises"></a>不要忽视被拒绝的Promise</h3>
+<p>这一条与不要忽略从 <code>try/catch</code> 捕捉到的错误有相同的原因。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">getdata()</div><div class="line">.then(data =&gt; &#123;</div><div class="line">  functionThatMightThrow(data);</div><div class="line">&#125;)</div><div class="line">.catch(error =&gt; &#123;</div><div class="line">  console.log(error);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><strong>好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">getdata()</div><div class="line">.then(data =&gt; &#123;</div><div class="line">  functionThatMightThrow(data);</div><div class="line">&#125;)</div><div class="line">.catch(error =&gt; &#123;</div><div class="line">  // 选择之一(比 console.log 更闹心)：</div><div class="line">  console.error(error);</div><div class="line">  // 另一个选择：</div><div class="line">  notifyUserOfError(error);</div><div class="line">  // 另一个选择：</div><div class="line">  reportErrorToService(error);</div><div class="line">  // 或者所有上述三种选择！</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2><a href="#formatting"></a><strong>格式</strong></h2>
+<p>格式是个很主观的东西，像这里提到的许多规则一，你不必完全遵循。要点<strong>不在于争论</strong>格式。<a href="http://standardjs.com/rules.html" target="_blank" rel="external">大量工具</a> 可以自动处理优化格式。用一个！让工程师争论格式问题简直就是在浪费时间和金钱。</p>
+<p>对于那些不能自动处理的格式(可以自动处理的包括缩进、Tab或空格、双引号或单引用等)，就看看这里的指导。</p>
+<h3><a href="#use-consistent-capitalization"></a>使用一致的大小写</h3>
+<p>JavaScript 是无类型的，所以大小写可以帮助你了解变量、函数等。这些规则具有较强的主观性，所以你的团队应该选择需要的。重点不在于你选择了什么，而在于要始终保持一致。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var DAYS_IN_WEEK = 7;</div><div class="line">var daysInMonth = 30;</div><div class="line"></div><div class="line">var songs = [&apos;Back In Black&apos;, &apos;Stairway to Heaven&apos;, &apos;Hey Jude&apos;];</div><div class="line">var Artists = [&apos;ACDC&apos;, &apos;Led Zeppelin&apos;, &apos;The Beatles&apos;];</div><div class="line"></div><div class="line">function eraseDatabase() &#123;&#125;</div><div class="line">function restore_database() &#123;&#125;</div><div class="line"></div><div class="line">class animal &#123;&#125;</div><div class="line">class Alpaca &#123;&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var DAYS_IN_WEEK = 7;</div><div class="line">var DAYS_IN_MONTH = 30;</div><div class="line"></div><div class="line">var songs = [&apos;Back In Black&apos;, &apos;Stairway to Heaven&apos;, &apos;Hey Jude&apos;];</div><div class="line">var artists = [&apos;ACDC&apos;, &apos;Led Zeppelin&apos;, &apos;The Beatles&apos;];</div><div class="line"></div><div class="line">function eraseDatabase() &#123;&#125;</div><div class="line">function restoreDatabase() &#123;&#125;</div><div class="line"></div><div class="line">class Animal &#123;&#125;</div><div class="line">class Alpaca &#123;&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#function-callers-and-callees-should-be-close"></a>函数调用者和被调用者应该尽可能放在一起</h3>
+<p>如果一个函数调用另一个函数，那应该让他们在源文件中的位置非常接近。理想情况下应该把调用者放在被调用者的正上方，这会让你的代码更易读，因为我们都习惯从上往下读代码，就像读报纸那样。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">class PerformanceReview &#123;</div><div class="line">  constructor(employee) &#123;</div><div class="line">    this.employee = employee;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  lookupPeers() &#123;</div><div class="line">    return db.lookup(this.employee, &apos;peers&apos;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  lookupMananger() &#123;</div><div class="line">    return db.lookup(this.employee, &apos;manager&apos;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  getPeerReviews() &#123;</div><div class="line">    let peers = this.lookupPeers();</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  perfReview() &#123;</div><div class="line">      getPeerReviews();</div><div class="line">      getManagerReview();</div><div class="line">      getSelfReview();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  getManagerReview() &#123;</div><div class="line">    let manager = this.lookupManager();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  getSelfReview() &#123;</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let review = new PerformanceReview(user);</div><div class="line">review.perfReview();</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">class PerformanceReview &#123;</div><div class="line">  constructor(employee) &#123;</div><div class="line">    this.employee = employee;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  perfReview() &#123;</div><div class="line">      getPeerReviews();</div><div class="line">      getManagerReview();</div><div class="line">      getSelfReview();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  getPeerReviews() &#123;</div><div class="line">    let peers = this.lookupPeers();</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  lookupPeers() &#123;</div><div class="line">    return db.lookup(this.employee, &apos;peers&apos;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  getManagerReview() &#123;</div><div class="line">    let manager = this.lookupManager();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  lookupMananger() &#123;</div><div class="line">    return db.lookup(this.employee, &apos;manager&apos;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  getSelfReview() &#123;</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let review = new PerformanceReview(employee);</div><div class="line">review.perfReview();</div></pre></td></tr></table></figure>
+<h2><a href="#comments"></a><strong>Comments</strong></h2>
+<h3><a href="#only-comment-things-that-have-business-logic-complexity"></a>只注释业务逻辑复杂的内容</h3>
+<p>注释是用来解释代码的，而不是必须的。好的代码应该 <em>自注释</em>。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">function hashIt(data) &#123;</div><div class="line">  // Hash 码</div><div class="line">  var hash = 0;</div><div class="line"></div><div class="line">  // 字符串长度</div><div class="line">  var length = data.length;</div><div class="line"></div><div class="line">  // 遍历数据中所有字符</div><div class="line">  for (var i = 0; i &lt; length; i++) &#123;</div><div class="line">    // 获取字符编码</div><div class="line">    var char = data.charCodeAt(i);</div><div class="line">    // 生成 Hash</div><div class="line">    hash = ((hash &lt;&lt; 5) - hash) + char;</div><div class="line">    // 转换为32位整数</div><div class="line">    hash = hash &amp; hash;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function hashIt(data) &#123;</div><div class="line">  var hash = 0;</div><div class="line">  var length = data.length;</div><div class="line"></div><div class="line">  for (var i = 0; i &lt; length; i++) &#123;</div><div class="line">    var char = data.charCodeAt(i);</div><div class="line">    hash = ((hash &lt;&lt; 5) - hash) + char;</div><div class="line"></div><div class="line">    // 转换为32位整数</div><div class="line">    hash = hash &amp; hash;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#dont-leave-commented-out-code-in-your-codebase"></a>不要把注释掉的代码留在代码库中</h3>
+<p>版本控制存在的原因就是保存你的历史代码。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">doStuff();</div><div class="line">// doOtherStuff();</div><div class="line">// doSomeMoreStuff();</div><div class="line">// doSoMuchStuff();</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">doStuff();</div></pre></td></tr></table></figure>
+<h3><a href="#dont-have-journal-comments"></a>不需要日志式的注释</h3>
+<p>记住，使用版本控制！没用的代码、注释掉的代码，尤其是日志式的注释。用 <code>git log</code> 来获取历史信息！</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 2016-12-20: Removed monads, didn&apos;t understand them (RM)</div><div class="line"> * 2016-10-01: Improved using special monads (JP)</div><div class="line"> * 2016-02-03: Removed type-checking (LI)</div><div class="line"> * 2015-03-14: Added combine with type-checking (JR)</div><div class="line"> */</div><div class="line">function combine(a, b) &#123;</div><div class="line">  return a + b;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function combine(a, b) &#123;</div><div class="line">  return a + b;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#avoid-positional-markers"></a>避免位置标记</h3>
+<p>位置标记通常只会添加垃圾信息。通过对函数或变量名以及适当的缩进就能为代码带来良好的可视化结构。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">////////////////////////////////////////////////////////////////////////////////</div><div class="line">// Scope Model Instantiation</div><div class="line">////////////////////////////////////////////////////////////////////////////////</div><div class="line">let $scope.model = &#123;</div><div class="line">  menu: &apos;foo&apos;,</div><div class="line">  nav: &apos;bar&apos;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">////////////////////////////////////////////////////////////////////////////////</div><div class="line">// Action setup</div><div class="line">////////////////////////////////////////////////////////////////////////////////</div><div class="line">let actions = function() &#123;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">let $scope.model = &#123;</div><div class="line">  menu: &apos;foo&apos;,</div><div class="line">  nav: &apos;bar&apos;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">let actions = function() &#123;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><a href="#avoid-legal-comments-in-source-files"></a>避免在源文件中添加版权注释</h3>
+<p>这是代码文件树顶层的 <code>LICENSE</code> 文件应该干的事情。</p>
+<p><strong>不好:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">The MIT License (MIT)</div><div class="line"></div><div class="line">Copyright (c) 2016 Ryan McDermott</div><div class="line"></div><div class="line">Permission is hereby granted, free of charge, to any person obtaining a copy</div><div class="line">of this software and associated documentation files (the &quot;Software&quot;), to deal</div><div class="line">in the Software without restriction, including without limitation the rights</div><div class="line">to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</div><div class="line">copies of the Software, and to permit persons to whom the Software is</div><div class="line">furnished to do so, subject to the following conditions:</div><div class="line"></div><div class="line">The above copyright notice and this permission notice shall be included in all</div><div class="line">copies or substantial portions of the Software.</div><div class="line"></div><div class="line">THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</div><div class="line">IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</div><div class="line">FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</div><div class="line">AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</div><div class="line">LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</div><div class="line">OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</div><div class="line">SOFTWARE</div><div class="line">*/</div><div class="line"></div><div class="line">function calculateBill() &#123;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>好</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function calculateBill() &#123;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/02/11/JS-nice-habit/">代码整洁之道——JS</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">卡少</a></p>
+        <p><span>发布时间:</span>2017-02-11, 09:03:33</p>
+        <p><span>最后更新:</span>2017-02-12, 11:53:24</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/02/11/JS-nice-habit/" title="代码整洁之道——JS">http://geekarl.com/2017/02/11/JS-nice-habit/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://geekarl.com/2017/02/11/JS-nice-habit/　　作者: 卡少" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/02/12/CSS-Good-Technique/">
+                    样式代码编写习惯约定——高逼格
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/12/31/personal-summarize/">
+                    卡少2016年终总结
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.</span> <span class="toc-text">使用有准确意义的变量名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.2.</span> <span class="toc-text">在变量的值不会改变时使用 ES6 的常量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.</span> <span class="toc-text">对同一类型的变量使用相同的词汇</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.4.</span> <span class="toc-text">使用可检索的名称</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.5.</span> <span class="toc-text">使用解释性的变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.6.</span> <span class="toc-text">避免暗示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.7.</span> <span class="toc-text">不要添加没必要的上下文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.8.</span> <span class="toc-text">短路语法比条件语句更清晰</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">函数参数 (理论上少于等于2个)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">一个函数只做一件事</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.3.</span> <span class="toc-text">函数名称要说明它做的事</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.4.</span> <span class="toc-text">函数应该只抽象一个层次</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.5.</span> <span class="toc-text">删除重复代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.6.</span> <span class="toc-text">使用默认参数代替短路表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.7.</span> <span class="toc-text">用 Object.assign 设置默认对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.8.</span> <span class="toc-text">不要把标记用作函数参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.9.</span> <span class="toc-text">避免副作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.10.</span> <span class="toc-text">不要写入全局函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.11.</span> <span class="toc-text">喜欢上命令式编程之上的函数式编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.12.</span> <span class="toc-text">封装条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.13.</span> <span class="toc-text">避免否定条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.14.</span> <span class="toc-text">避免条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.15.</span> <span class="toc-text">避免类型检查(第1部分)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.16.</span> <span class="toc-text">避免类型检查(第2部分)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.17.</span> <span class="toc-text">不要过度优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.18.</span> <span class="toc-text">删除不用的代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">对象和数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.1.</span> <span class="toc-text">使用 getter 和 setter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.2.</span> <span class="toc-text">让对象拥有私有成员</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.1.</span> <span class="toc-text">单一职责原则 (SRP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.2.</span> <span class="toc-text">开放封装原则(OCP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.3.</span> <span class="toc-text">里氏替换原则(LSP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.4.</span> <span class="toc-text">接口隔离原则(ISP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.5.</span> <span class="toc-text">依赖倒置原则(DIP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.6.</span> <span class="toc-text">多用 ES6 类语法，少用 ES5 构造函数语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.7.</span> <span class="toc-text">使用方法链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.8.</span> <span class="toc-text">多用组合，少用继承</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.</span> <span class="toc-text">测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">6.1.</span> <span class="toc-text">每次测试一个概念</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">7.</span> <span class="toc-text">Concurrency</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">7.1.</span> <span class="toc-text">使用 Promise 而不是回调</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">7.2.</span> <span class="toc-text">async/await 比 Promise 还整洁</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">8.</span> <span class="toc-text">错误处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">8.1.</span> <span class="toc-text">不要忽略捕捉到的错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">8.2.</span> <span class="toc-text">不要忽视被拒绝的Promise</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">9.</span> <span class="toc-text">格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">9.1.</span> <span class="toc-text">使用一致的大小写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">9.2.</span> <span class="toc-text">函数调用者和被调用者应该尽可能放在一起</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">10.</span> <span class="toc-text">Comments</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">10.1.</span> <span class="toc-text">只注释业务逻辑复杂的内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">10.2.</span> <span class="toc-text">不要把注释掉的代码留在代码库中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">10.3.</span> <span class="toc-text">不需要日志式的注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">10.4.</span> <span class="toc-text">避免位置标记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">10.5.</span> <span class="toc-text">避免在源文件中添加版权注释</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"代码整洁之道——JS　| 卡少技术博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2116365';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/02/12/CSS-Good-Technique/" title="上一篇: 样式代码编写习惯约定——高逼格">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/12/31/personal-summarize/" title="下一篇: 卡少2016年终总结">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/06/mac-software/">MAC系统下的相关优秀软件搜集</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/02/js-process-mechanism/">js线程机制的介绍和练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/04/learnFiddler/">fiddler抓包工具(windows)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/16/My-Git-Knowledge/">接触到的git的三个重要知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/09/gitLearn/">学习git常用及高阶命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/09/excel/">纯前端json数据生成excel下载的实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/03/fontend-optimize/">前端性能优化总结(简略)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/23/nvm-windows-learning/">在Windows上切换node版本的实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/23/ShadowSocks-Learning/">学习科学上网</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/bash-learning/">SHELL脚本的学习和制作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/ssr-introduction/">使用SSR来模拟后端mock数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/18/comment-about-LALALAND/">回首——爱乐之城</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/14/For-My-Lover/">情人节专题~你的谜底，我来揭开</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/CSS-Good-Technique/">样式代码编写习惯约定——高逼格</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/JS-nice-habit/">代码整洁之道——JS</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/31/personal-summarize/">卡少2016年终总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/25/techniques-about-VsCode/">techniques about VsCode</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/14/CSS-center/">用CSS实现居中的总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/13/firstHEXO/">使用HEXO搭建个人博客遇到的几个问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/nav-hover/">对列表hover效果的小探讨</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/13/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 卡少
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 4;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = " " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "Here back the King" + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+  </div>
+</body>
+</html>

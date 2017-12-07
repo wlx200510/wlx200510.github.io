@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="卡少" />
+
+
+
+<meta name="description" content="参加工作后，接触到更多的是sass的编写，这里把公司约定的CSS样式的编写习惯移步于此，方便查询并与大家分享">
+<meta property="og:type" content="article">
+<meta property="og:title" content="样式代码编写习惯约定——高逼格">
+<meta property="og:url" content="http://geekarl.com/2017/02/12/CSS-Good-Technique/index.html">
+<meta property="og:site_name" content="卡少技术博客">
+<meta property="og:description" content="参加工作后，接触到更多的是sass的编写，这里把公司约定的CSS样式的编写习惯移步于此，方便查询并与大家分享">
+<meta property="og:updated_time" content="2017-02-12T07:12:00.865Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="样式代码编写习惯约定——高逼格">
+<meta name="twitter:description" content="参加工作后，接触到更多的是sass的编写，这里把公司约定的CSS样式的编写习惯移步于此，方便查询并与大家分享">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="卡少技术博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>样式代码编写习惯约定——高逼格 | 卡少技术博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">卡少</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">我已不念过往，亦不惧将来。</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:wanglixing@outlook.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" href="/sina weibo" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/wlx200510" title="GitHub"></a>
+                            
+                                <a class="fa 网易云音乐" href="http://music.163.com/#/user/home?id=12281858" title="网易云音乐"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VsCode/">VsCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fiddler/">fiddler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heart/">heart</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/honey/">honey</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/promise/">promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后端/">后端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/域名/">域名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作/">工作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思考/">思考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技巧/">技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译器/">编译器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路径补全/">路径补全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件/">软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">热爱读书，好钻研，对node/VUE/ES6兴趣较高，抽时间要多研究React,现在组件化开发太火了。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">卡少</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">卡少</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">我已不念过往，亦不惧将来。</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:wanglixing@outlook.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="/sina weibo" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/wlx200510" title="GitHub"></a>
+                            
+                                <a class="fa 网易云音乐" target="_blank" href="http://music.163.com/#/user/home?id=12281858" title="网易云音乐"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-CSS-Good-Technique" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/02/12/CSS-Good-Technique/" class="article-date">
+      <time datetime="2017-02-12T01:03:33.000Z" itemprop="datePublished">2017-02-12</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      样式代码编写习惯约定——高逼格
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/工作总结/">工作总结</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技巧/">技巧</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <script src="/assets/js/APlayer.min.js"> </script><h2>CSS代码规范</h2>
+<p><strong>写在最前面的一句话：sass不要嵌套过深，不允许超过3层</strong></p>
+<h3><strong>命名规范</strong></h3>
+<p><strong>RULE1.  命名</strong>全部<strong>小写</strong>，不允许出现大写或者驼峰命名，使用<strong>短中划线</strong>，不允许出现下划线命名</p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.someSelector &#123;</div><div class="line">  margin: 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.some_selector &#123;</div><div class="line">  margin: 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.some-selector &#123;</div><div class="line">  margin: 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>RULE2</strong>. 尽量使用<strong>有意义的</strong>命名，<strong>不允许</strong>出现1,2,3,4的后缀区分，尽量避免使用拼音，除非耳熟能详的，比如分享的weixin，weibo这种的一看就知道意义的</p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.selector1 &#123;</div><div class="line">  margin: 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.biaoti &#123;</div><div class="line">  font-size: 18px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.title &#123;</div><div class="line">  font-size: 18px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>RULE3</strong>. 引入<code>JavaScript</code>钩子，<code>.js-*</code> classes 来表示行为(相对于样式)，但是不要在 CSS 中定义这些 classes。大家要习惯于使用</p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">`&lt;div class=&quot;`selector`&quot;&gt;&lt;/div&gt;`</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">`$(&apos;`.selector`&apos;).height();`</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div class=“selector js-selector&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&apos;.js-selector&apos;).height();</div></pre></td></tr></table></figure>
+<h3><strong>选择器</strong></h3>
+<p><strong>RULE4</strong>. 在一个widget里面最多使用一个声明widget意义的id，其他不得滥用id提高选择器的权重</p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;section&quot;&gt;</div><div class="line">  &lt;div id=“header&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;section&quot;&gt;</div><div class="line">  &lt;div&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p><strong>RULE5</strong>. 如无必要，不得为** <strong><code>id</code>、<code>class</code></strong> **选择器添加类型选择器进行限定。 比如div#id，p.class之类</p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">div#header &#123;</div><div class="line">  font-size: 20px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#header &#123;</div><div class="line">  font-size: 20px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>RULE6.</strong> 多选择器规则之间必须换行</p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">`.element, p &#123;</div><div class="line">  margin: 10px 0 @variable*2 10px;</div><div class="line">  `font-size: 12px;`</div><div class="line">&#125;`</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">`.element,</div><div class="line">p &#123;</div><div class="line">  margin: 10px 0 @variable*2 10px;</div><div class="line">  `font-size: 12px;`</div><div class="line">&#125;`</div></pre></td></tr></table></figure>
+<h3><strong>编码书写规范</strong></h3>
+<p><strong>RULE7.</strong> sass使用四个空格</p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">    margin: 10px 0 @variable*2 10px;</div><div class="line">    `font-size: 12px;`</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  margin: 10px 0 @variable*2 10px;</div><div class="line">  `font-size: 12px;`</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>RULE8.</strong> 属性定义必须另起一行</p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  margin: 10px 0 @variable*2 10px;`font-size: 12px;`</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  margin: 10px 0 @variable*2 10px;</div><div class="line">  `font-size: 12px;`</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>RULE9.</strong> 每个属性后面必须加 ‘;’</p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  margin: 10px 0 @variable*2 10px</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  margin: 10px 0 @variable*2 10px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>RULE10</strong>. 文本使用双引号</p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.element:after &#123;</div><div class="line">  `content: &apos;.&apos;`;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.element:after &#123;</div><div class="line">  `content: &quot;.&quot;`;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>RULE11</strong>. sass变量的计算用括号，便于阅读</p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  margin: 10px 0 @variable*2 10px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  margin: 10px 0 (@variable * 2) 10px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>RULE12</strong>. 选择器与 <code>{</code>之前<code>必须</code>要有空格</p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.element&#123;</div><div class="line">  margin: 10px 0 (@variable * 2) 10px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  margin: 10px 0 (@variable * 2) 10px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>RULE13</strong>. 属性名的<code>:</code>后必须要有空格, 属性名的<code>:</code>前禁止加空格</p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  margin : 10px 0 (@variable * 2) 10px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  margin: 10px 0 (@variable * 2) 10px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>RULE14</strong>. 数值单位的属性值，如值为零，则不得带单位。如不能有 0px的书写出现</p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  margin: 10px 0px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  margin: 10px 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>RULE15</strong>. 在可以使用缩写的情况下，尽量使用属性缩写（建议）</p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  margin-top: 10px;</div><div class="line">  margin-right: 5px;</div><div class="line">  margin-bottom: 2px;</div><div class="line">  margin-left: 0</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  margin: 10px 5px 2px 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>RULE16</strong>. 当数值为 0 - 1 之间的小数时，省略整数部分的** **<code>0</code></p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  margin: 0.1rem;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  margin: .1rem;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>RULE17</strong>. <code>url()</code>** **函数中的路径不加引号</p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  background: url(&quot;test.png&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  background: url(test.png);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>RULE18</strong>. 在自适应的布局上，小图片要用px单位并且后面必须添加?__sprite的标记</p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  background: url(test.png);</div><div class="line">  width: 2em;</div><div class="line">  height: 2em;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.element &#123;</div><div class="line">  background: url(test.png?__sprite);</div><div class="line">  width: 32px;</div><div class="line">  height: 32px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>**RULE19. <strong><code>自适应布局Media Query</code></strong> **不得单独编排，必须与相关的规则一起定义。</p>
+<p><strong>bad</strong></p>
+<p><strong>good</strong></p>
+<p><strong>RULE20</strong>. 需要使用hack的地方先想想自己哪地方做的不好，是否真的需要hack，目前浏览器需要用到hack的地方着实不多</p>
+<p><strong>RULE21</strong>. 清除浮动不得添加空标签的方式进行，多使用伪类，或者去了解BFC的相关规则，基本上能覆盖开发中的全部情况</p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;selector&quot;&gt;</div><div class="line">  &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.clearfix &#123;</div><div class="line">  clear: both;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;selector&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">.selector &#123;</div><div class="line"> &amp;:after &#123;</div><div class="line">  display: table;</div><div class="line">  clear: both;</div><div class="line">  content: &quot;&quot;;</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>RULE22</strong>. 带私有前缀的属性由长到短排列，按冒号位置对齐</p>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-webkit-user-select: none;</div><div class="line">-moz-user-select: none;</div><div class="line">-ms-user-select: none;</div><div class="line">user-select: none;</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-webkit-user-select: none;</div><div class="line">   -moz-user-select: none;</div><div class="line">    -ms-user-select: none;</div><div class="line">        user-select: none;</div></pre></td></tr></table></figure>
+<h4>rule23. 组件的样式中不使用id选择器</h4>
+<p><strong>bad</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#news-list-wrap &#123;</div><div class="line">    color: #000;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>good</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 如果担心组件样式被覆盖，可在class后面加上 -xxx 以保证唯一性</div><div class="line">// 基本原则就是通过给class加后缀来表示特殊性</div><div class="line">.news-list-wrap-sth &#123;</div><div class="line">    color: #000;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><strong>属性的书写顺序</strong></h3>
+<ol>
+<li>定位相关, 常见的有：display position left top float 等</li>
+<li>盒模型相关, 常见的有：<code>width</code> <code>height</code> <code>margin</code> <code>padding</code> <code>border</code> 等</li>
+<li>其他属性</li>
+</ol>
+<p>示例 ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">.content &#123;</div><div class="line">  /* 定位 */</div><div class="line">  display: block;</div><div class="line">  position: absolute;</div><div class="line">  left: 0;</div><div class="line">  top: 0;</div><div class="line">  /* 盒模型 */</div><div class="line">  width: 50px;</div><div class="line">  height: 50px;</div><div class="line">  margin: 10px;</div><div class="line">  border: 1px solid black;</div><div class="line">  / *其他* /</div><div class="line">  color: #efefef;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>按照这样的顺序书写可见提升浏览器渲染dom的性能<br>
+简单举个例子，网页中的图片，如果没有设置width和height，在图片载入之前，他所占的空间为0，但是当他加载完毕之后，那块为0的空间突然被撑开了，这样会导致，他下面的元素重新排列和渲染，造成重绘（repaint）和回流（reflow）。我们在写css的时候，把元素的定位放在前头，首先让浏览器知道该元素是在文本流内还是外，具体在页面的哪个部位，接着让浏览器知道他们的宽度和高度，border等这些占用空间的属性，其他的属性都是在这个固定的区域内渲染的，差不多就是这个意思吧~ （这个咱们遵守的最不好的，以后注意书写顺序，做一个有逼格的csser）</p>
+<p>另外，大家多挖掘sass，发挥他的威力，别以为只是一个方便嵌套的玩意，for，each map等能带来很多书写的便利提升效率</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/02/12/CSS-Good-Technique/">样式代码编写习惯约定——高逼格</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">卡少</a></p>
+        <p><span>发布时间:</span>2017-02-12, 09:03:33</p>
+        <p><span>最后更新:</span>2017-02-12, 15:12:00</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/02/12/CSS-Good-Technique/" title="样式代码编写习惯约定——高逼格">http://geekarl.com/2017/02/12/CSS-Good-Technique/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://geekarl.com/2017/02/12/CSS-Good-Technique/　　作者: 卡少" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/02/14/For-My-Lover/">
+                    情人节专题~你的谜底，我来揭开
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/02/11/JS-nice-habit/">
+                    代码整洁之道——JS
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">CSS代码规范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">命名规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.</span> <span class="toc-text">编码书写规范</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.1.</span> <span class="toc-text">rule23. 组件的样式中不使用id选择器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.4.</span> <span class="toc-text">属性的书写顺序</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"样式代码编写习惯约定——高逼格　| 卡少技术博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2116365';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/02/14/For-My-Lover/" title="上一篇: 情人节专题~你的谜底，我来揭开">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/02/11/JS-nice-habit/" title="下一篇: 代码整洁之道——JS">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/06/mac-software/">MAC系统下的相关优秀软件搜集</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/02/js-process-mechanism/">js线程机制的介绍和练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/04/learnFiddler/">fiddler抓包工具(windows)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/16/My-Git-Knowledge/">接触到的git的三个重要知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/09/gitLearn/">学习git常用及高阶命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/09/excel/">纯前端json数据生成excel下载的实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/03/fontend-optimize/">前端性能优化总结(简略)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/23/nvm-windows-learning/">在Windows上切换node版本的实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/23/ShadowSocks-Learning/">学习科学上网</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/bash-learning/">SHELL脚本的学习和制作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/ssr-introduction/">使用SSR来模拟后端mock数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/18/comment-about-LALALAND/">回首——爱乐之城</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/14/For-My-Lover/">情人节专题~你的谜底，我来揭开</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/CSS-Good-Technique/">样式代码编写习惯约定——高逼格</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/JS-nice-habit/">代码整洁之道——JS</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/31/personal-summarize/">卡少2016年终总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/25/techniques-about-VsCode/">techniques about VsCode</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/14/CSS-center/">用CSS实现居中的总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/13/firstHEXO/">使用HEXO搭建个人博客遇到的几个问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/nav-hover/">对列表hover效果的小探讨</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/13/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 卡少
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 4;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = " " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "Here back the King" + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+  </div>
+</body>
+</html>

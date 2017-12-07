@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="卡少" />
+
+
+
+<meta name="description" content="通过bash脚本来完成平常固定流程工作的自动化操作，提升工作效率。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SHELL脚本的学习和制作">
+<meta property="og:url" content="http://geekarl.com/2017/03/20/bash-learning/index.html">
+<meta property="og:site_name" content="卡少技术博客">
+<meta property="og:description" content="通过bash脚本来完成平常固定流程工作的自动化操作，提升工作效率。">
+<meta property="og:updated_time" content="2017-03-20T02:57:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SHELL脚本的学习和制作">
+<meta name="twitter:description" content="通过bash脚本来完成平常固定流程工作的自动化操作，提升工作效率。">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="卡少技术博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>SHELL脚本的学习和制作 | 卡少技术博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">卡少</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">我已不念过往，亦不惧将来。</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:wanglixing@outlook.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" href="/sina weibo" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/wlx200510" title="GitHub"></a>
+                            
+                                <a class="fa 网易云音乐" href="http://music.163.com/#/user/home?id=12281858" title="网易云音乐"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VsCode/">VsCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fiddler/">fiddler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heart/">heart</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/honey/">honey</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/promise/">promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后端/">后端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/域名/">域名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作/">工作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思考/">思考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技巧/">技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译器/">编译器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路径补全/">路径补全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件/">软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">热爱读书，好钻研，对node/VUE/ES6兴趣较高，抽时间要多研究React,现在组件化开发太火了。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">卡少</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">卡少</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">我已不念过往，亦不惧将来。</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:wanglixing@outlook.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="/sina weibo" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/wlx200510" title="GitHub"></a>
+                            
+                                <a class="fa 网易云音乐" target="_blank" href="http://music.163.com/#/user/home?id=12281858" title="网易云音乐"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-bash-learning" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/20/bash-learning/" class="article-date">
+      <time datetime="2017-03-20T02:36:00.000Z" itemprop="datePublished">2017-03-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SHELL脚本的学习和制作
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/学习/">学习</a><a class="article-category-link" href="/categories/学习/技术/">技术</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工作/">工作</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <script src="/assets/js/APlayer.min.js"> </script><h2>shell脚本的学习</h2>
+<blockquote>
+<p>因前端工程的自动化构建，在webpack打包后需要将index.html、dist和static三个文件上传到部署的linux环境中，之前一直是用windows通过tr上传到跳板机而后scp到发布机器上，近来部署了jenkins，可直接在jenkins部署的机器上进行shell脚本的触发自动化操作</p>
+</blockquote>
+<h3>本地的PACK构建shell脚本</h3>
+<p>首先是在在package.json中的scripts键值中加入release</p>
+<p><code>&quot;release&quot;: &quot;sh build/pack.sh&quot;</code></p>
+<p>之后在项目目录下新建build文件，并在其中新建pack.sh文件，内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="keyword">if</span> [ ! <span class="string">"<span class="variable">$1</span>"</span>]; <span class="keyword">then</span></div><div class="line">    <span class="built_in">echo</span> <span class="string">"不可缺少打包版本号"</span></div><div class="line">    <span class="built_in">exit</span> 1</div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="comment"># 上面的命令是确认传来了作为版本号的第一个参数</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"编译中....."</span></div><div class="line">npm run build</div><div class="line"><span class="comment"># "build": "cross-env NODE_ENV=production gulp",为gulp的命令</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"压缩打包中....."</span></div><div class="line">mkdir -p output</div><div class="line"><span class="comment"># -p指即便是有当前目录，建立也算成功</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"<span class="variable">$1</span>"</span> &gt; output/version.txt</div><div class="line">tar zcvf qmt.tgz dist/ index.html static/</div><div class="line">mv qmt.tgz <span class="variable">$1</span>.tgz</div><div class="line">mv <span class="variable">$1</span>.tgz output</div><div class="line"><span class="comment"># 打包两个文件夹的内容和index.html 并把打包后的文件移动到output中</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"打包完毕"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"提交、添加tag, 并push到gitlab"</span></div><div class="line">git add output/</div><div class="line">git add src/components/_global/footer/index.vue</div><div class="line"><span class="comment"># index.vue更改了下角标的版本号，需要重新添加保存</span></div><div class="line">git commit <span class="_">-a</span> -v -m <span class="string">'new release'</span></div><div class="line">git tag v<span class="string">"<span class="variable">$1</span>"</span></div><div class="line">git push -u origin release --tags</div><div class="line"><span class="comment"># 把新的tag推送到仓库</span></div></pre></td></tr></table></figure>
+<p>这就是执行了npm run release后执行的一系列命令。</p>
+<h2>使代码提交时能自动触发jenkins构建脚本</h2>
+<p>先在jenkins中建立一个任务 点击左上角新建  建立一个新的project(本次是直接复制的别人已建立好的配置)，取名为test(推送到测试环境) 在打开的配置页面中有如下几点需要注意</p>
+<ul>
+<li>项目名称核对是否正确。</li>
+<li>勾选参数化构建过程，将服务器的地址设置为变量，在脚本中可直接读到($TEST_SERVERS)</li>
+<li>源码管理项，选择git，填写当前项目的git地址，Branch(refs/heads/release) Local subdirectory for repo下写跟后端约定的文件夹名称</li>
+<li>构建触发器这里，选择Build when a change is push to GitLab 这里需要注意，要配置好项目的gitlab仓库的webhook，地址就是这个后面跟着的URL，同时下面的Target Branch选择release分支。</li>
+<li>构建触发器选择后，一些触发选项根据需要来确定，然后到项目的gitlab页面，点击右上角的配置-webhook项，第一个对话框写入上面提到的URL，选择push和push tags两个一般就可以完成触发</li>
+<li>在构建的commend对话框，写入触发脚本的shell命令如下, test.sh是接下来要写的shell脚本</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd $WORKSPACE/test</div><div class="line">sh build/test.sh</div></pre></td></tr></table></figure>
+<h2>写test.sh脚本</h2>
+<p>脚本的目标是基于jenkins所在的机器，运行此脚本，将打好的包传输到部署机器上，解压到所需的文件夹下，并把原压缩包删除。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$TEST_SERVERS</span></div><div class="line"><span class="comment"># 打开目标文件目录</span></div><div class="line"><span class="built_in">cd</span> <span class="variable">$WORKSPACE</span>/<span class="built_in">test</span></div><div class="line"><span class="comment"># 读取当前包的版本号</span></div><div class="line">VERSION=`cat ./output/version.txt`</div><div class="line"><span class="built_in">echo</span> <span class="string">"版本号: "</span><span class="variable">$VERSION</span></div><div class="line">scp output/qmt.tgz root@<span class="variable">$TEST_SERVERS</span>:/tmp &amp;&amp; \</div><div class="line"><span class="comment"># 通过scp命令把打好的output文件夹下的包传输到目标机器的tmp文件夹下</span></div><div class="line">ssh root@<span class="variable">$TEST_SERVERS</span> </div><div class="line"><span class="comment">#连接到目标机器上，默认是在root下 接下来要执行的命令需要放在双引号中！</span></div><div class="line"><span class="comment"># 先打开最顶层的目录，在最顶层的目录进行接下来的操作</span></div><div class="line"><span class="comment"># tar命令的zxvf对应解压 -C可指定解压到的文件夹 rm为删除命令</span></div><div class="line"><span class="string">"cd ../ &amp;&amp; tar zxvf ./tmp/qmt.tgz -C ./tv/le/*-static &amp;&amp; \</span></div><div class="line">tar zxvf ./tmp/qmt.tgz -C ./tv/le/staging-*-static &amp;&amp; \</div><div class="line">rm -rf ./tmp/qmt.tgz"</div></pre></td></tr></table></figure>
+<h2>学习发布用的upload脚本</h2>
+<p>upload脚本是将代码发布到两台机器上，因此$DEPLOY_SERVERS是一个两个IP地址用逗号分隔的字符串，先分隔为数组，而后进行循环部署处理。还有一点是通过读入的版本号来建立对应版本的文件夹，而后用软连接来指向，方便出问题后回滚版本。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$DEPLOY_SERVERS</span></div><div class="line">VERSION=`cat ../output/version.txt`</div><div class="line"><span class="built_in">echo</span> <span class="string">"版本号: "</span><span class="variable">$VERSION</span></div><div class="line"><span class="built_in">cd</span> <span class="variable">$WORKSPACE</span>/lesports-fe-cms</div><div class="line"><span class="comment"># 下面这个是讲$DEPLOY_SERVERS用','分隔为数组并存入ADDR</span></div><div class="line">IFS=<span class="string">','</span> <span class="built_in">read</span> -ra ADDR &lt;&lt;&lt; <span class="string">"<span class="variable">$DEPLOY_SERVERS</span>"</span></div><div class="line"><span class="comment"># 循环数组读取每一个变量</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">"<span class="variable">$&#123;ADDR[@]&#125;</span>"</span>; <span class="keyword">do</span></div><div class="line">    <span class="comment"># 先通过scp把包上传到要部署的机器上</span></div><div class="line">    scp output/qmt.tgz root@<span class="variable">$i</span>:/tmp</div><div class="line">    ssh root@<span class="variable">$i</span> <span class="string">"mkdir -p /letv/leapps/tags &amp;&amp; \</span></div><div class="line">    cd /letv/leapps/tags &amp;&amp; \</div><div class="line">    mkdir -p qmt.<span class="variable">$VERSION</span> &amp;&amp; \</div><div class="line">    cd qmt.<span class="variable">$VERSION</span> &amp;&amp; \</div><div class="line">    tar zxvf /tmp/qmt.tgz -C . &amp;&amp; \</div><div class="line">    rm -f /tmp/qmt.tgz &amp;&amp; \</div><div class="line">    ls -rthl &amp;&amp; \</div><div class="line">    cd ../../ &amp;&amp; \</div><div class="line">    rm -fr qmt-cms-static &amp;&amp; \</div><div class="line">    ln -s tags/qmt.<span class="variable">$VERSION</span> qmt-cms-static</div><div class="line">    "</div><div class="line"><span class="keyword">done</span></div><div class="line"><span class="comment"># mkdir -p qmt.$VERSION 为建立带版本号的文件夹(在tags文件夹下)</span></div><div class="line"><span class="comment"># cd进入带版本号的文件夹,把包解压到当前文件夹下</span></div><div class="line"><span class="comment"># ls -rthl 为显示目录内容列表</span></div><div class="line"><span class="comment"># 回退到 /letv/leapps文件夹中 此处已有qmt-cms-static这个文件夹，ln -s tags/qmt.$VERSION qmt-cms-static 就是把这个文件夹软连接到最新的带tag的文件夹上。</span></div></pre></td></tr></table></figure>
+<h2>优化脚本-取消版本号并增加错误提示</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="keyword">if</span> [ ! <span class="string">"<span class="variable">$1</span>"</span> ]; <span class="keyword">then</span></div><div class="line">    <span class="built_in">echo</span> <span class="string">"版本号是必须的"</span></div><div class="line">    <span class="built_in">exit</span> 1</div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="comment"># 用于当本地的tag已存在时的提示信息</span></div><div class="line">curTag=`git tag | grep v<span class="variable">$1</span>`</div><div class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$curTag</span>"</span> == <span class="string">"v<span class="variable">$1</span>"</span> ]; <span class="keyword">then</span></div><div class="line">    <span class="built_in">echo</span> <span class="string">"版本号已存在"</span></div><div class="line">    <span class="built_in">exit</span> 1</div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"DIST编译中....."</span></div><div class="line">npm run dist</div><div class="line"><span class="comment">#</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"压缩打包中......"</span></div><div class="line">mkdir -p output</div><div class="line">tar zcvf qmt.tgz dist/ index.html static/</div><div class="line">mv qmt.tgz output</div><div class="line"><span class="built_in">echo</span> <span class="string">"打包完毕"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"提交、添加tag，并push到gitlab"</span></div><div class="line">git add output/</div><div class="line">git add src/components/_global/footer/index.vue</div><div class="line">git commit <span class="_">-a</span> -v -m <span class="string">"new release v<span class="variable">$1</span>"</span></div><div class="line">git tag <span class="_">-a</span> v<span class="string">"<span class="variable">$1</span>"</span></div><div class="line"><span class="comment"># 捕捉错误并提示出错信息</span></div><div class="line">git push -u origin release || &#123; <span class="built_in">echo</span> <span class="string">"本地推送失败，请pull后再执行"</span>; <span class="built_in">exit</span> 1; &#125;</div><div class="line">git push origin v<span class="string">"<span class="variable">$1</span>"</span> || &#123; <span class="built_in">echo</span> <span class="string">"tag push failed"</span>; <span class="built_in">exit</span> 1; &#125;</div></pre></td></tr></table></figure>
+<p><em>这些shell脚本的难度都不是很大，主要是练习，毕竟也不是专业的运维，否则最起码也要有定时执行一类的，不过工作需要的运维东西不算多，慢慢积累吧。</em></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/03/20/bash-learning/">SHELL脚本的学习和制作</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">卡少</a></p>
+        <p><span>发布时间:</span>2017-03-20, 10:36:00</p>
+        <p><span>最后更新:</span>2017-03-20, 10:57:10</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/03/20/bash-learning/" title="SHELL脚本的学习和制作">http://geekarl.com/2017/03/20/bash-learning/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://geekarl.com/2017/03/20/bash-learning/　　作者: 卡少" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/03/23/ShadowSocks-Learning/">
+                    学习科学上网
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/03/11/ssr-introduction/">
+                    使用SSR来模拟后端mock数据
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">shell脚本的学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">本地的PACK构建shell脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">使代码提交时能自动触发jenkins构建脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">写test.sh脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">学习发布用的upload脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">优化脚本-取消版本号并增加错误提示</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"SHELL脚本的学习和制作　| 卡少技术博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2116365';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/03/23/ShadowSocks-Learning/" title="上一篇: 学习科学上网">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/03/11/ssr-introduction/" title="下一篇: 使用SSR来模拟后端mock数据">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/06/mac-software/">MAC系统下的相关优秀软件搜集</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/02/js-process-mechanism/">js线程机制的介绍和练习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/04/learnFiddler/">fiddler抓包工具(windows)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/16/My-Git-Knowledge/">接触到的git的三个重要知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/09/gitLearn/">学习git常用及高阶命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/09/excel/">纯前端json数据生成excel下载的实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/03/fontend-optimize/">前端性能优化总结(简略)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/23/nvm-windows-learning/">在Windows上切换node版本的实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/23/ShadowSocks-Learning/">学习科学上网</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/20/bash-learning/">SHELL脚本的学习和制作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/ssr-introduction/">使用SSR来模拟后端mock数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/18/comment-about-LALALAND/">回首——爱乐之城</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/14/For-My-Lover/">情人节专题~你的谜底，我来揭开</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/CSS-Good-Technique/">样式代码编写习惯约定——高逼格</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/JS-nice-habit/">代码整洁之道——JS</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/31/personal-summarize/">卡少2016年终总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/25/techniques-about-VsCode/">techniques about VsCode</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/14/CSS-center/">用CSS实现居中的总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/13/firstHEXO/">使用HEXO搭建个人博客遇到的几个问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/nav-hover/">对列表hover效果的小探讨</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/13/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 卡少
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 4;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = " " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "Here back the King" + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+  </div>
+</body>
+</html>
