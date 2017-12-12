@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title><![CDATA[新主题博客诞生之路]]></title>
+      <url>http://geekarl.com/2017/12/12/newBlogborn/</url>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<p>首先列出两大主题的文档地址，方便以后查阅<br>
+<a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak" target="_blank" rel="external">tranquilpeak</a><br>
+<a href="https://github.com/yscoder/hexo-theme-indigo/wiki" target="_blank" rel="external">indigo</a></p>
+<p>两大主题的主要不同：</p>
+<ul>
+<li><code>tranquilpeak</code>主要是展示简洁，无标题目录，白底黑字的阅读感类似简书，后者加入了很多设计元素，有目录/打赏等功能</li>
+<li><code>tranquilpeak</code>主题对博客作者展示比较少，但是<code>indigo</code>作者可以展示的位置比较多，并且可以加入自定义的作者页面</li>
+<li><code>tranquilpeak</code>的博客搜索用的是第三方的服务来做的，而<code>indigo</code>是本地生成json数据，部署上更加方便一些</li>
+<li>本次还探索了使用本地图片来完成markdown的方法</li>
+</ul>
+<h2>切换主题</h2>
+<p>在<code>github</code>上的主题切换用的是修改配置文件，在<code>gitee</code>上是用hexo新建了个项目完成的迁移，这个页面部署要小小参考一下<code>gitee</code>的使用文档。<br>
+切换主题基本没什么大的问题，直接把主题放入theme文件夹，而后在——config.yml进行配置即可，这个过程倒是很顺利，但在完成后会发现，所有的文章都没有缩略介绍，查看了说明才发现针对缩略介绍的文字这块是下放到主题上的，所以各个主题采用的方式不同，而原来用的主题是放到一个自定义字段description里面的，所以要费劲修改一番。针对两种主题不同的搜索处理，我都尝试了一下，综合感觉都不错，第三方的algolia是专门提供搜索的，个人的话免费的额度足够了。如果是本地生成json数据，那部署时就不需要向第三方数据搜索提供更新的条目，从精确性来讲感觉第三方更准一些，不过也不排除可能本地生成json数据的配置没做好，就基本的搜索需求来说都够用。</p>
+<h2>样式微调</h2>
+<ul>
+<li>针对<code>indigo</code>这个博客主题，感觉文章显示宽度比较小，通过研究less样式表，把一个变量从绝对像素变成了百分比，从而顺利解决了适配问题</li>
+<li>另外在使用<code>indigo</code>博客主题时，发现最新版本的toc渲染不对头，我一直以为是自己的配置问题，最后在github上查issue，发现是hexo的问题，不过针对这个的折腾还是很值得，让我摸清了hexo的渲染架构，同时收获了字符escape的标准解决办法</li>
+<li>其实所有的主题只要把配置文件摸清楚了，用起来问题都不大，另外主题的维护者都是国人，交流也比较自然，并且可以自己发挥加入自定义的逻辑</li>
+<li>在<code>gitee</code>一开始一直不显示静态资源，经查询发现必须在配置文件中把项目名称给加上，也就是有个类似二级目录的配置</li>
+</ul>
+<h2>评论踩坑</h2>
+<p>两个主题都使用了<a href="https://github.com/imsun/gitment" target="_blank" rel="external">gitment</a>这个评论插件，这个是使用了gihub的issue功能，通过恰当的封装变成了评论的接口，确实很灵活，不得不给作者点赞。<br>
+这个配置的关键在于插件的文档写的不是特别详细，在此有两点需求，一是要明白那个github用户名指的是github的username,不是邮箱或者id，另外就是要填写的仓库应该直接是仓库的名称，不应该是一个git仓库的地址，这样在发请求时才会拼出正确的api。另外针对github里面申请那个appid,主要时回调的网址，必须前匹配，如果不对在点击初始化按钮时会在url栏里面提示错误，从而无法init。</p>
+<h2>博客折腾体会</h2>
+<p>虽然瞎费了不少功夫，不过对前端静态博客的架构有了一定的认识，对自己用的东西最起码有个了解的底气~<br>
+通过引入了<a href="https://github.com/CodeFalling/hexo-asset-image.git" target="_blank" rel="external">hexo-asset-image</a>,从而可以本地使用图片，相信这个对于写博客有很大的用途<br>
+最初看到的主题样例都是有丰富的图片展示，下一步就是增加一些博客图片，从而让博客有些灵气~<br>
+<em>PS:附上两个博客的地址</em></p>
+<ul>
+<li><a href="http://www.geekarl.com" target="_blank" rel="external">tranquilpeak</a></li>
+<li><a href="http://geekarl.gitee.io/card_hexo_blog/" target="_blank" rel="external">indigo</a></li>
+</ul>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[MAC系统下的相关优秀软件搜集]]></title>
       <url>http://geekarl.com/2017/12/06/mac-software/</url>
       <content type="html"><![CDATA[<!-- excerpt -->
@@ -1233,8 +1271,26 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
     </entry>
     
     <entry>
+      <title><![CDATA[all-categories]]></title>
+      <url>http://geekarl.com/all-categories/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[all-archives]]></title>
       <url>http://geekarl.com/all-archives/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[all-tags]]></title>
+      <url>http://geekarl.com/all-tags/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[分类 & 标签]]></title>
+      <url>http://geekarl.com/tags/index.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
@@ -1289,7 +1345,7 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
 </style>
 <hr>
 <p><strong>我将竭尽全力地做好自己，谢谢过往，遇到的同事让我更好地认识了自己，既往不念，执着于前<span>——</span>卡少</strong></p>
-<p class="sign"><span>——</span> 感谢原博主提供的模板</p>
+<p class="sign"><span>——</span> 感谢hexo</p>
 <div class="blub">
     <img src="http://opm3cm6nh.bkt.clouddn.com/2014_February_DesignThinkingEmphatic-ApproachToProblemSolving-1600x700_1.jpg" title="Thinking">
 </div>
@@ -1299,10 +1355,6 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
 博客可以督促知识的积累和显性化，剩点笔墨，原来都写在本子上了；<br>
 建立博客的过程中发现一众牛人，正好有机会切磋切磋；<br>
 偶尔也写一些新的体会，不求人气，但求分享~。</p>
-</blockquote>
-<p><strong><a href="http://moxfive.coding.me/2015/08/28/Front-End-Study/" target="_blank" rel="external">借鉴MOxFIVE的前端学习路线:</a></strong></p>
-<blockquote>
-<p>这里保留链接，有待进一步学习和借鉴。</p>
 </blockquote>
 <p><strong>个人相关信息和经验:</strong></p>
 <blockquote>
@@ -1321,36 +1373,18 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
 <ul>
 <li>刚毕业在天津做了一段时间与前端关系不大的工作，但已有所涉猎。</li>
 <li>而后在天津会峰网科技有限公司做了一段时间半实习性质的工作。</li>
-<li>目前就职于乐视体育的前端产品研发部门，T4的前端工程师。</li>
+<li>之后来北京就职于乐视体育的前端产品研发部门，为期8个月。</li>
+<li>现任职于小米移动软件有限公司 MIUI部</li>
 </ul>
 <p><strong>欢迎交流:</strong></p>
 <blockquote>
 <p>个人邮件及社交网站等信息见边栏底部；<br>
-有什么留言或问题直接在文末留下评论即可。<br>
-后面把以前写的博客都转过来，以此为主阵地喽</p>
+有什么留言或问题直接在文末留下评论即可。</p>
 </blockquote>
 <div class="player">
 <iframe scrolling="auto" frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height="330" src="http://music.163.com/outchain/player?type=0&id=10460189&auto=0&height=430"></iframe>
 </div>
 <ul class="ds-recent-visitors" data-num-items="30" data-avatar-size="60"></ul>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[all-categories]]></title>
-      <url>http://geekarl.com/all-categories/index.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[all-tags]]></title>
-      <url>http://geekarl.com/all-tags/index.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[分类 & 标签]]></title>
-      <url>http://geekarl.com/tags/index.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
   
