@@ -4,6 +4,30 @@
   
     
     <entry>
+      <title><![CDATA[学会发布自己的npm包]]></title>
+      <url>http://geekarl.com/2017/12/26/npm-learn/</url>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<h2>准备工作</h2>
+<blockquote>
+<p>在<a href="https://www.npmjs.com/" target="_blank" rel="external">npm官网</a>注册账号，要记住用户名/邮箱/密码 三个信息，后面需要用到<br>
+需要发布的项目应该有相应的git地址 包括但不限于<code>github</code><br>
+最好在项目中使用gulp来把跑测试用例和打包的过程进行自动化，方便发布</p>
+</blockquote>
+<h2>操作流程</h2>
+<ol>
+<li>在修改完成后，首先本地提交，并执行单元测试(<code>npm run unit</code>)</li>
+<li>如果测试通过，则可以打包出压缩后的成品代码(<code>npm run build</code>)</li>
+<li>此时进入预发布流程，可以先通过<code>npm whoami</code>来确认登录信息，如果当前未登录，则需要<code>npm login</code>来输入用户名/密码/邮箱来登录</li>
+<li>确定处于登录状态后，<code>npm version from-git</code>把本地的npm包版本号更新到最新</li>
+<li>使用<code>npm version patch</code>来增加新一期的版本号，实质是打了一个本地的tag</li>
+<li>成功后表明完成了本地所需的预发布流程，在发布之前先通过<code>git commit -am 'version info' &amp;&amp; git push &amp;&amp; git push --tags</code>同步到远程</li>
+<li>执行<code>npm publish</code>将npm最新版本的包进行发布。</li>
+</ol>
+<h2>同步最新版本</h2>
+<p>需要在用到此npm包的项目中的package.json中更改此包的最新版本号，然后执行<code>npm i</code>来更新包的代码 之后就可以在最新包的基础上进行开发</p>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[新主题博客诞生之路]]></title>
       <url>http://geekarl.com/2017/12/12/newBlogborn/</url>
       <content type="html"><![CDATA[<!-- excerpt -->
@@ -1271,26 +1295,20 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
     </entry>
     
     <entry>
-      <title><![CDATA[all-categories]]></title>
-      <url>http://geekarl.com/all-categories/index.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[all-archives]]></title>
       <url>http://geekarl.com/all-archives/index.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
-      <title><![CDATA[all-tags]]></title>
-      <url>http://geekarl.com/all-tags/index.html</url>
+      <title><![CDATA[all-categories]]></title>
+      <url>http://geekarl.com/all-categories/index.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
-      <title><![CDATA[分类 & 标签]]></title>
-      <url>http://geekarl.com/tags/index.html</url>
+      <title><![CDATA[all-tags]]></title>
+      <url>http://geekarl.com/all-tags/index.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
@@ -1385,6 +1403,12 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
 <iframe scrolling="auto" frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height="330" src="http://music.163.com/outchain/player?type=0&id=10460189&auto=0&height=430"></iframe>
 </div>
 <ul class="ds-recent-visitors" data-num-items="30" data-avatar-size="60"></ul>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[分类 & 标签]]></title>
+      <url>http://geekarl.com/tags/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
   
