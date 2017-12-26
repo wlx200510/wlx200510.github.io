@@ -19,7 +19,7 @@
 <meta property="og:url" content="http://geekarl.com/2017/12/26/npm-learn/index.html">
 <meta property="og:site_name" content="卡少技术博客">
 <meta property="og:description" content="最近学习了下发布一个npm工具包的流程，记录下来，方便大家参考学习">
-<meta property="og:updated_time" content="2017-12-26T01:24:59.470Z">
+<meta property="og:updated_time" content="2017-12-26T01:29:34.853Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学会发布自己的npm包">
 <meta name="twitter:description" content="最近学习了下发布一个npm工具包的流程，记录下来，方便大家参考学习">
@@ -253,23 +253,23 @@
         <div class="main-content-wrap">
             <!-- excerpt -->
 <h2>准备工作</h2>
-<blockquote>
-<p>在<a href="https://www.npmjs.com/" target="_blank" rel="external">npm官网</a>注册账号，要记住用户名/邮箱/密码 三个信息，后面需要用到<br>
-需要发布的项目应该有相应的git地址 包括但不限于<code>github</code><br>
-最好在项目中使用gulp来把跑测试用例和打包的过程进行自动化，方便发布</p>
-</blockquote>
+<ul>
+<li>在<a href="https://www.npmjs.com/" target="_blank" rel="external">npm官网</a>注册账号，要记住用户名/邮箱/密码 三个信息，后面需要用到</li>
+<li>需要发布的项目应该有相应的<code>git</code>地址 包括但不限于<code>github</code></li>
+<li>最好在项目中使用<code>gulp</code>来把跑测试用例和打包的过程进行自动化，方便发布</li>
+</ul>
 <h2>操作流程</h2>
 <ol>
 <li>在修改完成后，首先本地提交，并执行单元测试(<code>npm run unit</code>)</li>
 <li>如果测试通过，则可以打包出压缩后的成品代码(<code>npm run build</code>)</li>
 <li>此时进入预发布流程，可以先通过<code>npm whoami</code>来确认登录信息，如果当前未登录，则需要<code>npm login</code>来输入用户名/密码/邮箱来登录</li>
-<li>确定处于登录状态后，<code>npm version from-git</code>把本地的npm包版本号更新到最新</li>
-<li>使用<code>npm version patch</code>来增加新一期的版本号，实质是打了一个本地的tag</li>
+<li>确定处于登录状态后，<code>npm version from-git</code>把本地的<code>npm</code>包版本号更新到最新</li>
+<li>使用<code>npm version patch</code>来增加新一期的版本号，实质是打了一个本地的<code>tag</code></li>
 <li>成功后表明完成了本地所需的预发布流程，在发布之前先通过<code>git commit -am 'version info' &amp;&amp; git push &amp;&amp; git push --tags</code>同步到远程</li>
-<li>执行<code>npm publish</code>将npm最新版本的包进行发布。</li>
+<li>执行<code>npm publish</code>将<code>npm</code>最新版本的包进行发布。</li>
 </ol>
 <h2>同步最新版本</h2>
-<p>需要在用到此npm包的项目中的package.json中更改此包的最新版本号，然后执行<code>npm i</code>来更新包的代码 之后就可以在最新包的基础上进行开发</p>
+<p>需要在用到此<code>npm</code>包的项目中的<code>package.json</code>中更改此包的最新版本号，然后执行<code>npm i</code>来更新包的代码 之后就可以在最新包的基础上进行开发</p>
             
 
         </div>
@@ -308,7 +308,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
                 <i class="fa fa-share-alt" aria-hidden="true"></i>
             </a>
         </li>
@@ -342,7 +342,7 @@
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
             
                 <i class="fa fa-list" aria-hidden="true"></i>
             </a>
@@ -393,7 +393,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
                 <i class="fa fa-share-alt" aria-hidden="true"></i>
             </a>
         </li>
@@ -427,7 +427,7 @@
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
             
                 <i class="fa fa-list" aria-hidden="true"></i>
             </a>
