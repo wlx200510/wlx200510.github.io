@@ -6,20 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="卡少技术博客">
-    <title>分类 &amp; 标签 - 卡少技术博客</title>
+    <title>网页实现把文本复制到粘贴板 - 卡少技术博客</title>
     <meta name="author" content="卡少">
     
     
         <link rel="icon" href="http://geekarl.com/assets/images/avatar.jpg">
     
     
-    <meta property="og:type" content="blog">
-<meta property="og:title" content="分类 & 标签">
-<meta property="og:url" content="http://geekarl.com/tags/index.html">
+    <meta name="description" content="为了写一个运营用得小工具，需要把一段文本复制下来方便粘贴，整个过程学到了网页中复制文本所需API和一些封装好的轮子，遂积累下来分享。">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="网页实现把文本复制到粘贴板">
+<meta property="og:url" content="http://geekarl.com/2017/12/27/clipboard/index.html">
 <meta property="og:site_name" content="卡少技术博客">
-<meta property="og:updated_time" content="2016-10-13T12:14:27.959Z">
+<meta property="og:description" content="为了写一个运营用得小工具，需要把一段文本复制下来方便粘贴，整个过程学到了网页中复制文本所需API和一些封装好的轮子，遂积累下来分享。">
+<meta property="og:updated_time" content="2017-12-27T07:50:48.739Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分类 & 标签">
+<meta name="twitter:title" content="网页实现把文本复制到粘贴板">
+<meta name="twitter:description" content="为了写一个运营用得小工具，需要把一段文本复制下来方便粘贴，整个过程学到了网页中复制文本所需API和一些封装好的轮子，遂积累下来分享。">
     
     
         
@@ -49,7 +52,7 @@
         
     
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a class="header-title-link" href="/ ">卡少技术博客</a>
@@ -73,7 +76,7 @@
         
     
 
-<nav id="sidebar" data-behavior="1">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -213,7 +216,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="1"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -224,16 +227,22 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            分类 &amp; 标签
+            网页实现把文本复制到粘贴板
         </h1>
     
     
         <div class="post-meta">
-    <time itemprop="datePublished" datetime="2016-10-13T14:12:18+08:00">
+    <time itemprop="datePublished" datetime="2017-12-27T15:50:27+08:00">
 	
-		    10月 13, 2016
+		    12月 27, 2017
     	
     </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/学习/">学习</a>
+
+
     
 </div>
 
@@ -242,12 +251,43 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <script src="/assets/js/APlayer.min.js"> </script>
+            <!-- excerpt -->
+<h2>思路整理</h2>
+<p>有一个按钮可以触发以下逻辑：</p>
+<ul>
+<li>将生成的文本自动复制到剪切板上 结果要有友好提示</li>
+<li>复制成功后可以粘贴到任何地方</li>
+</ul>
+<p>一开始我以为有通用的接口，一番调研之后发现有以下几种东东：</p>
+<ol>
+<li><code>document.execCommand(&quot;copy&quot;)</code>这个用于在要复制的文本处于被选中状态时使用</li>
+<li><code>window.clipboardData.setData(&quot;Text&quot;, clipBoardContent)</code>为挂载在window上的API 据说兼容性不好</li>
+<li>结合<code>ZeroClipboard.js</code>这个插件实现兼容性比较好的复制粘贴，通过<code>new ZeroClipboard.client()</code>来调用各个方法</li>
+<li><code>github</code>上的库<a href="https://github.com/zenorocha/clipboard.js" target="_blank" rel="external"><code>clipboard.js</code></a>,通过<code>new Clipboard('.btn')</code>这种语法实现访问剪切板的操作,兼容性最好</li>
+</ol>
+<p><em>有一些具体的代码示例参考CSDN中的<a href="http://blog.csdn.net/fanhu6816/article/details/52809385" target="_blank" rel="external">内容</a>,不过要考虑是否过时</em></p>
+<p>由于是在vue框架基础上进行开发，最后选择了上面提到的第四种方法，完全抛弃了flash的hack实现(第三种)，并且有着强大的兼容性，<code>github</code>上的star数量已经说明了一切，本来考虑是自己封装个指令来用，后来发现<a href="https://github.com/Inndy/vue-clipboard2" target="_blank" rel="external"><code>vue-clipboard2</code></a>这个插件已经实现了封装，按照绝不重复造轮子的原则，直接在项目里用了起来。</p>
+<h2>原理剖析</h2>
+<p><code>clipboard.js</code>的核心原理是虚拟了一个不可见的选区并利用复制的API来实现文本复制，因此最起码需要动态创造的页面元素有可以有被选中的属性。<br>
+为了方便学习vue自定义指令的写法，现在把vue-clipboard2的代码摘抄过来加以学习：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Clipboard = <span class="built_in">require</span>(<span class="string">'clipboard'</span>)</div><div class="line"></div><div class="line"><span class="keyword">var</span> VueClipboard = &#123;</div><div class="line">  <span class="attr">install</span>: <span class="function"><span class="keyword">function</span> (<span class="params">Vue</span>) </span>&#123;</div><div class="line">    Vue.prototype.$copyText = <span class="function"><span class="keyword">function</span> (<span class="params">text</span>) </span>&#123; </div><div class="line">      <span class="comment">// 这个是非触发式的调用api(this.$copyText)</span></div><div class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> fake_el = <span class="built_in">document</span>.createElement(<span class="string">'button'</span>);</div><div class="line">        <span class="keyword">var</span> clipboard = <span class="keyword">new</span> Clipboard(fake_el, &#123;</div><div class="line">          <span class="attr">text</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> text &#125;,</div><div class="line">          <span class="attr">action</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="string">'copy'</span> &#125;</div><div class="line">        &#125;);</div><div class="line">        clipboard.on(<span class="string">'success'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">          clipboard.destroy();</div><div class="line">          resolve(e);</div><div class="line">        &#125;);</div><div class="line">        clipboard.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">          clipboard.destroy();</div><div class="line">          reject(e);</div><div class="line">        &#125;);</div><div class="line">        fake_el.click();</div><div class="line">      &#125;);</div><div class="line">    &#125;;</div><div class="line">    <span class="comment">// 自定义指令时要注意vue自定义指令的生命周期</span></div><div class="line">    Vue.directive(<span class="string">'clipboard'</span>, &#123;</div><div class="line">      <span class="attr">bind</span>: <span class="function"><span class="keyword">function</span> (<span class="params">el, binding, vnode</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(binding.arg === <span class="string">'success'</span>) &#123;</div><div class="line">          el._v_clipboard_success = binding.value</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(binding.arg === <span class="string">'error'</span>) &#123;</div><div class="line">          el._v_clipboard_error = binding.value</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">          <span class="keyword">var</span> clipboard = <span class="keyword">new</span> Clipboard(el, &#123;</div><div class="line">            <span class="attr">text</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> binding.value &#125;,</div><div class="line">            <span class="attr">action</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> binding.arg === <span class="string">'cut'</span> ? <span class="string">'cut'</span> : <span class="string">'copy'</span> &#125;</div><div class="line">          &#125;)</div><div class="line">          clipboard.on(<span class="string">'success'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> callback = el._v_clipboard_success</div><div class="line">            callback &amp;&amp; callback(e)</div><div class="line">          &#125;)</div><div class="line">          clipboard.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> callback = el._v_clipboard_error</div><div class="line">            callback &amp;&amp; callback(e)</div><div class="line">          &#125;)</div><div class="line">          el._v_clipboard = clipboard</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      <span class="attr">update</span>: <span class="function"><span class="keyword">function</span> (<span class="params">el, binding</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(binding.arg === <span class="string">'success'</span>) &#123;</div><div class="line">          el._v_clipboard_success = binding.value</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(binding.arg === <span class="string">'error'</span>) &#123;</div><div class="line">          el._v_clipboard_error = binding.value</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">          el._v_clipboard.text = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> binding.value &#125;</div><div class="line">          el._v_clipboard.action = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> binding.arg === <span class="string">'cut'</span> ? <span class="string">'cut'</span> : <span class="string">'copy'</span> &#125;</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      <span class="attr">unbind</span>: <span class="function"><span class="keyword">function</span> (<span class="params">el, binding</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(binding.arg === <span class="string">'success'</span>) &#123;</div><div class="line">          <span class="keyword">delete</span> el._v_clipboard_success</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(binding.arg === <span class="string">'error'</span>) &#123;</div><div class="line">          <span class="keyword">delete</span> el._v_clipboard_error</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">          el._v_clipboard.destroy()</div><div class="line">          <span class="keyword">delete</span> el._v_clipboard</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 以下是把这个模块输出的写法，兼容了amd/cmd</span></div><div class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> exports == <span class="string">"object"</span>) &#123;</div><div class="line">  <span class="built_in">module</span>.exports = VueClipboard</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> define == <span class="string">"function"</span> &amp;&amp; define.amd) &#123;</div><div class="line">  define([], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> VueClipboard</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2>插件使用</h2>
+<p>如果对<code>vue-directive</code>比较熟悉的话，这些看懂都比较容易，核心就是<code>new Clipboard()</code>的调用，看完之后在vue中的用法自然很容易。定义的指令名为<code>v-clipboard</code>。并且可以传入<code>v-clipboard:cut</code>/<code>v-clipboard:copy</code>/<code>v-clipboard:success</code>/<code>v-clipboard:error</code>等参数及回调函数。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">el-button</span> <span class="attr">v-clipboard:copy</span>=<span class="string">"finalLink"</span> <span class="attr">v-clipboard:success</span>=<span class="string">"copySuccess"</span> <span class="attr">v-clipboard:error</span>=<span class="string">"copyFail"</span> <span class="attr">type</span>=<span class="string">"primary"</span>&gt;</span>复制链接<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></div><div class="line"><span class="keyword">import</span> VueClipboard <span class="keyword">from</span> <span class="string">'vue-clipboard2'</span></div><div class="line">Vue.use(VueClipboard) <span class="comment">//使用自定义指令的写法</span></div><div class="line">...</div><div class="line">copySuccess() &#123;</div><div class="line">    <span class="keyword">this</span>.$message(&#123;</div><div class="line">        <span class="attr">message</span>: <span class="string">'链接已复制，请粘贴'</span>,</div><div class="line">        <span class="attr">type</span>: <span class="string">'success'</span></div><div class="line">    &#125;)</div><div class="line">&#125;,</div><div class="line">copyFail() &#123;</div><div class="line">    <span class="keyword">this</span>.$message.error(<span class="string">'复制失败，请手动操作'</span>)</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<p>在element-ui基础上开发而成，所以成功和失败的回调都直接用了element的API。相信还是比较容易看懂的哈~</p>
             
 
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/vue/">vue</a> <a class="tag tag--primary tag--small t-link" href="/tags/工作/">工作</a>
+
+            </div>
         
         
             <div class="post-actions-wrap">
@@ -263,7 +303,8 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/26/npm-learn/" data-tooltip="学会发布自己的npm包" aria-label="下一篇: 学会发布自己的npm包">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -281,7 +322,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://geekarl.com/tags/index.html" title="分享到 Facebook">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://geekarl.com/2017/12/27/clipboard/" title="分享到 Facebook">
                     <i class="fa fa-facebook-official" aria-hidden="true"></i>
                 </a>
             </li>
@@ -289,7 +330,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://geekarl.com/tags/index.html" title="分享到 Twitter">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://geekarl.com/2017/12/27/clipboard/" title="分享到 Twitter">
                     <i class="fa fa-twitter" aria-hidden="true"></i>
                 </a>
             </li>
@@ -297,11 +338,13 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://geekarl.com/tags/index.html" title="分享到 Google+">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://geekarl.com/2017/12/27/clipboard/" title="分享到 Google+">
                     <i class="fa fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li>
         
+        
+            
         
         <li class="post-action">
             
@@ -316,6 +359,8 @@
 
         
         
+            
+        
     </div>
 </article>
 
@@ -328,6 +373,107 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/26/npm-learn/" data-tooltip="学会发布自己的npm包" aria-label="下一篇: 学会发布自己的npm包">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://geekarl.com/2017/12/27/clipboard/" title="分享到 Facebook">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://geekarl.com/2017/12/27/clipboard/" title="分享到 Twitter">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://geekarl.com/2017/12/27/clipboard/" title="分享到 Google+">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <i id="btn-close-shareoptions" class="fa fa-close"></i>
+    <ul class="share-options">
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://geekarl.com/2017/12/27/clipboard/">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i><span>分享到 Facebook</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://geekarl.com/2017/12/27/clipboard/">
+                    <i class="fa fa-twitter" aria-hidden="true"></i><span>分享到 Twitter</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://geekarl.com/2017/12/27/clipboard/">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i><span>分享到 Google+</span>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
             
         </div>
         
@@ -597,6 +743,8 @@
         <!--SCRIPTS-->
 <script src="/assets/js/script-peofhqjkzcghmndknakluequy1y6owxdwpaqyju9ntl9zxnk7rdolb3rjjoj.min.js"></script>
 <!--SCRIPTS END-->
+
+    
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>
