@@ -68,7 +68,7 @@
 <ul>
 <li><code>tranquilpeak</code>主要是展示简洁，无标题目录，白底黑字的阅读感类似简书，后者加入了很多设计元素，有目录/打赏等功能</li>
 <li><code>tranquilpeak</code>主题对博客作者展示比较少，但是<code>indigo</code>作者可以展示的位置比较多，并且可以加入自定义的作者页面</li>
-<li><code>tranquilpeak</code>的博客搜索用的是第三方的服务来做的，而<code>indigo</code>是本地生成json数据，部署上更加方便一些</li>
+<li><code>tranquilpeak</code>的博客搜索用的是第三方的服务来做的，当博客更新后需要<code>hexo algolia</code>重新提交索引，而<code>indigo</code>是本地生成json数据，部署上更加方便一些</li>
 <li>本次还探索了使用本地图片来完成markdown的方法</li>
 </ul>
 <h2>切换主题</h2>
