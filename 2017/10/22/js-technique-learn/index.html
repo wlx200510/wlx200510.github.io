@@ -1,0 +1,847 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="卡少技术博客">
+    <title>Javascript一些优雅实现 - 卡少技术博客</title>
+    <meta name="author" content="卡少">
+    
+    
+        <link rel="icon" href="http://geekarl.com/assets/images/avatar.jpg">
+    
+    
+    <meta name="description" content="作为一个jser, 当对一门语言的使用到达一定量时，不免会疲倦，仅以此文来惊醒，其实它还有很多地方等待探索~">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Javascript一些优雅实现">
+<meta property="og:url" content="http://geekarl.com/2017/10/22/js-technique-learn/index.html">
+<meta property="og:site_name" content="卡少技术博客">
+<meta property="og:description" content="作为一个jser, 当对一门语言的使用到达一定量时，不免会疲倦，仅以此文来惊醒，其实它还有很多地方等待探索~">
+<meta property="og:updated_time" content="2017-12-28T13:44:51.204Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript一些优雅实现">
+<meta name="twitter:description" content="作为一个jser, 当对一门语言的使用到达一定量时，不免会疲倦，仅以此文来惊醒，其实它还有很多地方等待探索~">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="http://geekarl.com/assets/images/avatar.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-pz4cc6y13wt2trzqa8l3n9v0yykr0sstdaheem7qj628nhjmhp9pfawvqawz.min.css">
+    <!--STYLES END-->
+    
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">卡少技术博客</a>
+    </div>
+    
+        
+            <a  class="header-right-picture "
+                href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/avatar.jpg" alt="作者的图片"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.jpg" alt="作者的图片"/>
+                </a>
+                <h4 class="sidebar-profile-name">卡少</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>最强的求知欲才能召唤最强的自己~carry on</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/ "
+                            
+                            title="首页"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-categories"
+                            
+                            title="分类"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-tags"
+                            
+                            title="标签"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-archives"
+                            
+                            title="归档"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link open-algolia-search"
+                             href="#search"
+                            
+                            title="搜索"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="#about"
+                            
+                            title="关于"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="https://github.com/wlx200510" target="_blank" rel="noopener" title="wlx200510">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">wlx200510</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="mailto:wanglixing@outlook.com" target="_blank" rel="noopener" title="outlook">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-envelope-o" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">outlook</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/atom.xml"
+                            
+                            title="RSS"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Javascript一些优雅实现
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-10-22T21:34:55+08:00">
+	
+		    10月 22, 2017
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/学习/">学习</a>
+
+
+    
+</div>
+
+    
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
+<h2>优雅实现<code>sleep</code>的效果</h2>
+<p>在诸如<code>python/Java</code>中都有<code>sleep</code>函数，但<code>js</code>没有，那应该如何用最优雅的方法实现？</p>
+<h3>粗暴版本</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">time</span>) </span>&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> start = +<span class="keyword">new</span> <span class="built_in">Date</span>; +<span class="keyword">new</span> <span class="built_in">Date</span> - start &lt; time;) &#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样就会把所有的执行任务<code>block</code>掉, 客户端还好，服务器就炸毛了。</p>
+<h3><code>Promise</code>版本</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">time</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> setTimeout(resolve, time))</div><div class="line">&#125;</div><div class="line"><span class="keyword">const</span> t1 = +<span class="keyword">new</span> <span class="built_in">Date</span>()</div><div class="line">sleep(<span class="number">3000</span>).then(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</div><div class="line">    <span class="keyword">const</span> t2 = +<span class="keyword">new</span> <span class="built_in">Date</span>()</div><div class="line">    <span class="built_in">console</span>.log(t2 - t1)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>这种方式不会阻塞，无负载问题，使用时代码量不多，但<code>Promise</code>内部的代码出错后需要层层判断后<code>catch</code>，还是有些麻烦。</p>
+<h3><code>Async/Await</code>版本的延迟函数</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">delay</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">reslove</span> =&gt;</span> &#123;</div><div class="line">    setTimeout(reslove, delay)</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> t1 = +<span class="keyword">new</span> <span class="built_in">Date</span>()</div><div class="line">  <span class="keyword">await</span> sleep(<span class="number">3000</span>)</div><div class="line">  <span class="keyword">const</span> t2 = +<span class="keyword">new</span> <span class="built_in">Date</span>()</div><div class="line">  <span class="built_in">console</span>.log(t2 - t1)</div><div class="line">&#125;()</div></pre></td></tr></table></figure>
+<p>各个函数都是非嵌套结构，现在开始要拥抱这种写法，整体写法可参照：<a href="https://juejin.im/post/59f9ce7a51882554f666220f" target="_blank" rel="external">四个改进点</a></p>
+<h3>用<code>C++</code>实现的绝对优雅</h3>
+<blockquote>
+<p>这里有 C++ 实现的模块：<a href="https://github.com/ErikDubbelboer/node-sleep" target="_blank" rel="external">https://github.com/ErikDubbelboer/node-sleep</a></p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> sleep = <span class="built_in">require</span>(<span class="string">"sleep"</span>)</div><div class="line"></div><div class="line"><span class="keyword">const</span> t1 = +<span class="keyword">new</span> <span class="built_in">Date</span>()</div><div class="line">sleep.msleep(<span class="number">3000</span>)</div><div class="line"><span class="keyword">const</span> t2 = +<span class="keyword">new</span> <span class="built_in">Date</span>()</div><div class="line"><span class="built_in">console</span>.log(t2 - t1)</div></pre></td></tr></table></figure>
+<p><em>现在开始异步请求都要试着在Promise的基础上拥抱Async/Await</em></p>
+<h2>获取时间戳的方法</h2>
+<ol>
+<li>第一层级别：<code>var timestamp = new Date().getTime()</code></li>
+<li>第二层级别：<code>var timestamp = (new Date()).valueOf()</code> 使用<code>valueOf</code>方法返回对象的原始值</li>
+<li>第三层级别：<code>var timestamp = +new Date()</code> 使用了隐式转换 可参考<a href="https://github.com/jawil/blog/issues/30" target="_blank" rel="external">来源博文</a> 讲的很详细</li>
+</ol>
+<p>这个方面原文中对隐式转换讲解的比较透彻，作为js的基础应该适当回顾学习。原始值指的是 ‘Null’,‘Undefined’,‘String’,‘Boolean’,‘Number’,‘Symbol’ 6种基本数据类型之一，不能忘却。</p>
+<h2>数组去重的算法进阶</h2>
+<blockquote>
+<p>暂不考虑对象字面量，函数等引用类型的去重，也不考虑 NaN, undefined, null等特殊类型情况</p>
+</blockquote>
+<h3>普通版</h3>
+<p>只说下思路，这种复杂度为平方的不再上代码，整体就是对这个数组每个元素取出来放到另一个数组中，在放入之前检验这个新数组中是否已有这个值，防止重复注入</p>
+<h3>进阶版</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a =  [<span class="number">1</span>, <span class="number">1</span>, <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="number">1</span>]</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> arr.filter(<span class="function"><span class="keyword">function</span>(<span class="params">ele,index,array</span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> array.indexOf(ele) === index</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(unique(a)) <span class="comment">// [1, 2, "1"]</span></div></pre></td></tr></table></figure>
+<p>利用函数式编程一对一去掉重复的数，写法相当优雅，但复杂度与基础版相当</p>
+<h3>超进阶版</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> obj = &#123;&#125;</div><div class="line">    <span class="keyword">return</span> arr.filter(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, array</span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> obj.hasOwnProperty(<span class="keyword">typeof</span> item + item) ? </div><div class="line">        <span class="literal">false</span> : </div><div class="line">        (obj[<span class="keyword">typeof</span> item + item] = <span class="literal">true</span>)</div><div class="line">    &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>之前最喜欢的一种去重方法，通过引入字典查找，将复杂度降低为<code>O(n)</code>，这个示例更加极端，把代码缩减到极致 不过易读性受影响</p>
+<h3>究极进化版</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> unique = <span class="function"><span class="params">a</span> =&gt;</span> [...new <span class="built_in">Set</span>(a)]</div></pre></td></tr></table></figure>
+<p><code>ES6</code>的<code>Set</code>数据结构与解构写法的完美结合，最优雅写法和可读性。</p>
+<h2>数组的转化与求和</h2>
+<p>在前端数组是一个最常用的数据结构，这是两个数组常用的操作，看一下如何优雅实现</p>
+<h3>数组转化</h3>
+<p>需求是把<code>argruments</code>对象(类数组)转换成数组:</p>
+<ul>
+<li>兼容性良好的版本：<code>var arr = Array.prototype.slice.call(arguments);</code> 不再赘述</li>
+<li>ES6的新写法：<code>var arr = Array.from(arguments);</code>(有length属性就可以) <code>var args = [...arguments];</code>(解构写法)</li>
+</ul>
+<p>第一种方法的原理来源博客讲得比较细，主要是探究<code>ArraySlice</code>的源码实现，摘抄如下：</p>
+<blockquote>
+<p><code>slice.call</code>的作用原理就是，利用<code>call</code>，将<code>slice</code>的方法作用于 <code>arrayLike</code>，<code>slice</code>的两个参数为空，<code>slice</code>内部解析使得 <code>arguments.lengt</code>等于0的时候 相当于处理 <code>slice(0)</code> ： 即选择整个数组，<code>slice</code>方法内部没有强制判断必须是<code>Array</code>类型，<code>slice</code>返回的是新建的数组（使用循环取值）”，所以这样就实现了类数组到数组的转化，<code>call</code>这个神奇的方法、<code>slice</code>的处理缺一不可。</p>
+</blockquote>
+<h3>数组求和</h3>
+<p>直接上最优雅的迭代</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line"><span class="keyword">return</span> arr.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b)</div><div class="line">&#125;</div><div class="line">sum(arr) <span class="comment">//15</span></div></pre></td></tr></table></figure>
+<h2>位运算黑科技总结</h2>
+<p>这个小节接触一下传说中的<code>ACM</code>常用技巧~</p>
+<h3>交换两个数字</h3>
+<ol>
+<li>引入中间变量的方法(略去不写)</li>
+<li>使用纯数字运算的方法(特别大的数字不行)</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> a = <span class="number">3</span>,b = <span class="number">4</span></div><div class="line">a += b</div><div class="line">b = a - b</div><div class="line">a -= b</div></pre></td></tr></table></figure>
+<ol start="3">
+<li>解构赋值 <code>[a, b] = [b, a]</code></li>
+<li>用异或实现</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> a = <span class="number">3</span>,b = <span class="number">4</span></div><div class="line">  a ^= b</div><div class="line">  b ^= a</div><div class="line">  a ^= b</div><div class="line"><span class="built_in">console</span>.log(a, b)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>对于开始的两个赋值语句，<code>a=a^b，b=b^a</code>，相当于<code>b=b^(a^b)=a^b^b</code>，而<code>b^b</code>显然等于0。因此<code>b=a^0</code>，显然结果为<code>a</code>。<br>
+同理可以分析第三个赋值语句，<code>a=a^b=(a^b)^a=b</code></p>
+</blockquote>
+<p>优点：不存在引入中间变量，不存在整数溢出<br>
+缺点：前端对位操作这一块可能了解不深，不容易理解</p>
+<h3>数字取整</h3>
+<p>这是个比较常见的前端需求，普通的处理办法有<code>parseInt</code>和<code>Math.trunc</code>等<br>
+各种位运算黑科技系列(大数fail)：</p>
+<ol>
+<li><code>~~number</code>取整</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(~~<span class="number">47.11</span>)  <span class="comment">// -&gt; 47</span></div><div class="line"><span class="built_in">console</span>.log(~~<span class="number">1.9999</span>) <span class="comment">// -&gt; 1</span></div><div class="line"><span class="built_in">console</span>.log(~~<span class="number">3</span>)      <span class="comment">// -&gt; 3</span></div><div class="line"><span class="built_in">console</span>.log(~~[])     <span class="comment">// -&gt; 0</span></div><div class="line"><span class="built_in">console</span>.log(~~<span class="literal">NaN</span>)    <span class="comment">// -&gt; 0</span></div><div class="line"><span class="built_in">console</span>.log(~~<span class="literal">null</span>)   <span class="comment">// -&gt; 0</span></div><div class="line"><span class="built_in">console</span>.log(~~<span class="number">2147493647.123</span>) <span class="comment">// -&gt; -2147473649 🙁</span></div></pre></td></tr></table></figure>
+<ol start="2">
+<li><code>number | 0</code>按位或取整</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="number">20.15</span>|<span class="number">0</span>);          <span class="comment">// -&gt; 20</span></div><div class="line"><span class="built_in">console</span>.log((<span class="number">-20.15</span>)|<span class="number">0</span>);       <span class="comment">// -&gt; -20</span></div><div class="line"><span class="built_in">console</span>.log(<span class="number">3000000000.15</span>|<span class="number">0</span>);  <span class="comment">// -&gt; -1294967296 🙁</span></div></pre></td></tr></table></figure>
+<ol start="3">
+<li><code>number ^ 0</code>按位异或取整</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="number">20.15</span>^<span class="number">0</span>);          <span class="comment">// -&gt; 20</span></div><div class="line"><span class="built_in">console</span>.log((<span class="number">-20.15</span>)^<span class="number">0</span>);       <span class="comment">// -&gt; -20</span></div><div class="line"><span class="built_in">console</span>.log(<span class="number">3000000000.15</span>^<span class="number">0</span>);  <span class="comment">// -&gt; -1294967296 🙁</span></div></pre></td></tr></table></figure>
+<ol start="4">
+<li><code>number &lt;&lt; 0</code>左移取整</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="number">20.15</span> &lt; <span class="xml"><span class="tag">&lt; <span class="attr">0</span>);     // <span class="attr">-</span>&gt;</span> 20</span></div><div class="line">console.log((-20.15) <span class="tag">&lt; &lt; <span class="attr">0</span>);  //<span class="attr">-20</span></span></div><div class="line"><span class="attr">console.log</span>(<span class="attr">3000000000.15</span> &lt;&lt; <span class="attr">0</span>);  // <span class="attr">-</span>&gt; -1294967296 🙁</div></pre></td></tr></table></figure>
+<h2>压轴之数字格式化</h2>
+<blockquote>
+<p>需求是把 <code>1234567890</code> 转换为 <code>1,234,567,890</code> (加上千位分隔符)</p>
+</blockquote>
+<h3>普通版</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatNumber</span>(<span class="params">str</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> arr = [], count = str.length;</div><div class="line"></div><div class="line">  <span class="keyword">while</span> (count &gt;= <span class="number">3</span>) &#123;</div><div class="line">    arr.unshift(str.slice(count - <span class="number">3</span>, count))</div><div class="line">    count -= <span class="number">3</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 如果是不是3的倍数就另外追加到上去</span></div><div class="line">  str.length % <span class="number">3</span> &amp;&amp; arr.unshift(str.slice(<span class="number">0</span>, str.length % <span class="number">3</span>))</div><div class="line">  <span class="keyword">return</span> arr.toString()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个版本就是按照流线思路下来，其实也不是很简单，思路比较普通，不过也需要注释</p>
+<h3>进阶版</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatNumber</span>(<span class="params">str</span>) </span>&#123;</div><div class="line">  <span class="comment">// ["0", "9", "8", "7", "6", "5", "4", "3", "2", "1"]</span></div><div class="line">  <span class="keyword">return</span> str.split(<span class="string">""</span>).reverse().reduce(<span class="function">(<span class="params">prev, next, index</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">return</span> ((index % <span class="number">3</span>) ? next : (next + <span class="string">','</span>)) + prev</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>感觉真心是函数式编程玩到骨子里去了，真心没注释不好看懂，编程珠玑中有类似的思路提到，看完之后恍然大悟的感觉。</p>
+<h3>进阶正则版</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatNumber</span>(<span class="params">str</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> str.replace(<span class="regexp">/\B(?=(\d&#123;3&#125;)+(?!\d))/g</span>, <span class="string">','</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>建议好好学习这个思路，正则真心是瑞士军刀，类似问题都会有这个方面的办法，就是找到快慢的问题。</p>
+<h3>终极进化版</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(<span class="number">123456789</span>).toLocaleString(<span class="string">'en-US'</span>)</div></pre></td></tr></table></figure>
+<p>没看到那篇博客是真不知道还有这个<code>API</code>……</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(<span class="number">123456789</span>).toLocaleString(<span class="string">'zh-hans-CN-u-nu-hanidec'</span>, &#123;<span class="attr">useGrouping</span>: <span class="literal">false</span>&#125;)</div><div class="line">(<span class="number">123456789</span>).toLocaleString(<span class="string">'zh-hans-CN-u-nu-hanidec'</span>, &#123;<span class="attr">useGrouping</span>: <span class="literal">true</span>&#125;)</div></pre></td></tr></table></figure>
+<p>PS: 感觉为培训机构老师的<a href="https://github.com/CodingMeUp/some_notes/tree/master/%E5%89%8D%E7%AB%AF" target="_blank" rel="external">前端工具箱</a> 可以分享一波</p>
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/javascript/">javascript</a> <a class="tag tag--primary tag--small t-link" href="/tags/总结/">总结</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/04/learnFiddler/" data-tooltip="fiddler抓包工具(windows)" aria-label="上一篇: fiddler抓包工具(windows)">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/09/30/css-tricks/" data-tooltip="css黑魔法简略版" aria-label="下一篇: css黑魔法简略版">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://geekarl.com/2017/10/22/js-technique-learn/" title="分享到 Facebook">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://geekarl.com/2017/10/22/js-technique-learn/" title="分享到 Twitter">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://geekarl.com/2017/10/22/js-technique-learn/" title="分享到 Google+">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2017 卡少. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/04/learnFiddler/" data-tooltip="fiddler抓包工具(windows)" aria-label="上一篇: fiddler抓包工具(windows)">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/09/30/css-tricks/" data-tooltip="css黑魔法简略版" aria-label="下一篇: css黑魔法简略版">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://geekarl.com/2017/10/22/js-technique-learn/" title="分享到 Facebook">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://geekarl.com/2017/10/22/js-technique-learn/" title="分享到 Twitter">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://geekarl.com/2017/10/22/js-technique-learn/" title="分享到 Google+">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <i id="btn-close-shareoptions" class="fa fa-close"></i>
+    <ul class="share-options">
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://geekarl.com/2017/10/22/js-technique-learn/">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i><span>分享到 Facebook</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://geekarl.com/2017/10/22/js-technique-learn/">
+                    <i class="fa fa-twitter" aria-hidden="true"></i><span>分享到 Twitter</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://geekarl.com/2017/10/22/js-technique-learn/">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i><span>分享到 Google+</span>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.jpg" alt="作者的图片"/>
+        
+            <h4 id="about-card-name">卡少</h4>
+        
+            <div id="about-card-bio"><p>最强的求知欲才能召唤最强的自己~carry on</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>MIUI前端工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                北京
+            </div>
+        
+    </div>
+</div>
+
+        
+            <div id="algolia-search-modal" class="modal-container">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="close-button"><i class="fa fa-close"></i></span>
+            <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+                <span class="searchby-algolia-text text-color-light text-small">by</span>
+                <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+            </a>
+            <i class="search-icon fa fa-search"></i>
+            <form id="algolia-search-form">
+                <input type="text" id="algolia-search-input" name="search"
+                    class="form-control input--large search-input" placeholder="Search "
+                    />
+            </form>
+        </div>
+        <div class="modal-body">
+            <div class="no-result text-color-light text-center">没有找到文章</div>
+            <div class="results">
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/04/13/hello-world/">
+                            <h3 class="media-heading">Hello World</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年4月13日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>my first artical about Hexo</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/05/14/nav-hover/">
+                            <h3 class="media-heading">对列表hover效果的小探讨</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年5月14日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>原来用list写的nav标签效果，博客转载到新网站。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/08/13/firstHEXO/">
+                            <h3 class="media-heading">使用HEXO搭建个人博客遇到的几个问题</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年8月13日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>还好有些github的使用基础，因此hexo博客的搭建用了一天就基本完成了，但这个过程中还是有两个小问题在文档上没有找到，还好通过查资料得到了解决，及时分享出来，希望让他人少走一些弯路。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/09/14/CSS-center/">
+                            <h3 class="media-heading">用CSS实现居中的总结</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月14日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>无论是工作还是面试中，元素居中总是一个高频的问题，不同情况下需要灵活地选取不同的方法，因此有必要对常用方法做一个简要的总结。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/10/25/techniques-about-VsCode/">
+                            <h3 class="media-heading">techniques about VsCode</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年10月25日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>记录目前VScode编译器的所有插件和快捷键，方便以后查找</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/12/31/personal-summarize/">
+                            <h3 class="media-heading">卡少2016年终总结</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年12月31日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>2016年个人经历，总结过去&amp;展望未来</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/11/JS-nice-habit/">
+                            <h3 class="media-heading">代码整洁之道——JS</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月11日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>《代码整洁之道》一书的诸多原则同时适用于JS，为了在工作中编写的代码有更多的可维护性，应该常常回顾此文章，思考并进步。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/12/CSS-Good-Technique/">
+                            <h3 class="media-heading">样式代码编写习惯约定——高逼格</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月12日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>参加工作后，接触到更多的是sass的编写，这里把公司约定的CSS样式的编写习惯移步于此，方便查询并与大家分享</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/14/For-My-Lover/">
+                            <h3 class="media-heading">情人节专题~你的谜底，我来揭开</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月14日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>JSUT FOR THE SPECIAL GIRL</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/18/comment-about-LALALAND/">
+                            <h3 class="media-heading">回首——爱乐之城</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月18日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>跟女朋友一起看最近最火的电影——爱乐之城。剧情悲中有喜，于我心有戚戚焉，有感而发，遂有此随笔</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p class="results-count text-medium"
+                data-message-zero="没有找到文章"
+                data-message-one="找到 1 篇文章"
+                data-message-other="找到 {n} 篇文章">
+                找到 26 篇文章
+            </p>
+        </div>
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-peofhqjkzcghmndknakluequy1y6owxdwpaqyju9ntl9zxnk7rdolb3rjjoj.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>
+    <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <script>
+        var algoliaClient = algoliasearch('NRRSUOXO5C', 'fc865619ea4d0f7dea75788f7f4965c3');
+        var algoliaIndex = algoliaClient.initIndex('geekarl-blog');
+    </script>
+
+
+    </body>
+</html>
