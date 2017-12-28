@@ -235,7 +235,8 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[css黑魔法简略版]]></title>
       <url>http://geekarl.com/2017/09/30/css-tricks/</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h2>利用css伪类的content属性来输入文本</h2>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<h2>利用css伪类的content属性来输入文本</h2>
 <ul>
 <li>思路来源 鼠标浮动显示文字</li>
 </ul>
@@ -286,8 +287,7 @@ micro-task(微任务)：Promise，process.nextTick<br>
 <li>css奇技淫巧 <a href="https://github.com/chokcoco/iCSS" target="_blank" rel="external">github地址</a> <a href="http://www.cnblogs.com/coco1s/" target="_blank" rel="external">blog地址</a></li>
 <li>CSS radio/checkbox单复选框元素显隐技术<a href="http://www.zhangxinxu.com/wordpress/2012/01/css-css3-selector-element-display-tab-listdown/" target="_blank" rel="external">张鑫旭大神博客</a></li>
 </ol>
-<p>PS: <em>本文是再jawil/blog的文档上缩减总结而成，版权归原作者所有，加入的自己部分仅为学习探讨使用</em></p>
-]]></content>
+<p>PS: <em>本文是再jawil/blog的文档上缩减总结而成，版权归原作者所有，加入的自己部分仅为学习探讨使用</em></p>]]></content>
     </entry>
     
     <entry>
@@ -1383,24 +1383,6 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
     </entry>
     
     <entry>
-      <title><![CDATA[all-categories]]></title>
-      <url>http://geekarl.com/all-categories/index.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[all-tags]]></title>
-      <url>http://geekarl.com/all-tags/index.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[all-archives]]></title>
-      <url>http://geekarl.com/all-archives/index.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[博主信息]]></title>
       <url>http://geekarl.com/about/index.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><style type="text/css">
@@ -1494,8 +1476,26 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
     </entry>
     
     <entry>
+      <title><![CDATA[all-categories]]></title>
+      <url>http://geekarl.com/all-categories/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[分类 & 标签]]></title>
       <url>http://geekarl.com/tags/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[all-archives]]></title>
+      <url>http://geekarl.com/all-archives/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[all-tags]]></title>
+      <url>http://geekarl.com/all-tags/index.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
