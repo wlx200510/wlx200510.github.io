@@ -4,6 +4,51 @@
   
     
     <entry>
+      <title><![CDATA[类vue-cli中webpack模板的多页+elementUI模板]]></title>
+      <url>http://geekarl.com/2018/01/11/vue-cli-template/</url>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<blockquote>
+<p>本脚手架并且适当简化了一些功能（删除了测试库） 并引入了外部mock和axios两个常用库可以灵活配置。 这里写一下说明文件和心得体会</p>
+</blockquote>
+<h2>配置功能</h2>
+<p>最基本的功能为<code>webpack3+Vue2</code>的基础上引入了外部组件库<code>elementUI</code> 其实也可以灵活修改为别的，<code>css</code>的支持仅引入了<code>less</code>和<code>sass</code>，相信这两者用的人也是最多的。还有一点是针对多页面也引入了<code>vue-router</code>, 也就是说这个多页面仓库也可以当单页面来搞起。<br>
+加入的<code>axios</code>库是本地业务所需，这个可以在生成脚手架时不选择，但这个作为Vue的推荐库，建议尽量用这个，坑比较少。</p>
+<ol>
+<li><a href="https://github.com/vuejs/vue" target="_blank" rel="external">Vue2</a></li>
+<li><a href="https://github.com/webpack/webpack" target="_blank" rel="external">Webpack3</a></li>
+<li><a href="https://github.com/ElemeFE/element" target="_blank" rel="external">ElementUI</a></li>
+<li><a href="https://github.com/eslint/eslint" target="_blank" rel="external">Eslint</a>(<a href="https://github.com/vuejs/eslint-config-vue" target="_blank" rel="external">eslint-config-vue</a> default)</li>
+<li><a href="https://github.com/postcss/postcss" target="_blank" rel="external">Postcss</a>(<a href="https://github.com/postcss/autoprefixer" target="_blank" rel="external">autoprefixer</a> default)</li>
+<li><a href="http://lesscss.org/" target="_blank" rel="external">Less</a></li>
+<li><a href="https://github.com/webpack-contrib/sass-loader" target="_blank" rel="external">Sass</a></li>
+<li><a href="https://github.com/vuejs/vue-router" target="_blank" rel="external">VueRouter</a></li>
+<li><a href="https://github.com/nuysoft/Mock" target="_blank" rel="external">mock.js</a></li>
+<li><a href="https://github.com/axios/axios" target="_blank" rel="external">axios</a></li>
+</ol>
+<h2>使用方法</h2>
+<p>相信看到这篇文章的人对<code>vue-cli</code>的使用比较熟练了，有需要补课的小伙伴戳<a href="https://github.com/vuejs/vue-cli" target="_blank" rel="external">这里</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ npm install -g vue-cli</div><div class="line">$ vue init wlx200510/vue-multiple-pages-cli new_project</div><div class="line">$ <span class="built_in">cd</span> new_project</div><div class="line">$ npm install</div></pre></td></tr></table></figure>
+<p>开发流程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># serve with hot reload at localhost:8060</span></div><div class="line">$ npm run dev</div></pre></td></tr></table></figure>
+<p>打包流程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ npm run build</div><div class="line">$ node server.js <span class="comment">#listen 2333 port</span></div></pre></td></tr></table></figure>
+<h2>文件架构</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">├── build</div><div class="line">│   ├── build.js <span class="comment"># build entry</span></div><div class="line">│   ├── utils.js <span class="comment"># tool funcs</span></div><div class="line">│   ├── webpack.base.conf.js</div><div class="line">│   ├── webpack.dev.conf.js</div><div class="line">│   └── webpack.prod.conf.js</div><div class="line">│</div><div class="line">├── config</div><div class="line">│   ├── index.js  <span class="comment"># config index settings</span></div><div class="line">│   ├── dev.env.js <span class="comment"># dev env</span></div><div class="line">│   └── prod.env.js <span class="comment"># prod build env</span></div><div class="line">│</div><div class="line">├── src  <span class="comment"># main folder</span></div><div class="line">│   ├── assets  <span class="comment"># common assets folder</span></div><div class="line">│   │   ├── img</div><div class="line">│   │   │   └── logo.png</div><div class="line">│   │   ├── js</div><div class="line">│   │   └── css</div><div class="line">│   ├── components <span class="comment"># common components folder</span></div><div class="line">│   │   └── modal.vue</div><div class="line">│   └── pages  <span class="comment"># pages</span></div><div class="line">│       ├── user  <span class="comment"># user part (folder name can be customized)</span></div><div class="line">│       │   ├── login <span class="comment"># login.html (folder name can be customized)</span></div><div class="line">│       │   │   ├── app.js   <span class="comment"># entry js (file name can't be customized unless you change the webpack.config.js)</span></div><div class="line">│       │   │   ├── app.vue  <span class="comment"># login vue (file name can be customized)</span></div><div class="line">│       │   │   └── app.html <span class="comment"># template html (file name can't be customized unless you change the webpack.config.js)</span></div><div class="line">│       │   └── index <span class="comment"># index.html</span></div><div class="line">│       │       ├── app.js</div><div class="line">│       │       ├── app.html</div><div class="line">│       │       └── app.vue</div><div class="line">│       └── customer <span class="comment"># customer part (folder name can be customized)</span></div><div class="line">│           └── home <span class="comment"># home.html</span></div><div class="line">│               ├── app.html</div><div class="line">│               ├── app.js</div><div class="line">│               ├── app.vue</div><div class="line">│               ├── mock</div><div class="line">│               │   └── index.js <span class="comment"># mock.js to mock API</span></div><div class="line">│               ├── router</div><div class="line">│               │   └── index.js <span class="comment"># vue-router use example</span></div><div class="line">│               └── selfComponents</div><div class="line">│                   └── notFound.vue <span class="comment"># components example with vue-router</span></div><div class="line">├── LICENSE</div><div class="line">├── .babelrc          <span class="comment"># babel config (es2015 default)</span></div><div class="line">├── .eslintrc.js      <span class="comment"># eslint config (eslint-config-vue default)</span></div><div class="line">├── server.js         <span class="comment"># port 2333</span></div><div class="line">├── package.json</div><div class="line">├── postcss.config.js <span class="comment"># postcss (autoprefixer default)</span></div><div class="line">├── webpack.config.js</div><div class="line">└── README.md</div></pre></td></tr></table></figure>
+<h2>具体细节</h2>
+<p>本仓库的<a href="https://github.com/wlx200510/vue-multiple-pages-cli" target="_blank" rel="external">具体地址</a><br>
+多页面入口的设置是参照<code>element-starter</code>来做的，特点是文件目录结构一定是要遵循上述规定，具体参考<code>github</code>中的<code>README</code>文档<br>
+项目的配置细节大部分都在config目录下，熟悉<code>vue-cli/webpack</code>模板的应该都很容易看懂，因为只多了一项<code>openPage</code>其余基本相同</p>
+<h2>编写模板体会</h2>
+<ol>
+<li>通过双大括号来处理文本的渲染。</li>
+<li>编写<code>meta.js</code>用于用户生成项目前的交互和提示。</li>
+<li><code>webpack</code>生成两份分别用于开发环境和打包环境的架构设计很合理。</li>
+<li>配置文件单独列出，所有的配置与具体的<code>webpack.conf</code>文件解耦。</li>
+<li>最难处理的莫过于文件路径问题，这个需要多次尝试，有耐心才行。</li>
+</ol>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[REACT学习资源总结]]></title>
       <url>http://geekarl.com/2018/01/09/react-learn/</url>
       <content type="html"><![CDATA[<!-- excerpt -->
@@ -1531,6 +1576,12 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
     </entry>
     
     <entry>
+      <title><![CDATA[all-tags]]></title>
+      <url>http://geekarl.com/all-tags/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[all-categories]]></title>
       <url>http://geekarl.com/all-categories/index.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
@@ -1539,12 +1590,6 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
     <entry>
       <title><![CDATA[all-archives]]></title>
       <url>http://geekarl.com/all-archives/index.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[all-tags]]></title>
-      <url>http://geekarl.com/all-tags/index.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
