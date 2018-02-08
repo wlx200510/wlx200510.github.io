@@ -4,6 +4,32 @@
   
     
     <entry>
+      <title><![CDATA[REACT框架学习心得]]></title>
+      <url>http://geekarl.com/2018/02/08/redux-learn/</url>
+      <content type="html"><![CDATA[<!-- excerpt -->
+<blockquote>
+<p>先上一个<code>REACT</code>的框架源码介绍的<a href="https://medium.com/@ericchurchill/the-react-source-code-a-beginners-walkthrough-i-7240e86f3030" target="_blank" rel="external">文章</a>，辅助源码的解释，团队推荐。</p>
+</blockquote>
+<h2>框架概念和工程模板</h2>
+<p>这一部分的内容直接给个链接，<a href="https://github.com/wlx200510/react-wlx" target="_blank" rel="external"><code>github</code>地址</a>在此，我在原作者的基础上加了自己的一些内容，仓库的最新代码也进行了重构，包括<code>actionCreator</code>和<code>reducer</code>，欢迎提意见和<code>star</code>。这个教程可以说是把react的轮廓放到了大家面前，并且这个代码也可以<code>fork</code>一份直接用到自己的移动端项目上，<code>PC</code>端还需要把REM取消后使用。<br>
+　　这个<code>README</code>解决的是框架可用的问题，相信用这个demo来让新人入门也好，代码进阶也罢，都可以顺利完成，不过具体的REACT框架原理建议在项目跑起来后要有所钻研，但源码又不好立即入手，这就需要上面的框架源码介绍文章了，希望对源码有探究心的小伙伴参考一开始推荐的文章，也可以看<a href="https://bogdan-lyashenko.github.io/Under-the-hood-ReactJS/?utm_campaign=read_more&amp;utm_medium=blog&amp;utm_source=mybridge" target="_blank" rel="external">这一篇</a>的分章节介绍，更加详尽。</p>
+<h2>redux学习心得</h2>
+<p>简单说一下在看整个教程和代码写法时着重的几个点：</p>
+<ol>
+<li><code>connect</code>函数的[<code>mapDispatchToProps</code>]参数传入一个对象，当对象中键属性是对象，实际是自动包含了dispatch调用，从而不需要显式调用。</li>
+<li>当引入了<code>redux-thunk</code>后，需要在createStore上加入<code>thunk</code>中间件，并且上一点中键的属性变成了函数，此时异步下的<code>dispatch</code>需要显式调用。</li>
+<li>为了减少样板代码，需要统一用数据检索的思想来完成<code>reducer</code>和<code>action</code>对象的生成逻辑，具体可参考github中的样例。</li>
+<li>前端的数据其实就是三类：Domain data(服务器给的展示数据)、App state(某个行为的标识数据，如正在请求数据之类)、UI state(UI状态)</li>
+<li><code>Store</code> 代表着应用核心，因此应该用域数据(<code>Domain data</code>)和应用状态数据(<code>App state</code>)定义 <code>State</code>，而不是用 UI 状态(<code>UI state</code>)</li>
+<li>Reducer的重构介绍中一个核心概念需要理解，就是函数分解，在redux重构中又分为 工具函数/业务逻辑/高阶函数 三种拆分技巧</li>
+</ol>
+<p><em>建议仔细看下<code>redux</code>重构技巧，中文翻译版本<a href="http://cn.redux.js.org/docs/recipes/" target="_blank" rel="external">在此</a>，英文好的建议看原版。里面关于实现撤销重做的思路介绍，感觉非常不错。</em></p>
+<h2>进一步探索</h2>
+<p>其实我这里想说的就是<code>react</code>的最佳实践的东西，确切来说就是组件拆分这一块，我感觉用react的很重要的进阶就是知道什么时候使用无状态组件，如何合理拆分组件，其实比函数分解都难，尤其在实际业务中还会有越拆越麻烦的现象发生，另外一点就是要稳准地找到高阶组件的切入点，解决开发中冗余代码和逻辑的痛点，必要的时候还要跟产品沟通，来整合通用逻辑，方便增量开发和维护。<br>
+　　另一方面还要探索<code>react</code>各种库的使用和实现，毕竟作为工程师，实现需求是最重要的，包括但不限于各种UI库的引入，比如最新的iceworks的的代码生成的学习，这都是提高<code>REACT</code>水平的良好机会，在此奉上<code>iceworks</code>的<a href="https://github.com/alibaba/ice" target="_blank" rel="external">地址</a>，望大家一起进步。</p>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[手机adb命令学习]]></title>
       <url>http://geekarl.com/2018/02/02/adb-learn/</url>
       <content type="html"><![CDATA[<!-- excerpt -->
@@ -1685,6 +1711,12 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
     </entry>
     
     <entry>
+      <title><![CDATA[all-categories]]></title>
+      <url>http://geekarl.com/all-categories/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[博主信息]]></title>
       <url>http://geekarl.com/about/index.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><style type="text/css">
@@ -1775,12 +1807,6 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
 <iframe scrolling="auto" frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height="330" src="http://music.163.com/outchain/player?type=0&id=10460189&auto=0&height=430"></iframe>
 </div>
 <ul class="ds-recent-visitors" data-num-items="30" data-avatar-size="60"></ul>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[all-categories]]></title>
-      <url>http://geekarl.com/all-categories/index.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
