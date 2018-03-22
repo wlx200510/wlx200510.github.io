@@ -1,0 +1,800 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="卡少技术博客">
+    <title>React项目的服务端渲染改造(koa2+webpack3.11) - 卡少技术博客</title>
+    <meta name="author" content="卡少">
+    
+    
+        <link rel="icon" href="http://geekarl.com/assets/images/avatar.jpg">
+    
+    
+    <meta name="description" content="因为对网页SEO的需要，要把之前的React项目改造为服务端渲染，经过一番调查和研究，查阅了大量互联网资料。成功踩坑。">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="React项目的服务端渲染改造(koa2+webpack3.11)">
+<meta property="og:url" content="http://geekarl.com/2018/03/16/react-ssr-learn/index.html">
+<meta property="og:site_name" content="卡少技术博客">
+<meta property="og:description" content="因为对网页SEO的需要，要把之前的React项目改造为服务端渲染，经过一番调查和研究，查阅了大量互联网资料。成功踩坑。">
+<meta property="og:image" content="http://geekarl.com/react-ssr-learn/paint1.png">
+<meta property="og:image" content="http://geekarl.com/react-ssr-learn/dashang.jpg">
+<meta property="og:image" content="http://geekarl.com/react-ssr-learn/wechat.jpg">
+<meta property="og:updated_time" content="2018-03-22T11:11:39.932Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React项目的服务端渲染改造(koa2+webpack3.11)">
+<meta name="twitter:description" content="因为对网页SEO的需要，要把之前的React项目改造为服务端渲染，经过一番调查和研究，查阅了大量互联网资料。成功踩坑。">
+<meta name="twitter:image" content="http://geekarl.com/react-ssr-learn/paint1.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="http://geekarl.com/assets/images/avatar.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-pz4cc6y13wt2trzqa8l3n9v0yykr0sstdaheem7qj628nhjmhp9pfawvqawz.min.css">
+    <!--STYLES END-->
+    
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">卡少技术博客</a>
+    </div>
+    
+        
+            <a  class="header-right-picture "
+                href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/avatar.jpg" alt="作者的图片"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.jpg" alt="作者的图片"/>
+                </a>
+                <h4 class="sidebar-profile-name">卡少</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>最强的求知欲才能召唤最强的自己~carry on</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/ "
+                            
+                            title="首页"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-categories"
+                            
+                            title="分类"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-tags"
+                            
+                            title="标签"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-archives"
+                            
+                            title="归档"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link open-algolia-search"
+                             href="#search"
+                            
+                            title="搜索"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="#about"
+                            
+                            title="关于"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="https://github.com/wlx200510" target="_blank" rel="noopener" title="wlx200510">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">wlx200510</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="mailto:wanglixing@outlook.com" target="_blank" rel="noopener" title="outlook">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-envelope-o" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">outlook</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/atom.xml"
+                            
+                            title="RSS"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            React项目的服务端渲染改造(koa2+webpack3.11)
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-03-16T14:16:32+08:00">
+	
+		    3月 16, 2018
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/工作/">工作</a>
+
+
+    
+</div>
+
+    
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <!-- excerpt -->
+<blockquote>
+<p>选型思路：实现服务端渲染，想用React最新的版本，并且不对现有的写法做大的改动，如果一开始就打算服务端渲染，建议直接用<code>NEXT</code>框架来写</p>
+</blockquote>
+<p>项目地址：<a href="https://github.com/wlx200510/react_koa_ssr" target="_blank" rel="external"><code>https://github.com/wlx200510/react_koa_ssr</code></a><br>
+脚手架选型：<code>webpack3.11.0 + react Router4 + Redux + koa2 + React16 + Node8.x</code><br>
+主要心得：对<code>React</code>的相关知识更加熟悉，成功拓展自己的技术领域，对服务端技术在实际项目上有所积累</p>
+<p><em>注意点：使用框架前一定确认当前webpack版本为3.x Node为8.x以上，读者最好用React在3个月以上，并有实际React项目经验</em></p>
+<h2>项目目录介绍</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">├── assets</div><div class="line">│   └── index.css //放置一些全局的资源文件 可以是js 图片等</div><div class="line">├── config</div><div class="line">│   ├── webpack.config.dev.js  开发环境webpack打包设置</div><div class="line">│   └── webpack.config.prod.js 生产环境webpack打包设置</div><div class="line">├── package.json</div><div class="line">├── README.md</div><div class="line">├── server  server端渲染文件，如果对不是很了解，建议参考[koa教程](http://wlxadyl.cn/2018/02/11/koa-learn/)</div><div class="line">│   ├── app.js</div><div class="line">│   ├── clientRouter.js  // 在此文件中包含了把服务端路由匹配到react路由的逻辑</div><div class="line">│   ├── ignore.js</div><div class="line">│   └── index.js</div><div class="line">└── src</div><div class="line">    ├── app  此文件夹下主要用于放置浏览器和服务端通用逻辑</div><div class="line">    │   ├── configureStore.js  //redux-thunk设置</div><div class="line">    │   ├── createApp.js       //根据渲染环境不同来设置不同的router模式</div><div class="line">    │   ├── index.js</div><div class="line">    │   └── router</div><div class="line">    │       ├── index.js</div><div class="line">    │       └── routes.js      //路由配置文件！ 重要</div><div class="line">    ├── assets</div><div class="line">    │   ├── css                放置一些公共的样式文件</div><div class="line">    │   │   ├── _base.scss     //很多项目都会用到的初始化css</div><div class="line">    │   │   ├── index.scss</div><div class="line">    │   │   └── my.scss</div><div class="line">    │   └── img</div><div class="line">    ├── components             放置一些公共的组件</div><div class="line">    │   ├── FloatDownloadBtn   公共组件样例写法</div><div class="line">    │   │   ├── FloatDownloadBtn.js</div><div class="line">    │   │   ├── FloatDownloadBtn.scss</div><div class="line">    │   │   └── index.js</div><div class="line">    │   ├── Loading.js</div><div class="line">    │   └── Model.js           函数式组件的写法</div><div class="line">    │</div><div class="line">    ├── favicon.ico</div><div class="line">    ├── index.ejs              //渲染的模板 如果项目需要，可以放一些公共文件进去</div><div class="line">    ├── index.js               //包括热更新的逻辑</div><div class="line">    ├── pages                  页面组件文件夹</div><div class="line">    │   ├── home</div><div class="line">    │   │   ├── components     // 用于放置页面组件，主要逻辑</div><div class="line">    │   │   │   └── homePage.js</div><div class="line">    │   │   ├── containers     // 使用connect来封装出高阶组件 注入全局state数据</div><div class="line">    │   │   │   └── homeContainer.js</div><div class="line">    │   │   ├── index.js       // 页面路由配置文件 注意thunk属性</div><div class="line">    │   │   └── reducer</div><div class="line">    │   │       └── index.js   // 页面的reducer 这里暴露出来给store统一处理 注意写法</div><div class="line">    │   └── user</div><div class="line">    │       ├── components</div><div class="line">    │       │   └── userPage.js</div><div class="line">    │       ├── containers</div><div class="line">    │       │   └── userContainer.js</div><div class="line">    │       └── index.js</div><div class="line">    └── store</div><div class="line">        ├── actions            // 各action存放地</div><div class="line">        │   ├── home.js</div><div class="line">        │   └── thunk.js</div><div class="line">        ├── constants.js       // 各action名称汇集处 防止重名</div><div class="line">        └── reducers</div><div class="line">            └── index.js       // 引用各页面的所有reducer 在此处统一combine处理</div></pre></td></tr></table></figure>
+<h2>项目的构建思路</h2>
+<ol>
+<li>本地开发使用webpack-dev-server，实现热更新，基本流程跟之前react开发类似，仍是浏览器端渲染，因此在编写代码时要考虑到一套逻辑，两种渲染环境的问题。</li>
+<li>当前端页面渲染完成后，其Router跳转将不会对服务端进行请求，从而减轻服务端压力，从而页面的进入方式也是两种，还要考虑两种渲染环境下路由同构的问题。</li>
+<li>生产环境要使用koa做后端服务器，实现按需加载，在服务端获取数据，并渲染出整个HTML，利用React16最新的能力来合并整个状态树，实现服务端渲染。</li>
+</ol>
+<h3>本地开发介绍</h3>
+<p>查看本地开发主要涉及的文件是<code>src</code>目录下的<code>index.js</code>文件，判断当前的运行环境，只有在开发环境下才会使用module.hot的API，实现当reducer发生变化时的页面渲染更新通知，注意其中的<code>hydrate</code>方法，这是v16版本的一个专门为服务端渲染新增的<code>API</code>方法，它在render方法的基础上实现了对服务端渲染内容的最大可能重用，实现了静态<code>DOM</code>到动态<code>NODES</code>的过程。实质是代替了v15版本下判断checksum标记的过程，使得重用的过程更加高效优雅。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> renderApp=<span class="function"><span class="params">()</span>=&gt;</span>&#123;</div><div class="line">  <span class="keyword">let</span> application=createApp(&#123;store,history&#125;);</div><div class="line">  hydrate(application,<span class="built_in">document</span>.getElementById(<span class="string">'root'</span>));</div><div class="line">&#125;</div><div class="line"><span class="built_in">window</span>.main = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">  Loadable.preloadReady().then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    renderApp()</div><div class="line">  &#125;);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">if</span>(process.env.NODE_ENV===<span class="string">'development'</span>)&#123;</div><div class="line">  <span class="keyword">if</span>(<span class="built_in">module</span>.hot)&#123;</div><div class="line">    <span class="built_in">module</span>.hot.accept(<span class="string">'./store/reducers/index.js'</span>,()=&gt;&#123;</div><div class="line">      <span class="keyword">let</span> newReducer=<span class="built_in">require</span>(<span class="string">'./store/reducers/index.js'</span>);</div><div class="line">      store.replaceReducer(newReducer)</div><div class="line">    &#125;)</div><div class="line">    <span class="built_in">module</span>.hot.accept(<span class="string">'./app/index.js'</span>,()=&gt;&#123;</div><div class="line">      <span class="keyword">let</span> &#123;createApp&#125;=<span class="built_in">require</span>(<span class="string">'./app/index.js'</span>);</div><div class="line">      <span class="keyword">let</span> newReducer=<span class="built_in">require</span>(<span class="string">'./store/reducers/index.js'</span>);</div><div class="line">      store.replaceReducer(newReducer)</div><div class="line">      <span class="keyword">let</span> application=createApp(&#123;store,history&#125;);</div><div class="line">      hydrate(application,<span class="built_in">document</span>.getElementById(<span class="string">'root'</span>));</div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意<code>window.main</code>这个函数的定义，结合<code>index.ejs</code>可以知道这个函数是所有脚本加载完成后才触发，里面用的是<code>react-loadable</code>的写法，用于页面的懒加载，关于页面分别打包的写法要结合路由设置来讲解，这里有个大致印象即可。需要注意的是app这个文件下暴露出的三个方法是在浏览器端和服务器端通用的，接下来主要就是说这部分的思路。</p>
+<h3>路由处理</h3>
+<p>接下来看以下<code>src/app</code>目录下的文件，<code>index.js</code>暴露了三个方法，这里面涉及的三个方法在服务端和浏览器端开发都会用到，这一部分主要讲其下的<code>router</code>文件里面的代码思路和<code>createApp.js</code>文件对路由的处理，这里是实现两端路由相互打通的关键点。<br>
+　　<code>router</code>文件夹下的routes.js是路由配置文件，将各个页面下的路由配置都引进来，合成一个配置数组，可以通过这个配置来灵活控制页面上下线。同目录下的<code>index.js</code>是<code>RouterV4</code>的标准写法，通过遍历配置数组的方式传入路由配置，<code>ConnectRouter</code>是用于合并<code>Router</code>的一个组件，注意到<code>history</code>要作为参数传入，需要在<code>createApp.js</code>文件里做单独的处理。先大致看一下Route组件中的几个配置项，值得注意的是其中的<code>thunk</code>属性，这是实现后端获取数据后渲染的关键一步，正是这个属性实现了类似<code>Next</code>里面的组件提前获取数据的生命周期钩子，其余的属性都可以在相关<a href="https://reacttraining.com/react-router/web/api/Route" target="_blank" rel="external">React-router文档</a>中找到说明，这里不在赘述。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> routesConfig <span class="keyword">from</span> <span class="string">'./routes'</span>;</div><div class="line"><span class="keyword">const</span> Routers=<span class="function">(<span class="params">&#123;history&#125;</span>)=&gt;</span>(</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">ConnectedRouter</span> <span class="attr">history</span>=<span class="string">&#123;history&#125;</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">      &#123;</div><div class="line">        routesConfig.map(route=&gt;(</div><div class="line">          <span class="tag">&lt;<span class="name">Route</span> <span class="attr">key</span>=<span class="string">&#123;route.path&#125;</span> <span class="attr">exact</span>=<span class="string">&#123;route.exact&#125;</span> <span class="attr">path</span>=<span class="string">&#123;route.path&#125;</span> <span class="attr">component</span>=<span class="string">&#123;route.component&#125;</span>  <span class="attr">thunk</span>=<span class="string">&#123;route.thunk&#125;</span>  /&gt;</span></div><div class="line">        ))</div><div class="line">      &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">ConnectedRouter</span>&gt;</span></div><div class="line">)</div><div class="line">export default Routers;</div></pre></td></tr></table></figure>
+<p>查看<code>app</code>目录下的<code>createApp.js</code>里面的代码可以发现，本框架是针对不同的工作环境做了不同的处理，只有在生产环境下才利用Loadable.Capture方法实现了懒加载，动态引入不同页面对应的打包之后的js文件。到这里还要看一下组件里面的路由配置文件的写法，以<code>home</code>页面下的<code>index.js</code>为例。注意<code>/* webpackChunkName: 'Home' */</code>这串字符，实质是指定了打包后此页面对应的js文件名，所以针对不同的页面，这个注释也需要修改，避免打包到一起。<code>loading</code>这个配置项只会在开发环境生效，当页面加载未完成前显示，这个实际项目开发如果不需要可以删除此组件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;homeThunk&#125; <span class="keyword">from</span> <span class="string">'../../store/actions/thunk'</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> LoadableHome = Loadable(&#123;</div><div class="line">    <span class="attr">loader</span>: <span class="function"><span class="params">()</span> =&gt;</span><span class="keyword">import</span>(<span class="comment">/* webpackChunkName: 'Home' */</span><span class="string">'./containers/homeContainer.js'</span>),</div><div class="line">    <span class="attr">loading</span>: Loading,</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">const</span> HomeRouter = &#123;</div><div class="line">    <span class="attr">path</span>: <span class="string">'/'</span>,</div><div class="line">    <span class="attr">exact</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">component</span>: LoadableHome,</div><div class="line">    <span class="attr">thunk</span>: homeThunk <span class="comment">// 服务端渲染会开启并执行这个action，用于获取页面渲染所需数据</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> HomeRouter</div></pre></td></tr></table></figure>
+<p>这里多说一句，有时我们要改造的项目的页面文件里有从<code>window.location</code>里面获取参数的代码，改造成服务端渲染时要全部去掉，或者是要在render之后的生命周期中使用。并且页面级别组件都已经注入了相关路由信息，可以通过<code>this.props.location</code>来获取URL里面的参数。本项目用的是<code>BrowserRouter</code>，如果用<code>HashRouter</code>则包含参数可能略有不同，根据实际情况取用。</p>
+<p>根据React16的服务端渲染的API介绍：<br>
+　　浏览器端使用的注入<code>ConnectedRouter</code>中的<code>history</code>为：<code>import createHistory from 'history/createBrowserHistory'</code><br>
+　　服务器端使用的<code>history</code>为<code>import createHistory from 'history/createMemoryHistory'</code></p>
+<h3>服务端渲染</h3>
+<p>这里就不会涉及到<code>koa2</code>的一些基础知识，如果对<code>koa2</code>框架不熟悉可以参考我的另外一篇<a href="http://wlxadyl.cn/2018/02/11/koa-learn/" target="_blank" rel="external">博文</a>。这里是看server文件夹下都是服务端的代码。首先是简洁的<code>app.js</code>用于保证每次连接都返回的是一个新的服务器端实例，这对于单线程的js语言是很关键的思路。需要重点介绍的就是<code>clientRouter.js</code>这个文件，结合<code>/src/app/configureStore.js</code>这个文件共同理解服务端渲染的数据获取流程和React的渲染机制。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*configureStore.js*/</span></div><div class="line"><span class="keyword">import</span> &#123;createStore, applyMiddleware,compose&#125; <span class="keyword">from</span> <span class="string">"redux"</span>;</div><div class="line"><span class="keyword">import</span> thunkMiddleware <span class="keyword">from</span> <span class="string">"redux-thunk"</span>;</div><div class="line"><span class="keyword">import</span> createHistory <span class="keyword">from</span> <span class="string">'history/createMemoryHistory'</span>;</div><div class="line"><span class="keyword">import</span> &#123;  routerReducer, routerMiddleware &#125; <span class="keyword">from</span> <span class="string">'react-router-redux'</span></div><div class="line"><span class="keyword">import</span> rootReducer <span class="keyword">from</span> <span class="string">'../store/reducers/index.js'</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> routerReducers=routerMiddleware(createHistory());<span class="comment">//路由</span></div><div class="line"><span class="keyword">const</span> composeEnhancers = process.env.NODE_ENV==<span class="string">'development'</span>?<span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;</div><div class="line"></div><div class="line"><span class="keyword">const</span> middleware=[thunkMiddleware,routerReducers]; <span class="comment">//把路由注入到reducer，可以从reducer中直接获取路由信息</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> configureStore=<span class="function">(<span class="params">initialState</span>)=&gt;</span>createStore(rootReducer,initialState,composeEnhancers(applyMiddleware(...middleware)));</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> configureStore;</div></pre></td></tr></table></figure>
+<p><code>window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__</code>这个变量是浏览器里面的Redux的开发者工具，开发React-redux应用时建议安装，否则会有报错提示。这里面大部分都是<code>redux-thunk</code>的示例代码，关于这部分如果看不懂建议看一下<code>redux-thunk</code>的官方文档，这里要注意的是<code>configureStore</code>这个方法要传入的<code>initialState</code>参数，这个渲染的具体思路是：在服务端判断路由的thunk方法，如果存在则需要执行这个获取数据逻辑，这是个阻塞过程，可以当作同步，获取后放到全局State中，在前端输出的HTML中注入<code>window.__INITIAL_STATE__</code>这个全局变量，当html载入完毕后，这个变量赋值已有数据的全局<code>State</code>作为<code>initState</code>提供给react应用，然后浏览器端的js加载完毕后会通过复用页面上已有的dom和初始的<code>initState</code>作为开始，合并到render后的生命周期中，从而在<code>componentDidMount</code>中已经可以从this.props中获取渲染所需数据。<br>
+　　但还要考虑到页面切换也有可能在前端执行跳转，此时作为React的应用不会触发对后端的请求，因此在<code>componentDidMount</code>这个生命周期里并没有获取数据，为了解决这个问题，我建议在这个生命周期中都调用props中传来的<code>action</code>触发函数，但在action内部进行一层逻辑判断，避免重复的请求，实际项目中请求数据往往会有个标识性ID，就可以将这个ID存入<code>store</code>中，然后就可以进行一次对比校验来提前返回，避免重复发送<code>ajax</code>请求，具体可看store/actions/home.js`中的逻辑处理。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;ADD,GET_HOME_INFO&#125; <span class="keyword">from</span> <span class="string">'../constants'</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> add=<span class="function">(<span class="params">count</span>)=&gt;</span>(&#123;<span class="attr">type</span>: ADD, count,&#125;)</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> getHomeInfo=<span class="function">(<span class="params">sendId=<span class="number">1</span></span>)=&gt;</span><span class="keyword">async</span>(dispatch,getState)=&gt;&#123;</div><div class="line">  <span class="keyword">let</span> &#123;name,age,id&#125;=getState().HomeReducer.homeInfo;</div><div class="line">  <span class="keyword">if</span> (id === sendId) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="comment">//是通过对请求id和已有数据的标识性id进行对比校验，避免重复获取数据。</span></div><div class="line">  &#125;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'footer'</span>.includes(<span class="string">'foo'</span>))</div><div class="line">  <span class="keyword">await</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span>=&gt;</span>&#123;</div><div class="line">    <span class="keyword">let</span> homeInfo=&#123;<span class="attr">name</span>:<span class="string">'wd2010'</span>,<span class="attr">age</span>:<span class="string">'25'</span>,<span class="attr">id</span>:sendId&#125;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'-----------请求getHomeInfo'</span>)</div><div class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>resolve(homeInfo),<span class="number">1000</span>)</div><div class="line">  &#125;).then(<span class="function"><span class="params">homeInfo</span>=&gt;</span>&#123;</div><div class="line">    dispatch(&#123;<span class="attr">type</span>:GET_HOME_INFO,<span class="attr">data</span>:&#123;homeInfo&#125;&#125;)</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意这里的<code>async/await</code>写法，这里涉及到服务端koa2使用这个来做数据请求，因此需要统一返回<code>async</code>函数，这块不熟的同学建议看下ES7的知识，主要是<code>async</code>如何配合<code>Promise</code>实现异步流程改造，并且如果涉及koa2的服务端工作，对<code>async</code>函数用的更多，这也是本项目要求Node版本为8.x以上的原因，从8开始就可以直接用这两个关键字。<br>
+　　不过到具体项目中，往往会涉及到一些服务端参数的注入问题，但这块根据不同项目需求差异很大，并且不属于这个React服务端改造的一部分，没法统一分享，如果真是公司项目要用到对这块有需求咨询可以打赏后加我微信讨论。</p>
+<h3>以Home页面为例的渲染流程</h3>
+<p>为了方便大家理解，我以一个页面为例整理了一下数据流的整体过程，看一下思路：</p>
+<ol>
+<li>服务端接收到请求，通过<code>/home</code>找到对应的路由配置</li>
+<li>判断路由存在<code>thunk</code>方法，此时执行<code>store/actions/thunk.js</code>里面的暴露出的函数</li>
+<li>异步获取的数据会注入到全局state中，此时的dispatch分发其实并不生效</li>
+<li>要输出的HTML代码中会将获取到数据后的全局state放到<code>window.__INITIAL_STATE__</code>这个全局变量中，作为initState</li>
+<li><code>window.__INITIAL_STATE__</code>将在react生命周期起作用前合并入全局state，此时react发现dom已经生成，不会再次触发render，并且数据状态得到同步</li>
+</ol>
+<p><img src="react-ssr-learn/paint1.png" alt="服务端直出HTML"></p>
+<p>基本的流程已经介绍结束，至于一些<code>Reducer</code>的函数式写法，还有actions的位置都是参考网上的一些分析来组织的，具体见仁见智，这个只要符合自己的理解，并且有助于团队开发就好。如果您符合我在文章一开始设定的读者背景，相信本文的讲述足够您点亮自己的服务端渲染技术点啦。如果对React了解偏少也没关系，可以参考<a href="https://github.com/wlx200510/react-wlx" target="_blank" rel="external">这里</a>来补充一些React的基础知识，也可以到<a href="http://wlxadyl.cn/" target="_blank" rel="external">我的博客</a>学习交流。</p>
+<p><b>如果这篇文章对您有帮助，或者用于您公司的项目发现一些问题，欢迎加我微信打赏后讨论并解决问题~。</b></p>
+<p>打赏二维码：<br>
+<img src="react-ssr-learn/dashang.jpg" alt=""></p>
+<p>打赏获取特权流程：</p>
+<ul>
+<li>扫描下发二维码 加我为好友</li>
+<li>发送打赏截图给我</li>
+<li>拉你进React的服务端渲染讨论微信群</li>
+<li>解答这个框架在实际应用中的问题</li>
+</ul>
+<p><img src="react-ssr-learn/wechat.jpg" alt=""></p>
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/KOA/">KOA</a> <a class="tag tag--primary tag--small t-link" href="/tags/REACT/">REACT</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/22/vue-senior-learn/" data-tooltip="Vue进阶部分文档研读和学习" aria-label="上一篇: Vue进阶部分文档研读和学习">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/08/redux-learn/" data-tooltip="REACT框架学习心得" aria-label="下一篇: REACT框架学习心得">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://geekarl.com/2018/03/16/react-ssr-learn/" title="分享到 Facebook">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://geekarl.com/2018/03/16/react-ssr-learn/" title="分享到 Twitter">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://geekarl.com/2018/03/16/react-ssr-learn/" title="分享到 Google+">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2018 卡少. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/22/vue-senior-learn/" data-tooltip="Vue进阶部分文档研读和学习" aria-label="上一篇: Vue进阶部分文档研读和学习">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/08/redux-learn/" data-tooltip="REACT框架学习心得" aria-label="下一篇: REACT框架学习心得">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://geekarl.com/2018/03/16/react-ssr-learn/" title="分享到 Facebook">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://geekarl.com/2018/03/16/react-ssr-learn/" title="分享到 Twitter">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://geekarl.com/2018/03/16/react-ssr-learn/" title="分享到 Google+">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <i id="btn-close-shareoptions" class="fa fa-close"></i>
+    <ul class="share-options">
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://geekarl.com/2018/03/16/react-ssr-learn/">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i><span>分享到 Facebook</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://geekarl.com/2018/03/16/react-ssr-learn/">
+                    <i class="fa fa-twitter" aria-hidden="true"></i><span>分享到 Twitter</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://geekarl.com/2018/03/16/react-ssr-learn/">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i><span>分享到 Google+</span>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.jpg" alt="作者的图片"/>
+        
+            <h4 id="about-card-name">卡少</h4>
+        
+            <div id="about-card-bio"><p>最强的求知欲才能召唤最强的自己~carry on</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>MIUI前端工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                北京
+            </div>
+        
+    </div>
+</div>
+
+        
+            <div id="algolia-search-modal" class="modal-container">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="close-button"><i class="fa fa-close"></i></span>
+            <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+                <span class="searchby-algolia-text text-color-light text-small">by</span>
+                <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+            </a>
+            <i class="search-icon fa fa-search"></i>
+            <form id="algolia-search-form">
+                <input type="text" id="algolia-search-input" name="search"
+                    class="form-control input--large search-input" placeholder="Search "
+                    />
+            </form>
+        </div>
+        <div class="modal-body">
+            <div class="no-result text-color-light text-center">没有找到文章</div>
+            <div class="results">
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/04/13/hello-world/">
+                            <h3 class="media-heading">Hello World</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年4月13日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>my first artical about Hexo</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/05/14/nav-hover/">
+                            <h3 class="media-heading">对列表hover效果的小探讨</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年5月14日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>原来用list写的nav标签效果，博客转载到新网站。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/08/13/firstHEXO/">
+                            <h3 class="media-heading">使用HEXO搭建个人博客遇到的几个问题</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年8月13日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>还好有些github的使用基础，因此hexo博客的搭建用了一天就基本完成了，但这个过程中还是有两个小问题在文档上没有找到，还好通过查资料得到了解决，及时分享出来，希望让他人少走一些弯路。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/09/14/CSS-center/">
+                            <h3 class="media-heading">用CSS实现居中的总结</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月14日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>无论是工作还是面试中，元素居中总是一个高频的问题，不同情况下需要灵活地选取不同的方法，因此有必要对常用方法做一个简要的总结。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/10/25/techniques-about-VsCode/">
+                            <h3 class="media-heading">techniques about VsCode</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年10月25日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>记录目前VScode编译器的所有插件和快捷键，方便以后查找</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/12/31/personal-summarize/">
+                            <h3 class="media-heading">卡少2016年终总结</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年12月31日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>2016年个人经历，总结过去&amp;展望未来</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/11/JS-nice-habit/">
+                            <h3 class="media-heading">代码整洁之道——JS</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月11日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>《代码整洁之道》一书的诸多原则同时适用于JS，为了在工作中编写的代码有更多的可维护性，应该常常回顾此文章，思考并进步。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/12/CSS-Good-Technique/">
+                            <h3 class="media-heading">样式代码编写习惯约定——高逼格</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月12日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>参加工作后，接触到更多的是sass的编写，这里把公司约定的CSS样式的编写习惯移步于此，方便查询并与大家分享</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/14/For-My-Lover/">
+                            <h3 class="media-heading">情人节专题~你的谜底，我来揭开</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月14日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>JSUT FOR THE SPECIAL GIRL</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/18/comment-about-LALALAND/">
+                            <h3 class="media-heading">回首——爱乐之城</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月18日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>跟女朋友一起看最近最火的电影——爱乐之城。剧情悲中有喜，于我心有戚戚焉，有感而发，遂有此随笔</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p class="results-count text-medium"
+                data-message-zero="没有找到文章"
+                data-message-one="找到 1 篇文章"
+                data-message-other="找到 {n} 篇文章">
+                找到 32 篇文章
+            </p>
+        </div>
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-peofhqjkzcghmndknakluequy1y6owxdwpaqyju9ntl9zxnk7rdolb3rjjoj.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>
+    <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <script>
+        var algoliaClient = algoliasearch('NRRSUOXO5C', 'fc865619ea4d0f7dea75788f7f4965c3');
+        var algoliaIndex = algoliaClient.initIndex('geekarl-blog');
+    </script>
+
+
+    </body>
+</html>

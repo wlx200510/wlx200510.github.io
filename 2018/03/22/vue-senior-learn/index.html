@@ -1,0 +1,860 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="卡少技术博客">
+    <title>Vue进阶部分文档研读和学习 - 卡少技术博客</title>
+    <meta name="author" content="卡少">
+    
+    
+        <link rel="icon" href="http://geekarl.com/assets/images/avatar.jpg">
+    
+    
+    <meta name="description" content="用Vue用过一段时间之后，回顾复习Vue文档，用自己的经验加以总结，望给后来人以参考。">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Vue进阶部分文档研读和学习">
+<meta property="og:url" content="http://geekarl.com/2018/03/22/vue-senior-learn/index.html">
+<meta property="og:site_name" content="卡少技术博客">
+<meta property="og:description" content="用Vue用过一段时间之后，回顾复习Vue文档，用自己的经验加以总结，望给后来人以参考。">
+<meta property="og:updated_time" content="2018-03-22T11:14:48.615Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue进阶部分文档研读和学习">
+<meta name="twitter:description" content="用Vue用过一段时间之后，回顾复习Vue文档，用自己的经验加以总结，望给后来人以参考。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="http://geekarl.com/assets/images/avatar.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-pz4cc6y13wt2trzqa8l3n9v0yykr0sstdaheem7qj628nhjmhp9pfawvqawz.min.css">
+    <!--STYLES END-->
+    
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">卡少技术博客</a>
+    </div>
+    
+        
+            <a  class="header-right-picture "
+                href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/avatar.jpg" alt="作者的图片"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.jpg" alt="作者的图片"/>
+                </a>
+                <h4 class="sidebar-profile-name">卡少</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>最强的求知欲才能召唤最强的自己~carry on</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/ "
+                            
+                            title="首页"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-categories"
+                            
+                            title="分类"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-tags"
+                            
+                            title="标签"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-archives"
+                            
+                            title="归档"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link open-algolia-search"
+                             href="#search"
+                            
+                            title="搜索"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="#about"
+                            
+                            title="关于"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="https://github.com/wlx200510" target="_blank" rel="noopener" title="wlx200510">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">wlx200510</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="mailto:wanglixing@outlook.com" target="_blank" rel="noopener" title="outlook">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-envelope-o" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">outlook</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/atom.xml"
+                            
+                            title="RSS"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Vue进阶部分文档研读和学习
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-03-22T19:09:32+08:00">
+	
+		    3月 22, 2018
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/学习/">学习</a>
+
+
+    
+</div>
+
+    
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <!-- excerpt -->
+<blockquote>
+<p>针对Vue文档中部分大家可能不会去研读的内容，我做了个小总结，作为有经验者的快餐，不是特别适合初学者哈</p>
+</blockquote>
+<h2>节省代码量的mixin</h2>
+<blockquote>
+<p><code>mixin</code>概念：组件级可复用逻辑，包括数据变量/生命周期钩子/公共方法，从而在混入的组件中可以直接使用，不用重复写冗余逻辑(类似继承)</p>
+</blockquote>
+<p>使用方法:</p>
+<ul>
+<li>在某一公共文件夹<code>pub</code>下创建<code>mixin</code>文件夹，其下创建<code>mixinTest.js</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> mixinTest = &#123;</div><div class="line">    created() &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">`components <span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span> created`</span>)</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">        hello() &#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'mixin method hello'</span>)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> mixinTest</div></pre></td></tr></table></figure>
+<ul>
+<li>在组件中引用刚才的公共混入文件并使用</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> mixinTest <span class="keyword">from</span> <span class="string">'../pub/mixin/mixinTest.js'</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    data() &#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            <span class="attr">name</span>: <span class="string">'hello'</span></div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">mixins</span>: [mixinTest],</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">        useMixin() &#123;</div><div class="line">            <span class="keyword">this</span>.hello()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><em>ps: 若是使用<code>Vue.mixin()</code>这个方法，则会影响之后创建的所有Vue示例，慎用！</em></p>
+<p>注意<code>mixin</code>的几个特性:</p>
+<ol>
+<li>混入的数据变量是浅合并，冲突时以组件内的数据优先(对象里面的自定义变量)</li>
+<li>混入的生命周期函数内的逻辑会与组件内定义的生命周期函数逻辑进行合并，并且先执行(created/mounted/destroy)</li>
+<li>混入的值为对象的选项，会混合成一个对象，冲突后也是以组件内键名优先(data/method/components/directives)</li>
+</ol>
+<h2>slot内容分发</h2>
+<blockquote>
+<p><code>slot</code>概念引入：Vue跟React在写法上的不同就在于组件与子组件内部元素的组织上，在组件里面没有<code>children</code>元素供我们访问和展现(暂不考虑<code>render</code>函数)，取而代之的API是<code>slot</code></p>
+</blockquote>
+<p>使用场景定义：</p>
+<ul>
+<li>自定义的子组件里面有嵌套的HTML或者其他自定义的标签组件</li>
+<li>这个自定义的子组件是写在父组件里面，嵌套的东西也放在父组件里面</li>
+<li>通过在子组件的模板里面使用<code>&lt;slot&gt;&lt;/slot&gt;</code>标签，从而达到渲染写在父组件里的嵌套标签的效果</li>
+<li>本质是把父组件放在子组件里的内容，插到了子组件的位置，多个标签也会一起被插入</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">self-component</span>&gt;</span>  <span class="comment">&lt;!--self-component表示自定义的组件--&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">span</span>&gt;</span>12345<span class="tag">&lt;/<span class="name">span</span>&gt;</span>  <span class="comment">&lt;!--父组件里的嵌套标签--&gt;</span> </div><div class="line">        <span class="tag">&lt;/<span class="name">self-component</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span> </div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">components</span>: [selfComponent]</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!--self-component的组件模板--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">button</span>&gt;</span><span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="comment">// 只有子组件的模板里面有slot标签，才能取到写在自定义组件里面的标签的渲染引用</span></div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><code>slot</code>特性的进阶两点：</p>
+<ol>
+<li>slot插入内容的编译作用域：被分发的内容的作用域，根据其所在模板决定</li>
+</ol>
+<ul>
+<li>具体内容写的位置，决定了编译的作用域(大部分情况都是在父组件作用域下)</li>
+<li><code>2.1.0+</code>新增作用域插槽，从而可以把子组件的属性暴露给父组件中写在子组件内的内容使用</li>
+<li>子组件中的slot标签可以直接写自定义属性，然后父组件写在slot中的标签加上<code>slot-scope</code>属性</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 父组件模板 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">child</span> <span class="attr">:items</span>=<span class="string">"items"</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- 作用域插槽也可以是具名的 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">slot</span>=<span class="string">"item"</span> <span class="attr">slot-scope</span>=<span class="string">"props"</span> <span class="attr">class</span>=<span class="string">"my-fancy-item"</span>&gt;</span>&#123;&#123; props.text &#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">child</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 子组件模板 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">"item"</span> <span class="attr">v-for</span>=<span class="string">"item in items"</span> <span class="attr">:text</span>=<span class="string">"item.text"</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 这里写当父组件引用子组件但没写内部内容时展示的东东 --&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">slot</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure>
+<ol start="2">
+<li>slot的<code>name</code>属性来指定标签插入的位置，也就是文档里面的具名插槽(这个<a href="https://cn.vuejs.org/v2/guide/components.html#%E4%BD%BF%E7%94%A8%E6%8F%92%E6%A7%BD%E5%88%86%E5%8F%91%E5%86%85%E5%AE%B9" target="_blank" rel="external">官方文档</a>说的明白)</li>
+</ol>
+<ul>
+<li>在子组件的模板里面写的<code>slot</code>有个<code>name</code>属性(<code>&lt;slot name=&quot;foo&quot;&gt;&lt;/slot&gt;</code>)</li>
+<li>在父组件中写子组件里面的插槽内容，指明<code>slot</code>属性(<code>&lt;p slot=&quot;foo&quot;&gt;123&lt;/p&gt;</code>)</li>
+<li>父组件的内容就会对应<code>slot==name</code>放到正确的位置</li>
+<li>没有指明<code>slot</code>属性的就会默认放到匿名插槽的位置上</li>
+</ul>
+<h2>动态组件</h2>
+<blockquote>
+<p>动态组件这个特性，很多人写的Vue项目也不少，但也没用到过这个，有必要多说几句</p>
+</blockquote>
+<p>动态组件适用情况：</p>
+<ol>
+<li>单页应用，部分组件的切换不涉及路由，只是页面有一块区域的组件要变更</li>
+<li>变更的组件参数定义上是一致的，比如都是对话框，要传一个对象进去，但对象里面的数据结构不同</li>
+<li>通过使用component的is属性，避免在template中的冗余组件代码，避免多个<code>v-if</code>模板代码更加整洁</li>
+</ol>
+<p>使用的方法(借鉴文档):</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">keep-alive</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">component</span> <span class="attr">v-bind:is</span>=<span class="string">"currentView"</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 组件在 vm.currentview (对应组件名称)变化时改变！ --&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 非活动组件将被缓存！可以保留它的状态或避免重新渲染 --&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">component</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>注意点：</p>
+<ul>
+<li>动态切换的组件都要引入到父组件中，渲染是动态的，但引入不是。</li>
+<li><code>&lt;keep-alive&gt;</code>包裹动态组件时，会缓存不活动的组件实例，提高性能，避免重复渲染(<code>keep-alive</code>不会渲染额外DOM结构)</li>
+<li><code>&lt;keep-alive&gt;</code>有<code>include</code>和<code>exclude</code>这两个属性，用于指定缓存和不缓存的组件(传入字符串/数组/正则)</li>
+<li>另一种避免重新渲染的方法是为标签增加属性<code>v-once</code>，用于缓存大量的静态内容，避免重复渲染。</li>
+</ul>
+<p><em>ps:<code>&lt;keep-alive&gt;</code>不会在函数式组件中正常工作，因为它们没有缓存实例。</em></p>
+<h2>动画与过渡</h2>
+<blockquote>
+<p>其实很多前端工程师第一次用Vue的动画和过渡都是通过库组件来做到的，所以对这块没怎么深挖，各种过渡特效和按钮动画就跑起来了，现在就看下文档，补补课</p>
+</blockquote>
+<p>前端实现动画的基本方法分为三种种：css3的过渡和keyframe/javascript操纵dom/使用webgl或者canvas来独立实现，其中第三种是作为展示动画，与交互结合较少，而Vue作为一个框架，其支持动画基是从前两种入手的，从官方文档提到的四种支持就可以看出这一点。不过官方文档是从DOM过渡和状态过渡两个方面来讲解，前者是DOM的消失和出现的动画等属性的变化，后者是页面上某些值的变化。</p>
+<h3>DOM属性的改变</h3>
+<ol>
+<li>若是单个元素/组件的显隐，在组件外面包裹一层<code>&lt;transition&gt;&lt;/transition&gt;</code>，而后选择是css过渡还是javascript过渡</li>
+</ol>
+<ul>
+<li>CSS过渡：</li>
+</ul>
+<ol>
+<li>vue提供了六个样式后缀，本质是在dom过渡的过程中动态地添加和删除对应的<code>className</code>。(<code>-[enter|leave]-?[active|to]?</code>)</li>
+<li>如果用css库来辅助开发，可以在<code>transiton</code>这个标签上定义自定义过渡类名，也是六个属性。(<code>[enter|leave]-?[active|to]?-class</code>)</li>
+<li>常见的一种效果是元素首次渲染的动画，如懒加载图片飞入，这个时候要在<code>transiton</code>标签上加上<code>appear</code>，另有三个属性可指定(<code>appear-?[to|active]?-class</code>)</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 每种CSS动画库对应的class命名规则可能不同，所以根据不同库要自己写，以animate.css为例 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">transition</span></span></div><div class="line">    <span class="attr">name</span>=<span class="string">"custom-classes-transition"</span></div><div class="line">    <span class="attr">enter-active-class</span>=<span class="string">"animated tada"</span></div><div class="line">    <span class="attr">leave-active-class</span>=<span class="string">"animated bounceOutRight"</span></div><div class="line">    <span class="attr">:duration</span>=<span class="string">"&#123; enter: 500, leave: 800 &#125;"</span></div><div class="line">&gt;...<span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- duration属性可以传一个对象，定制进入和移出的持续时间--&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>JS过渡：</li>
+</ul>
+<ol>
+<li>因为现在很多动画库需要工程师调用库提供的函数，把dom元素传入进行处理，这个时候需要这种方式</li>
+<li>通过在<code>transiton</code>这个标签上添加监听事件，共8个(<code>[before|after]?-?[enter|leave]-?[cancelled]?</code>)</li>
+<li>监听事件的回调函数的第一个参数都是el，为过渡的dom元素，在<code>enter</code>和<code>leave</code>这两个还会传入<code>done</code>作为第二个参数</li>
+<li>元素首次渲染的动画，可以指定的监听事件有4个(<code>[before|after]?-?appear</code>和<code>appear-cancelled</code>)</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">transition</span> <span class="attr">v-bind:css</span>=<span class="string">"false"</span></span></div><div class="line">    <span class="attr">v-on:before-enter</span>=<span class="string">"beforeEnter"</span> <span class="attr">v-on:enter</span>=<span class="string">"enter"</span></div><div class="line">    <span class="attr">v-on:leave</span>=<span class="string">"leave"</span> <span class="attr">v-on:leave-cancelled</span>=<span class="string">"leaveCancelled"</span>&gt;</div><div class="line">        <span class="comment">&lt;!-- 对于仅使用 JavaScript 过渡的元素添加 v-bind:css="false"，Vue 会跳过 CSS 的检测 --&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">methods: &#123; <span class="comment">// 以Velocity库为例</span></div><div class="line">    beforeEnter: <span class="function"><span class="keyword">function</span> (<span class="params">el</span>) </span>&#123;<span class="comment">/*...*/</span>&#125;,</div><div class="line">  <span class="comment">// 此回调函数是可选项的设置</span></div><div class="line">  enter: <span class="function"><span class="keyword">function</span> (<span class="params">el, done</span>) </span>&#123;</div><div class="line">    <span class="comment">// Velocity(el, &#123; opacity: 1, fontSize: '1.4em' &#125;, &#123; duration: 300 &#125;)</span></div><div class="line">    done()  <span class="comment">//回调函数 done 是必须的。否则，它们会被同步调用。</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">leave</span>: <span class="function"><span class="keyword">function</span> (<span class="params">el, done</span>) </span>&#123;</div><div class="line">    <span class="comment">// Velocity(el, &#123; translateX: '15px', rotateZ: '50deg' &#125;, &#123; duration: 600 &#125;)</span></div><div class="line">    done()</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">leaveCancelled</span>: <span class="function"><span class="keyword">function</span> (<span class="params">el</span>) </span>&#123;<span class="comment">/*...*/</span>&#125;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><em>多元素过渡其实就是一句话：照常使用<code>v-if/v-else</code>的同时对同一种标签加上<code>key</code>来标识</em></p>
+<p>Vue对于这种多元素动画有队列上的处理，这就是<code>transiton</code>这个标签上的<code>mode</code>属性，通过指定(in-out|out-in)模式，实现消失和出现动画的队列效果，让动画更加自然。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"fade"</span> <span class="attr">mode</span>=<span class="string">"out-in"</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- ... the buttons ... --&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><em>多组件过渡也是一句话：用上一节提到的动态组件，即可完成。</em></p>
+<p>针对列表过渡，其本质仍是多个元素的同时过渡，不过列表大部分是通过数组动态渲染的，因此有独特的地方，不过整体的动画思路不变。具体有以下几点</p>
+<ol>
+<li>使用<code>transitoin-group</code>这个组件，其需要渲染为一个真实元素，可以通过tag这个属性来指定。</li>
+<li>列表的每个元素需要提供<code>key</code>属性</li>
+<li>使用<code>CSS</code>过渡的话，要考虑到列表内容变化过程中，存在相关元素的定位改变，如果要让定位是平滑过渡的动画，要另外一个<code>v-move</code>属性。<br>
+这个属性是通过设置一个<code>css</code>类的样式，来将创建元素在定位变化时的过渡，Vue内部是通过<code>FLIP</code>实现了一个动画队列，只要注意一点就是过渡元素不能设置为<code>display:inline</code>,这里需要文档上的代码做一个简短的<code>demo</code>：(其实通过在li上设置过渡transition属性也可以实现<code>v-move</code>的效果)</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">"shuffle"</span>&gt;</span>Shuffle<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">transition-group</span> <span class="attr">name</span>=<span class="string">"flip-list"</span> <span class="attr">tag</span>=<span class="string">"ul"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"item in items"</span> <span class="attr">v-bind:key</span>=<span class="string">"item"</span>&gt;</span>&#123;&#123; item &#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">transition-group</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">import</span> _ <span class="keyword">from</span> <span class="string">'lodash'</span>;</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    data() &#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            <span class="attr">items</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">        <span class="attr">shuffle</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.items = _.shuffle(<span class="keyword">this</span>.items)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">"css"</span>&gt;</span><span class="css"></span></div><div class="line"><span class="selector-class">.flip-list-move</span> &#123;</div><div class="line">  <span class="attribute">transition</span>: transform <span class="number">1s</span>;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3>数值和属性动态变化</h3>
+<p>这一部分的动画主要是针对数据元素本身的特效，比如数字的增减，颜色的过渡过程控制，svg动画的实现等，其本质都是数字/文本的变化。<br>
+我自己总结就是：通过利用Vue的响应式系统，把数字的变化通过外部库把DOM上对应数值的变化做出连续的效果，如1-&gt;100是个数字递增的连续过程，黑色-&gt;红色的过程。官方文档主要是用几个示例代码来说明，其本质步骤如下：</p>
+<ol>
+<li>在页面上通过<code>input</code>的双向绑定修改某一变量a，还有一个处理dom上的过渡效果的变量b</li>
+<li>这个数据被watcher绑定(watch对象中某个属性是这个变量a)，触发逻辑</li>
+<li>在watcher里面的逻辑就是通过外部过渡库，指定初始值b和最终值a，是把b的值最后改为a</li>
+<li>DOM上绑定的变量就是b，如果某些复杂情况可能是基于b的计算属性，从而把b的变化过程展现出来</li>
+</ol>
+<p>上面这个思路走一遍下来就完成了一个单元级别的动画效果，这种类似的流程其实是很常见的需求，所以有必要把这个过程封装成一个组件，只暴露要过渡的值作为入口，每次改变这个值都是一个动画过渡效果。组件封装需要在上面四个步骤的基础上添加<code>mounted</code>生命周期规定初始值即可，同时原来的两个值a/b在组件里面作为一个值，可以用<code>watch</code>对象中的<code>newValue</code>和<code>oldValue</code>作为区分。<br>
+　　至于最后的SVG，其本质也是数字的过渡，只不过里面涉及的状态变量更多，代码更长而已，不过纯前端页面这种需求倒还是不多的，不过作为爱好倒可以鼓捣一些好玩的小<code>demo</code>，不过肯定需要设计师的参与，要不那些参数可不好调出来呐。</p>
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/Vue/">Vue</a> <a class="tag tag--primary tag--small t-link" href="/tags/学习/">学习</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/16/react-ssr-learn/" data-tooltip="React项目的服务端渲染改造(koa2+webpack3.11)" aria-label="下一篇: React项目的服务端渲染改造(koa2+webpack3.11)">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://geekarl.com/2018/03/22/vue-senior-learn/" title="分享到 Facebook">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://geekarl.com/2018/03/22/vue-senior-learn/" title="分享到 Twitter">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://geekarl.com/2018/03/22/vue-senior-learn/" title="分享到 Google+">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2018 卡少. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/16/react-ssr-learn/" data-tooltip="React项目的服务端渲染改造(koa2+webpack3.11)" aria-label="下一篇: React项目的服务端渲染改造(koa2+webpack3.11)">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://geekarl.com/2018/03/22/vue-senior-learn/" title="分享到 Facebook">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://geekarl.com/2018/03/22/vue-senior-learn/" title="分享到 Twitter">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://geekarl.com/2018/03/22/vue-senior-learn/" title="分享到 Google+">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <i id="btn-close-shareoptions" class="fa fa-close"></i>
+    <ul class="share-options">
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://geekarl.com/2018/03/22/vue-senior-learn/">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i><span>分享到 Facebook</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://geekarl.com/2018/03/22/vue-senior-learn/">
+                    <i class="fa fa-twitter" aria-hidden="true"></i><span>分享到 Twitter</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://geekarl.com/2018/03/22/vue-senior-learn/">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i><span>分享到 Google+</span>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.jpg" alt="作者的图片"/>
+        
+            <h4 id="about-card-name">卡少</h4>
+        
+            <div id="about-card-bio"><p>最强的求知欲才能召唤最强的自己~carry on</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>MIUI前端工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                北京
+            </div>
+        
+    </div>
+</div>
+
+        
+            <div id="algolia-search-modal" class="modal-container">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="close-button"><i class="fa fa-close"></i></span>
+            <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+                <span class="searchby-algolia-text text-color-light text-small">by</span>
+                <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+            </a>
+            <i class="search-icon fa fa-search"></i>
+            <form id="algolia-search-form">
+                <input type="text" id="algolia-search-input" name="search"
+                    class="form-control input--large search-input" placeholder="Search "
+                    />
+            </form>
+        </div>
+        <div class="modal-body">
+            <div class="no-result text-color-light text-center">没有找到文章</div>
+            <div class="results">
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/04/13/hello-world/">
+                            <h3 class="media-heading">Hello World</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年4月13日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>my first artical about Hexo</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/05/14/nav-hover/">
+                            <h3 class="media-heading">对列表hover效果的小探讨</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年5月14日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>原来用list写的nav标签效果，博客转载到新网站。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/08/13/firstHEXO/">
+                            <h3 class="media-heading">使用HEXO搭建个人博客遇到的几个问题</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年8月13日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>还好有些github的使用基础，因此hexo博客的搭建用了一天就基本完成了，但这个过程中还是有两个小问题在文档上没有找到，还好通过查资料得到了解决，及时分享出来，希望让他人少走一些弯路。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/09/14/CSS-center/">
+                            <h3 class="media-heading">用CSS实现居中的总结</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月14日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>无论是工作还是面试中，元素居中总是一个高频的问题，不同情况下需要灵活地选取不同的方法，因此有必要对常用方法做一个简要的总结。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/10/25/techniques-about-VsCode/">
+                            <h3 class="media-heading">techniques about VsCode</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年10月25日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>记录目前VScode编译器的所有插件和快捷键，方便以后查找</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/12/31/personal-summarize/">
+                            <h3 class="media-heading">卡少2016年终总结</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年12月31日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>2016年个人经历，总结过去&amp;展望未来</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/11/JS-nice-habit/">
+                            <h3 class="media-heading">代码整洁之道——JS</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月11日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>《代码整洁之道》一书的诸多原则同时适用于JS，为了在工作中编写的代码有更多的可维护性，应该常常回顾此文章，思考并进步。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/12/CSS-Good-Technique/">
+                            <h3 class="media-heading">样式代码编写习惯约定——高逼格</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月12日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>参加工作后，接触到更多的是sass的编写，这里把公司约定的CSS样式的编写习惯移步于此，方便查询并与大家分享</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/14/For-My-Lover/">
+                            <h3 class="media-heading">情人节专题~你的谜底，我来揭开</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月14日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>JSUT FOR THE SPECIAL GIRL</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/18/comment-about-LALALAND/">
+                            <h3 class="media-heading">回首——爱乐之城</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月18日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>跟女朋友一起看最近最火的电影——爱乐之城。剧情悲中有喜，于我心有戚戚焉，有感而发，遂有此随笔</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p class="results-count text-medium"
+                data-message-zero="没有找到文章"
+                data-message-one="找到 1 篇文章"
+                data-message-other="找到 {n} 篇文章">
+                找到 32 篇文章
+            </p>
+        </div>
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-peofhqjkzcghmndknakluequy1y6owxdwpaqyju9ntl9zxnk7rdolb3rjjoj.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>
+    <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <script>
+        var algoliaClient = algoliasearch('NRRSUOXO5C', 'fc865619ea4d0f7dea75788f7f4965c3');
+        var algoliaIndex = algoliaClient.initIndex('geekarl-blog');
+    </script>
+
+
+    </body>
+</html>
