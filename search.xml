@@ -6,10 +6,8 @@
     <entry>
       <title><![CDATA[Vue进阶部分文档研读和学习]]></title>
       <url>http://geekarl.com/2018/03/22/vue-senior-learn/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
-<blockquote>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <p>针对Vue文档中部分大家可能不会去研读的内容，我做了个小总结，作为有经验者的快餐，不是特别适合初学者哈</p>
-</blockquote>
 <h2>节省代码量的mixin</h2>
 <blockquote>
 <p><code>mixin</code>概念：组件级可复用逻辑，包括数据变量/生命周期钩子/公共方法，从而在混入的组件中可以直接使用，不用重复写冗余逻辑(类似继承)</p>
@@ -137,7 +135,7 @@
     <entry>
       <title><![CDATA[React项目的服务端渲染改造(koa2+webpack3.11)]]></title>
       <url>http://geekarl.com/2018/03/16/react-ssr-learn/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <blockquote>
 <p>选型思路：实现服务端渲染，想用React最新的版本，并且不对现有的写法做大的改动，如果一开始就打算服务端渲染，建议直接用<code>NEXT</code>框架来写</p>
 </blockquote>
@@ -202,7 +200,7 @@
     <entry>
       <title><![CDATA[REACT框架学习心得]]></title>
       <url>http://geekarl.com/2018/02/08/redux-learn/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <blockquote>
 <p>先上一个<code>REACT</code>的框架源码介绍的<a href="https://medium.com/@ericchurchill/the-react-source-code-a-beginners-walkthrough-i-7240e86f3030" target="_blank" rel="external">文章</a>，辅助源码的解释，团队推荐。</p>
 </blockquote>
@@ -228,7 +226,7 @@
     <entry>
       <title><![CDATA[手机adb命令学习]]></title>
       <url>http://geekarl.com/2018/02/02/adb-learn/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <h2>概念介绍</h2>
 <p>ADB的全称为Android Debug Bridge，字面意思就是安卓调试桥接，简单点说，它是Android系统提供的一套工具，通过它，我们可以在电脑上建立一个连接到手机的通道，然后可以在电脑上向手机发送一些指令，完成一些我们需要做的工作。ADB也是android sdk里的一个工具，用这个工具可以直接操作管理android模拟器或者真实的andriod设备(如G1手机)。可以去 android sdk/platform-tools or <a href="http://adbshell.com/downloads" target="_blank" rel="external">ADB Kits</a>进行下载。<br>
 有关adb shell的文档在 <a href="http://adbshell.com/" target="_blank" rel="external">这里</a><br>
@@ -331,7 +329,7 @@
     <entry>
       <title><![CDATA[类webpack模板的多页Vue项目模板]]></title>
       <url>http://geekarl.com/2018/01/11/vue-cli-template/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <blockquote>
 <p>本脚手架并且适当简化了一些功能（删除了测试库） 并引入了外部mock和axios两个常用库可以灵活配置。 这里写一下说明文件和心得体会</p>
 </blockquote>
@@ -376,7 +374,7 @@
     <entry>
       <title><![CDATA[REACT学习资源总结]]></title>
       <url>http://geekarl.com/2018/01/09/react-learn/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <h2>前端早读课</h2>
 <ul>
 <li><a href="https://zhuanlan.zhihu.com/p/31615844" target="_blank" rel="external">1163期 React整洁代码的最佳实践</a> <a href="http://americanexpress.io/clean-code-dirty-code/" target="_blank" rel="external">英文原文</a></li>
@@ -408,7 +406,7 @@
     <entry>
       <title><![CDATA[网页实现把文本复制到粘贴板]]></title>
       <url>http://geekarl.com/2017/12/27/clipboard/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <h2>思路整理</h2>
 <p>有一个按钮可以触发以下逻辑：</p>
 <ul>
@@ -438,7 +436,7 @@
     <entry>
       <title><![CDATA[学会发布自己的npm包]]></title>
       <url>http://geekarl.com/2017/12/26/npm-learn/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <h2>准备工作</h2>
 <ul>
 <li>在<a href="https://www.npmjs.com/" target="_blank" rel="external">npm官网</a>注册账号，要记住用户名/邮箱/密码 三个信息，后面需要用到</li>
@@ -462,7 +460,7 @@
     <entry>
       <title><![CDATA[新主题博客诞生之路]]></title>
       <url>http://geekarl.com/2017/12/12/newBlogborn/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <p>首先列出两大主题的文档地址，方便以后查阅<br>
 <a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak" target="_blank" rel="external">tranquilpeak</a><br>
 <a href="https://github.com/yscoder/hexo-theme-indigo/wiki" target="_blank" rel="external">indigo</a></p>
@@ -500,7 +498,7 @@
     <entry>
       <title><![CDATA[MAC系统下的相关优秀软件搜集]]></title>
       <url>http://geekarl.com/2017/12/06/mac-software/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <h3>软件包管理</h3>
 <ul>
 <li><a href="https://brew.sh/" target="_blank" rel="external">Homebrew</a> 绝对的包管理神器 已使用</li>
@@ -560,7 +558,7 @@
     <entry>
       <title><![CDATA[js线程机制的介绍和练习]]></title>
       <url>http://geekarl.com/2017/12/02/js-process-mechanism/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <blockquote>
 <p>给定的几行代码，我们需要知道其输出内容和顺序。JavaScript是一门单线程语言，但有其独特的线程机制</p>
 </blockquote>
@@ -620,7 +618,7 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[fiddler抓包工具(windows)]]></title>
       <url>http://geekarl.com/2017/11/04/learnFiddler/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <p>在打开fiddler后，会在客户端和服务器之间自动增加一层127.0.0.1:8090的代理层，其表征为客户端的所有请求都要先经过Fiddler，然后转发到相应的服务器，反之，服务器端的所有响应，也都会先经过Fiddler然后发送到客户端。此时IE和chrome的浏览器相应代理设置将自动更改，其他浏览器要进行代理设置</p>
 <p>默认情况下fiddler只能获取http请求，需在菜单项 Tools-&gt;Fiddler Options-&gt;HTTPS的选项卡中 CaptureHTTPS CONNECTs是默认勾选的，要手动勾选Decrypt HTTPS traffic和Ignore servercertificate errors两项（首次点击会弹出是否信任fiddler证书和安全提示，直接点击yes就行）</p>
 <p>如果要启用手机端抓包，需要额外设置  Tools-&gt;Fiddler Options-&gt;Connections 中勾选allow remote computers to connect，并确认默认监听端口(8090),如果端口号有更改，需要重启生效，否则会出现无法上网的问题。对手机端的设置步骤如下：</p>
@@ -637,7 +635,7 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[Javascript一些优雅实现]]></title>
       <url>http://geekarl.com/2017/10/22/js-technique-learn/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <h2>优雅实现<code>sleep</code>的效果</h2>
 <p>在诸如<code>python/Java</code>中都有<code>sleep</code>函数，但<code>js</code>没有，那应该如何用最优雅的方法实现？</p>
 <h3>粗暴版本</h3>
@@ -753,7 +751,7 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[css黑魔法简略版]]></title>
       <url>http://geekarl.com/2017/09/30/css-tricks/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <h2>利用css伪类的content属性来输入文本</h2>
 <ul>
 <li>思路来源 鼠标浮动显示文字</li>
@@ -811,7 +809,7 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[接触到的git的三个重要知识点]]></title>
       <url>http://geekarl.com/2017/08/16/My-Git-Knowledge/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <h2>git配置多个SSH-Key</h2>
 <ol>
 <li>
@@ -871,7 +869,7 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[学习git常用及高阶命令]]></title>
       <url>http://geekarl.com/2017/07/09/gitLearn/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <blockquote>
 <p>几个常用的git命令情景</p>
 </blockquote>
@@ -926,7 +924,7 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[纯前端json数据生成excel下载的实现]]></title>
       <url>http://geekarl.com/2017/06/09/excel/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <h3>引入工具</h3>
 <p>本项目是使用vue2.0的后端项目, 用的ES6的模块化语法。<br>
 <a href="https://github.com/eligrey/FileSaver.js" target="_blank" rel="external">file-saver</a></p>
@@ -957,7 +955,7 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[前端性能优化总结(简略)]]></title>
       <url>http://geekarl.com/2017/06/03/fontend-optimize/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <h3>静态资源优化</h3>
 <p><em>这方面主要是减少静态资源的加载时间 减少http请求的数量和时间上来考虑</em></p>
 <ul>
@@ -986,7 +984,7 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[在Windows上切换node版本的实践]]></title>
       <url>http://geekarl.com/2017/03/23/nvm-windows-learning/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <h3>下载node切换软件</h3>
 <p>在MAC下有大名鼎鼎的nvm，网上有很多成熟的教程。windows下也有“著名”的<a href="https://github.com/coreybutler/nvm-windows/releases" target="_blank" rel="external">nvm-windows</a> 实打实来说，这个挺好用的，不过我的打开方式有点歪~  现在来看一下这个go语言写成的工具有哪些需要注意的地方。<br>
 项目的github链接为：<a href="https://github.com/coreybutler/nvm-windows/" target="_blank" rel="external">nvm-windows</a> 可以点击上一段的链接下载1.1.3版本的切换软件，如果更新了，那就要按照github中给出的最新文档来，这次有点费力就是吃了没看英文文档的亏。</p>
@@ -1011,7 +1009,7 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[学习科学上网]]></title>
       <url>http://geekarl.com/2017/03/23/ShadowSocks-Learning/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <p><em>不过这个并非对非程序出身的人的教程，详细学习可以参考最后的《SS不完全指南》一文</em></p>
 <blockquote>
 <p>今天经过一番探索，对shadowsocks的使用方式有了一定理解，虽然没到用代码控制那一层，不过对于平时应用足矣<br>
@@ -1047,7 +1045,7 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[SHELL脚本的学习和制作]]></title>
       <url>http://geekarl.com/2017/03/20/bash-learning/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <h3>本地的PACK构建shell脚本</h3>
 <p>首先是在在package.json中的scripts键值中加入release</p>
 <p><code>&quot;release&quot;: &quot;sh build/pack.sh&quot;</code></p>
@@ -1079,7 +1077,7 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[使用SSR来模拟后端mock数据]]></title>
       <url>http://geekarl.com/2017/03/11/ssr-introduction/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <h3>特点</h3>
 <ul>
 <li>可强制跨域访问（ajax不报错，方便调试）</li>
@@ -1118,7 +1116,7 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[回首——爱乐之城]]></title>
       <url>http://geekarl.com/2017/02/18/comment-about-LALALAND/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <p><strong>文艺类的电影看的不多，不过这一部不愧是经典，最重要的就是每个人都在其中能找到自己的视角。</strong> <strong>——by卡少</strong></p>
 <p><img src="http://image13.m1905.cn/uploadfile/2016/0714/20160714103140105045.jpg" alt="Banner"></p>
 <p>首先是夸张的开场舞，让我有一种看文艺表演的感觉，不得不说上来这么high的表演，歌词中却透漏出了之后的剧情，不过据说这是对另外一部电影的致敬，无论如何，这开场白确实铺垫的不错，得以跟随导演顺畅浸入剧情。</p>
@@ -1136,7 +1134,7 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[情人节专题~你的谜底，我来揭开]]></title>
       <url>http://geekarl.com/2017/02/14/For-My-Lover/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <style type="text/css">
 .show-heart{
     background-color: rgba(235, 159, 171, 0.4);
@@ -1197,7 +1195,7 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[样式代码编写习惯约定——高逼格]]></title>
       <url>http://geekarl.com/2017/02/12/CSS-Good-Technique/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <h2>CSS代码规范</h2>
 <p><strong>写在最前面的一句话：sass不要嵌套过深，不允许超过3层</strong></p>
 <h3><strong>命名规范</strong></h3>
@@ -1334,7 +1332,7 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[代码整洁之道——JS]]></title>
       <url>http://geekarl.com/2017/02/11/JS-nice-habit/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <blockquote>
 <p>本文转载自：<a href="http://www.zcfy.cc" target="_blank" rel="external">众成翻译</a><br>
 译者：<a href="http://www.zcfy.cc/@jamesfancy" target="_blank" rel="external">边城</a><br>
@@ -1688,7 +1686,7 @@ micro-task(微任务)：Promise，process.nextTick<br>
     <entry>
       <title><![CDATA[卡少2016年终总结]]></title>
       <url>http://geekarl.com/2016/12/31/personal-summarize/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <h1>个人2016年终总结</h1>
 <hr>
 <h3>在2016年里发生了很多事情，从最开始1月3号的经历和拜别，春节期间的决心，四月份的离职，脱产学习，并找项目练手，学习各种前沿技术，一转眼已经在北京入职两个月了，期间种种，真是令人唏嘘不已。</h3>
@@ -1704,7 +1702,7 @@ PS: 新的一年，积攒人品，期待爆发 哦哦]]></content>
     <entry>
       <title><![CDATA[techniques about VsCode]]></title>
       <url>http://geekarl.com/2016/10/25/techniques-about-VsCode/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <h2>VScode的插件记录</h2>
 <hr>
 <article>
@@ -1736,7 +1734,7 @@ PS: 新的一年，积攒人品，期待爆发 哦哦]]></content>
     <entry>
       <title><![CDATA[用CSS实现居中的总结]]></title>
       <url>http://geekarl.com/2016/09/14/CSS-center/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <h3>行内或者行内块元素居中</h3>
 <p>1.单行竖直居中</p>
 <blockquote>
@@ -1785,7 +1783,7 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
     <entry>
       <title><![CDATA[使用HEXO搭建个人博客遇到的几个问题]]></title>
       <url>http://geekarl.com/2016/08/13/firstHEXO/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <style>
     .text{
         text-indent:32px;
@@ -1805,7 +1803,7 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
     <entry>
       <title><![CDATA[对列表hover效果的小探讨]]></title>
       <url>http://geekarl.com/2016/05/14/nav-hover/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <h2>有hover效果的页面导航的制作思路</h2>
 <p style="text-indent:32px;">在做顶部页面导航时，很多情况下网站需要鼠标悬停的底部高亮线的效果。这部分nav一般是采用ul+lian+a的方式来做，li设置display为行内块元素。今天的想法是让这个悬停产生的线如何跟这个字的宽度相同，而不是li的宽度？</p>
 <p style="text-indent:32px;">这个想法的关键在于这个悬停线统一是用伪元素来实现的，伪元素的宽度就是这个悬停线的宽度，因此css类选择器应该是 .nav ul li a:hover::after的格式。但还是出现了一些小问题，比如这个a的宽度只能是被里面文字撑开的宽度，不能设置值 一般对a就设置width:100%即可。 但导航的文字之间是有空隙的，这个是个技巧，也就是设置li的margin值，从而让导航按钮之间有个等大的间隔。 具体实现代码如下：</p>
@@ -1817,7 +1815,7 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
     <entry>
       <title><![CDATA[Hello World]]></title>
       <url>http://geekarl.com/2016/04/13/hello-world/</url>
-      <content type="html"><![CDATA[<!-- excerpt -->
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2>Quick Start</h2>
 <h3>Create a new post</h3>
@@ -2000,8 +1998,8 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
     </entry>
     
     <entry>
-      <title><![CDATA[all-categories]]></title>
-      <url>http://geekarl.com/all-categories/index.html</url>
+      <title><![CDATA[分类 & 标签]]></title>
+      <url>http://geekarl.com/tags/index.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
@@ -2012,8 +2010,8 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
     </entry>
     
     <entry>
-      <title><![CDATA[分类 & 标签]]></title>
-      <url>http://geekarl.com/tags/index.html</url>
+      <title><![CDATA[all-categories]]></title>
+      <url>http://geekarl.com/all-categories/index.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
