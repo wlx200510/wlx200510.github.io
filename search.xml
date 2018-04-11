@@ -4,6 +4,50 @@
   
     
     <entry>
+      <title><![CDATA[四个Vue的写法优化技巧]]></title>
+      <url>http://geekarl.com/2018/04/11/four-vue-tricks/</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
+<h2>watch的优化写法</h2>
+<blockquote>
+<p>我们平时总会遇到组件创建时获取列表，筛选项改变后刷新列表的需求，在<code>watch</code>中的逻辑，还要在组件的<code>created()</code>中再执行一遍，以下写法解决此痛点。</p>
+</blockquote>
+<p><em><code>bad</code></em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  created() &#123;</div><div class="line">    <span class="keyword">this</span>.fetchListData()</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">watch</span>: &#123;</div><div class="line">    searchValue() &#123;</div><div class="line">      <span class="keyword">this</span>.fetchListData()</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><em><code>good</code></em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  <span class="attr">watch</span>: &#123;</div><div class="line">    <span class="attr">searchValue</span>: &#123;</div><div class="line">      <span class="attr">handler</span>: <span class="string">'fetchListData'</span>,</div><div class="line">      <span class="attr">immediate</span>: <span class="literal">true</span>  <span class="comment">//表示组件初始化时执行一次</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2>优化组件引入的代码</h2>
+<blockquote>
+<p>在开发大型应用时，很多页面用到很多公共UI库的组件，按照Vue原本的写法，每种组件都要在每个页面引用一次，真是好累，如何省事偷懒呢？</p>
+</blockquote>
+<p><em><code>bad</code></em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> BaseButton <span class="keyword">from</span> <span class="string">'../components/baseButton'</span></div><div class="line"><span class="keyword">import</span> BaseInput <span class="keyword">from</span> <span class="string">'../components/baseInput'</span></div><div class="line"><span class="keyword">import</span> BaseCard <span class="keyword">from</span> <span class="string">'../components/baseCard'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  <span class="attr">components</span>: &#123;</div><div class="line">    BaseButton,</div><div class="line">    BaseInpur,</div><div class="line">    BaseCard</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><em><code>good</code></em></p>
+<p>在公共组件<code>components</code>文件夹下新建一个<code>allImport.js</code>文件，本质是使用webpack的一个<code>require.context()</code>方法来实现代码层级的动态引入，下面注意代码的实现，重点看注释。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// allImport.js</span></div><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">capitalizeFirstLetter</span>(<span class="params">string</span>) </span>&#123;</div><div class="line">  <span class="comment">// 此函数用途是首字符大写，baseInput-&gt;BaseInput 如果是已经首字符大写的文件名，不需要</span></div><div class="line">  <span class="keyword">return</span> string.charAt(<span class="number">0</span>).toUpperCase() + string.slice(<span class="number">1</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleFileName</span>(<span class="params">string</span>) </span>&#123;</div><div class="line">  <span class="comment">// 把形如 ./fileName.vue -&gt; fileName</span></div><div class="line">  <span class="keyword">return</span> string.replace(<span class="regexp">/^\.\//</span>, <span class="string">''</span>).replace(<span class="regexp">/\.\w+&amp;/</span>, <span class="string">''</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> requireComponent = <span class="built_in">require</span>.context(<span class="string">'.'</span>, <span class="literal">false</span>, /\.vue$/)</div><div class="line"><span class="comment">// 表示找到此文件夹下所有.vue为后缀的文件，详见webpack require.context文档</span></div><div class="line"></div><div class="line">requireComponent.keys().forEach(<span class="function"><span class="params">fileName</span> =&gt;</span> &#123; <span class="comment">// fileName可以认为是路径字符串</span></div><div class="line">  <span class="keyword">const</span> componentConfig = requireComponent(fileName)</div><div class="line">  <span class="keyword">const</span> componentName = capitalizeFirstLetter(handleFileName(fileName))</div><div class="line">  Vue.component(componentName, componentConfig.default || componentConfig)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>在<code>main.js</code>中引入这个脚本即可 <code>import 'components/global.js'</code><br>
+PS: 如果是用<code>extend</code>这个方法来继承Vue实例实现节省代码，每个页面的<code>import</code>还是不能省略</p>
+<h2>父子组件通信的优化写法</h2>
+<blockquote>
+<p>我们Vue组件写多了就会感觉到，父组件上面要写上监听子组件emit来的事件，同时每一个属性都得绑定了传过去，无论自定义的还是click/placeholder之类原生的。这个优化方法是把一些原生得属性和事件进行简写，尤其对组件库之类改造原有HTML元素有奇效。</p>
+</blockquote>
+<p><em><code>bad</code></em></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 父组件的模板写法 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- 可以看到这个自定义的组件上有好多原生的属性和事件 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">BaseInput</span> <span class="attr">:value</span>=<span class="string">"value"</span></span></div><div class="line">    <span class="attr">label</span>=<span class="string">"密码"</span> <span class="attr">placeholder</span>=<span class="string">"place input your password"</span></div><div class="line">    @<span class="attr">input</span>=<span class="string">"handleInput"</span> @<span class="attr">focus</span>=<span class="string">"handleFocus"</span>&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">BaseInput</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 子组件写法 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">label</span>&gt;</span></div><div class="line">    &#123;&#123;lable&#125;&#125;</div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">:value</span>=<span class="string">"value"</span></span></div><div class="line">      <span class="attr">:placeholder</span>=<span class="string">"placeholder"</span></div><div class="line">      @<span class="attr">focus</span>=<span class="string">"$emit('focus', $event)"</span></div><div class="line">      @<span class="attr">input</span>=<span class="string">"$emit('input', $event.target.value)"</span></div><div class="line">    &gt;</div><div class="line">    <span class="comment">&lt;!-- 这些原生事件实质是被代理的一层，从而导致了很多的冗余代码，其实我们可以利用两个简写手段，避免这种无意义的代理，直接传入 --&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>优化点1：Dom的原生属性可以通过<code>$attrs</code>这个<code>API</code>来实现非声明式传递。<code>$attr</code>包含的是父作用域中不作为<code>prop</code>被识别的(<code>class</code>/<code>style</code>除外)特性。</li>
+<li>优化点2：Dom的原生事件可以通过<code>$listeners</code>实现非声明式传入，<code>$listeners</code>包含了父作用域中不含<code>.native</code>修饰器的事件监听(v-on:),如果是更多层级，可以通过<code>v-on=&quot;$listeners&quot;</code>一层层传递到组件内部。</li>
+<li>注意：默认父作用与不被认为是<code>props</code>的属性将会回退到子组件的根元素上，也就是例子中的<code>label</code>上，需在当前子组件的Vue内部设置<code>inheritAttrs: false</code></li>
+</ul>
+<p><em><code>good</code></em></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 父组件保持不变，子组件优化写法如下 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">:value</span>=<span class="string">"value"</span> <span class="attr">v-bind</span>=<span class="string">"$attrs"</span> <span class="attr">v-on</span>=<span class="string">"selfListeners"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">inheritAttrs</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">computed</span>: &#123;</div><div class="line">      selfListeners() &#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">          ...this.$listeners,</div><div class="line">          <span class="attr">input</span>: <span class="function"><span class="params">event</span> =&gt;</span> <span class="keyword">this</span>.$emit(<span class="string">'input'</span>, event.target.value)</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2>使用Render函数来组织渲染逻辑</h2>
+<blockquote>
+<p>教程中的例子是关于省略掉根元素来考虑的，其实这种写法应该是更贴近<code>React</code>的思路，所以学会用<code>js</code>来生成<code>HTML</code>吧</p>
+</blockquote>
+<p><em>函数式组件的<code>render</code>的写法</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 注意，如果使用这种JSX的写法，要引入`babel-plugin-transform-vue-jsx`这个插件</span></div><div class="line"><span class="comment">// 根据最新的这个插件文档，已经不用在第一个参数上传递`createElement`这个h参数了</span></div><div class="line">Vue.component(<span class="string">'my-router'</span>, &#123;</div><div class="line">  <span class="attr">functional</span>: <span class="literal">true</span>,</div><div class="line">  <span class="comment">// context参数代表上下文，里面有属性props</span></div><div class="line">  render(context) &#123;</div><div class="line">    <span class="keyword">return</span> context.props.routes.map(<span class="function"><span class="params">route</span> =&gt;</span></div><div class="line">      &lt;li key=&#123;route.name&#125;&gt;</div><div class="line">        <span class="xml"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&#123;route&#125;</span>&gt;</span>&#123;route.title&#125;<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span></div><div class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Vue进阶部分文档研读和学习]]></title>
       <url>http://geekarl.com/2018/03/22/vue-senior-learn/</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
@@ -1899,6 +1943,30 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
     </entry>
     
     <entry>
+      <title><![CDATA[all-archives]]></title>
+      <url>http://geekarl.com/all-archives/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[all-categories]]></title>
+      <url>http://geekarl.com/all-categories/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[all-tags]]></title>
+      <url>http://geekarl.com/all-tags/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[分类 & 标签]]></title>
+      <url>http://geekarl.com/tags/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[博主信息]]></title>
       <url>http://geekarl.com/about/index.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><style type="text/css">
@@ -1989,30 +2057,6 @@ IE8+、火狐谷歌等现在浏览器中可以用display:table-cell来进行居�
 <iframe scrolling="auto" frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height="330" src="http://music.163.com/outchain/player?type=0&id=10460189&auto=0&height=430"></iframe>
 </div>
 <ul class="ds-recent-visitors" data-num-items="30" data-avatar-size="60"></ul>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[all-archives]]></title>
-      <url>http://geekarl.com/all-archives/index.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[分类 & 标签]]></title>
-      <url>http://geekarl.com/tags/index.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[all-tags]]></title>
-      <url>http://geekarl.com/all-tags/index.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[all-categories]]></title>
-      <url>http://geekarl.com/all-categories/index.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
   

@@ -1,0 +1,773 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="卡少技术博客">
+    <title>四个Vue的写法优化技巧 - 卡少技术博客</title>
+    <meta name="author" content="卡少">
+    
+    
+        <link rel="icon" href="http://geekarl.com/assets/images/avatar.jpg">
+    
+    
+    <meta name="description" content="最近看到了Youtobe上的视频，某大神总结了几个Vuejs的优化方法，取名为Vue文档不想让你知道的技巧，这个标题比较浮夸，我对其内容进行了提炼，总结了四点，希望对大家有帮助。">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="四个Vue的写法优化技巧">
+<meta property="og:url" content="http://geekarl.com/2018/04/11/four-vue-tricks/index.html">
+<meta property="og:site_name" content="卡少技术博客">
+<meta property="og:description" content="最近看到了Youtobe上的视频，某大神总结了几个Vuejs的优化方法，取名为Vue文档不想让你知道的技巧，这个标题比较浮夸，我对其内容进行了提炼，总结了四点，希望对大家有帮助。">
+<meta property="og:updated_time" content="2018-04-11T05:03:48.406Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="四个Vue的写法优化技巧">
+<meta name="twitter:description" content="最近看到了Youtobe上的视频，某大神总结了几个Vuejs的优化方法，取名为Vue文档不想让你知道的技巧，这个标题比较浮夸，我对其内容进行了提炼，总结了四点，希望对大家有帮助。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="http://geekarl.com/assets/images/avatar.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-pz4cc6y13wt2trzqa8l3n9v0yykr0sstdaheem7qj628nhjmhp9pfawvqawz.min.css">
+    <!--STYLES END-->
+    
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">卡少技术博客</a>
+    </div>
+    
+        
+            <a  class="header-right-picture "
+                href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/avatar.jpg" alt="作者的图片"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.jpg" alt="作者的图片"/>
+                </a>
+                <h4 class="sidebar-profile-name">卡少</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>最强的求知欲才能召唤最强的自己~carry on</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/ "
+                            
+                            title="首页"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-categories"
+                            
+                            title="分类"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-tags"
+                            
+                            title="标签"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-archives"
+                            
+                            title="归档"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link open-algolia-search"
+                             href="#search"
+                            
+                            title="搜索"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="#about"
+                            
+                            title="关于"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="https://github.com/wlx200510" target="_blank" rel="noopener" title="wlx200510">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">wlx200510</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="mailto:wanglixing@outlook.com" target="_blank" rel="noopener" title="outlook">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-envelope-o" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">outlook</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/atom.xml"
+                            
+                            title="RSS"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            四个Vue的写法优化技巧
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-04-11T12:45:11+08:00">
+	
+		    4月 11, 2018
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/工作/">工作</a>, <a class="category-link" href="/categories/工作/学习/">学习</a>
+
+
+    
+</div>
+
+    
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
+<h2>watch的优化写法</h2>
+<blockquote>
+<p>我们平时总会遇到组件创建时获取列表，筛选项改变后刷新列表的需求，在<code>watch</code>中的逻辑，还要在组件的<code>created()</code>中再执行一遍，以下写法解决此痛点。</p>
+</blockquote>
+<p><em><code>bad</code></em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  created() &#123;</div><div class="line">    <span class="keyword">this</span>.fetchListData()</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">watch</span>: &#123;</div><div class="line">    searchValue() &#123;</div><div class="line">      <span class="keyword">this</span>.fetchListData()</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><em><code>good</code></em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  <span class="attr">watch</span>: &#123;</div><div class="line">    <span class="attr">searchValue</span>: &#123;</div><div class="line">      <span class="attr">handler</span>: <span class="string">'fetchListData'</span>,</div><div class="line">      <span class="attr">immediate</span>: <span class="literal">true</span>  <span class="comment">//表示组件初始化时执行一次</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2>优化组件引入的代码</h2>
+<blockquote>
+<p>在开发大型应用时，很多页面用到很多公共UI库的组件，按照Vue原本的写法，每种组件都要在每个页面引用一次，真是好累，如何省事偷懒呢？</p>
+</blockquote>
+<p><em><code>bad</code></em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> BaseButton <span class="keyword">from</span> <span class="string">'../components/baseButton'</span></div><div class="line"><span class="keyword">import</span> BaseInput <span class="keyword">from</span> <span class="string">'../components/baseInput'</span></div><div class="line"><span class="keyword">import</span> BaseCard <span class="keyword">from</span> <span class="string">'../components/baseCard'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  <span class="attr">components</span>: &#123;</div><div class="line">    BaseButton,</div><div class="line">    BaseInpur,</div><div class="line">    BaseCard</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><em><code>good</code></em></p>
+<p>在公共组件<code>components</code>文件夹下新建一个<code>allImport.js</code>文件，本质是使用webpack的一个<code>require.context()</code>方法来实现代码层级的动态引入，下面注意代码的实现，重点看注释。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// allImport.js</span></div><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">capitalizeFirstLetter</span>(<span class="params">string</span>) </span>&#123;</div><div class="line">  <span class="comment">// 此函数用途是首字符大写，baseInput-&gt;BaseInput 如果是已经首字符大写的文件名，不需要</span></div><div class="line">  <span class="keyword">return</span> string.charAt(<span class="number">0</span>).toUpperCase() + string.slice(<span class="number">1</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleFileName</span>(<span class="params">string</span>) </span>&#123;</div><div class="line">  <span class="comment">// 把形如 ./fileName.vue -&gt; fileName</span></div><div class="line">  <span class="keyword">return</span> string.replace(<span class="regexp">/^\.\//</span>, <span class="string">''</span>).replace(<span class="regexp">/\.\w+&amp;/</span>, <span class="string">''</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> requireComponent = <span class="built_in">require</span>.context(<span class="string">'.'</span>, <span class="literal">false</span>, /\.vue$/)</div><div class="line"><span class="comment">// 表示找到此文件夹下所有.vue为后缀的文件，详见webpack require.context文档</span></div><div class="line"></div><div class="line">requireComponent.keys().forEach(<span class="function"><span class="params">fileName</span> =&gt;</span> &#123; <span class="comment">// fileName可以认为是路径字符串</span></div><div class="line">  <span class="keyword">const</span> componentConfig = requireComponent(fileName)</div><div class="line">  <span class="keyword">const</span> componentName = capitalizeFirstLetter(handleFileName(fileName))</div><div class="line">  Vue.component(componentName, componentConfig.default || componentConfig)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>在<code>main.js</code>中引入这个脚本即可 <code>import 'components/global.js'</code><br>
+PS: 如果是用<code>extend</code>这个方法来继承Vue实例实现节省代码，每个页面的<code>import</code>还是不能省略</p>
+<h2>父子组件通信的优化写法</h2>
+<blockquote>
+<p>我们Vue组件写多了就会感觉到，父组件上面要写上监听子组件emit来的事件，同时每一个属性都得绑定了传过去，无论自定义的还是click/placeholder之类原生的。这个优化方法是把一些原生得属性和事件进行简写，尤其对组件库之类改造原有HTML元素有奇效。</p>
+</blockquote>
+<p><em><code>bad</code></em></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 父组件的模板写法 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- 可以看到这个自定义的组件上有好多原生的属性和事件 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">BaseInput</span> <span class="attr">:value</span>=<span class="string">"value"</span></span></div><div class="line">    <span class="attr">label</span>=<span class="string">"密码"</span> <span class="attr">placeholder</span>=<span class="string">"place input your password"</span></div><div class="line">    @<span class="attr">input</span>=<span class="string">"handleInput"</span> @<span class="attr">focus</span>=<span class="string">"handleFocus"</span>&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">BaseInput</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 子组件写法 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">label</span>&gt;</span></div><div class="line">    &#123;&#123;lable&#125;&#125;</div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">:value</span>=<span class="string">"value"</span></span></div><div class="line">      <span class="attr">:placeholder</span>=<span class="string">"placeholder"</span></div><div class="line">      @<span class="attr">focus</span>=<span class="string">"$emit('focus', $event)"</span></div><div class="line">      @<span class="attr">input</span>=<span class="string">"$emit('input', $event.target.value)"</span></div><div class="line">    &gt;</div><div class="line">    <span class="comment">&lt;!-- 这些原生事件实质是被代理的一层，从而导致了很多的冗余代码，其实我们可以利用两个简写手段，避免这种无意义的代理，直接传入 --&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>优化点1：Dom的原生属性可以通过<code>$attrs</code>这个<code>API</code>来实现非声明式传递。<code>$attr</code>包含的是父作用域中不作为<code>prop</code>被识别的(<code>class</code>/<code>style</code>除外)特性。</li>
+<li>优化点2：Dom的原生事件可以通过<code>$listeners</code>实现非声明式传入，<code>$listeners</code>包含了父作用域中不含<code>.native</code>修饰器的事件监听(v-on:),如果是更多层级，可以通过<code>v-on=&quot;$listeners&quot;</code>一层层传递到组件内部。</li>
+<li>注意：默认父作用与不被认为是<code>props</code>的属性将会回退到子组件的根元素上，也就是例子中的<code>label</code>上，需在当前子组件的Vue内部设置<code>inheritAttrs: false</code></li>
+</ul>
+<p><em><code>good</code></em></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 父组件保持不变，子组件优化写法如下 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">:value</span>=<span class="string">"value"</span> <span class="attr">v-bind</span>=<span class="string">"$attrs"</span> <span class="attr">v-on</span>=<span class="string">"selfListeners"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">inheritAttrs</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">computed</span>: &#123;</div><div class="line">      selfListeners() &#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">          ...this.$listeners,</div><div class="line">          <span class="attr">input</span>: <span class="function"><span class="params">event</span> =&gt;</span> <span class="keyword">this</span>.$emit(<span class="string">'input'</span>, event.target.value)</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2>使用Render函数来组织渲染逻辑</h2>
+<blockquote>
+<p>教程中的例子是关于省略掉根元素来考虑的，其实这种写法应该是更贴近<code>React</code>的思路，所以学会用<code>js</code>来生成<code>HTML</code>吧</p>
+</blockquote>
+<p><em>函数式组件的<code>render</code>的写法</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 注意，如果使用这种JSX的写法，要引入`babel-plugin-transform-vue-jsx`这个插件</span></div><div class="line"><span class="comment">// 根据最新的这个插件文档，已经不用在第一个参数上传递`createElement`这个h参数了</span></div><div class="line">Vue.component(<span class="string">'my-router'</span>, &#123;</div><div class="line">  <span class="attr">functional</span>: <span class="literal">true</span>,</div><div class="line">  <span class="comment">// context参数代表上下文，里面有属性props</span></div><div class="line">  render(context) &#123;</div><div class="line">    <span class="keyword">return</span> context.props.routes.map(<span class="function"><span class="params">route</span> =&gt;</span></div><div class="line">      &lt;li key=&#123;route.name&#125;&gt;</div><div class="line">        <span class="xml"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&#123;route&#125;</span>&gt;</span>&#123;route.title&#125;<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span></div><div class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/vue/">vue</a> <a class="tag tag--primary tag--small t-link" href="/tags/webpack/">webpack</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/22/vue-senior-learn/" data-tooltip="Vue进阶部分文档研读和学习" aria-label="下一篇: Vue进阶部分文档研读和学习">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://geekarl.com/2018/04/11/four-vue-tricks/" title="分享到 Facebook">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://geekarl.com/2018/04/11/four-vue-tricks/" title="分享到 Twitter">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://geekarl.com/2018/04/11/four-vue-tricks/" title="分享到 Google+">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2018 卡少. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/22/vue-senior-learn/" data-tooltip="Vue进阶部分文档研读和学习" aria-label="下一篇: Vue进阶部分文档研读和学习">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://geekarl.com/2018/04/11/four-vue-tricks/" title="分享到 Facebook">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://geekarl.com/2018/04/11/four-vue-tricks/" title="分享到 Twitter">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://geekarl.com/2018/04/11/four-vue-tricks/" title="分享到 Google+">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <i id="btn-close-shareoptions" class="fa fa-close"></i>
+    <ul class="share-options">
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://geekarl.com/2018/04/11/four-vue-tricks/">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i><span>分享到 Facebook</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://geekarl.com/2018/04/11/four-vue-tricks/">
+                    <i class="fa fa-twitter" aria-hidden="true"></i><span>分享到 Twitter</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://geekarl.com/2018/04/11/four-vue-tricks/">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i><span>分享到 Google+</span>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.jpg" alt="作者的图片"/>
+        
+            <h4 id="about-card-name">卡少</h4>
+        
+            <div id="about-card-bio"><p>最强的求知欲才能召唤最强的自己~carry on</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>MIUI前端工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                北京
+            </div>
+        
+    </div>
+</div>
+
+        
+            <div id="algolia-search-modal" class="modal-container">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="close-button"><i class="fa fa-close"></i></span>
+            <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+                <span class="searchby-algolia-text text-color-light text-small">by</span>
+                <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+            </a>
+            <i class="search-icon fa fa-search"></i>
+            <form id="algolia-search-form">
+                <input type="text" id="algolia-search-input" name="search"
+                    class="form-control input--large search-input" placeholder="Search "
+                    />
+            </form>
+        </div>
+        <div class="modal-body">
+            <div class="no-result text-color-light text-center">没有找到文章</div>
+            <div class="results">
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/04/13/hello-world/">
+                            <h3 class="media-heading">Hello World</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年4月13日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>my first artical about Hexo</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/05/14/nav-hover/">
+                            <h3 class="media-heading">对列表hover效果的小探讨</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年5月14日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>原来用list写的nav标签效果，博客转载到新网站。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/08/13/firstHEXO/">
+                            <h3 class="media-heading">使用HEXO搭建个人博客遇到的几个问题</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年8月13日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>还好有些github的使用基础，因此hexo博客的搭建用了一天就基本完成了，但这个过程中还是有两个小问题在文档上没有找到，还好通过查资料得到了解决，及时分享出来，希望让他人少走一些弯路。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/09/14/CSS-center/">
+                            <h3 class="media-heading">用CSS实现居中的总结</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月14日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>无论是工作还是面试中，元素居中总是一个高频的问题，不同情况下需要灵活地选取不同的方法，因此有必要对常用方法做一个简要的总结。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/10/25/techniques-about-VsCode/">
+                            <h3 class="media-heading">techniques about VsCode</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年10月25日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>记录目前VScode编译器的所有插件和快捷键，方便以后查找</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/12/31/personal-summarize/">
+                            <h3 class="media-heading">卡少2016年终总结</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年12月31日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>2016年个人经历，总结过去&amp;展望未来</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/11/JS-nice-habit/">
+                            <h3 class="media-heading">代码整洁之道——JS</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月11日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>《代码整洁之道》一书的诸多原则同时适用于JS，为了在工作中编写的代码有更多的可维护性，应该常常回顾此文章，思考并进步。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/12/CSS-Good-Technique/">
+                            <h3 class="media-heading">样式代码编写习惯约定——高逼格</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月12日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>参加工作后，接触到更多的是sass的编写，这里把公司约定的CSS样式的编写习惯移步于此，方便查询并与大家分享</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/14/For-My-Lover/">
+                            <h3 class="media-heading">情人节专题~你的谜底，我来揭开</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月14日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>JSUT FOR THE SPECIAL GIRL</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/18/comment-about-LALALAND/">
+                            <h3 class="media-heading">回首——爱乐之城</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月18日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>跟女朋友一起看最近最火的电影——爱乐之城。剧情悲中有喜，于我心有戚戚焉，有感而发，遂有此随笔</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p class="results-count text-medium"
+                data-message-zero="没有找到文章"
+                data-message-one="找到 1 篇文章"
+                data-message-other="找到 {n} 篇文章">
+                找到 33 篇文章
+            </p>
+        </div>
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-peofhqjkzcghmndknakluequy1y6owxdwpaqyju9ntl9zxnk7rdolb3rjjoj.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>
+    <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <script>
+        var algoliaClient = algoliasearch('NRRSUOXO5C', 'fc865619ea4d0f7dea75788f7f4965c3');
+        var algoliaIndex = algoliaClient.initIndex('geekarl-blog');
+    </script>
+
+
+    </body>
+</html>
