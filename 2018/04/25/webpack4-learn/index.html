@@ -19,7 +19,7 @@
 <meta property="og:url" content="http://geekarl.com/2018/04/25/webpack4-learn/index.html">
 <meta property="og:site_name" content="卡少技术博客">
 <meta property="og:description" content="学习webpack4的配置更改，从而用最新的特性武装我们的日常项目。">
-<meta property="og:updated_time" content="2018-04-25T07:16:01.550Z">
+<meta property="og:updated_time" content="2018-04-28T02:05:32.110Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack4配置入门和进阶">
 <meta name="twitter:description" content="学习webpack4的配置更改，从而用最新的特性武装我们的日常项目。">
@@ -251,7 +251,7 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <!-- excerpt -->
+            <script src="/assets/js/APlayer.min.js"> </script><!-- excerpt -->
 <blockquote>
 <p>webpack作为一个模块打包器，主要用于前端工程中的依赖梳理和模块打包，将我们开发的具有高可读性和可维护性的代码文件打包成浏览器可以识别并正常运行的压缩代码，主要包括样式文件处理成<code>css</code>，各种新式的<code>JavaScript</code>转换成浏览器认识的写法等，也是前端工程师进阶的不二法门，本文借鉴了部分<code>vue-cli</code>对<code>webpack</code>的配置思路，还有一些网上比较好的解决方案，在此对这些作者一并表示感谢。</p>
 </blockquote>
@@ -344,6 +344,7 @@ PS: 关于<code>loader</code>的详细说明可以参考<code>webpack3.x</code>�
 <p>多说一句，就是实现JS打包的<code>treeShaking</code>还有一种方法是编译期分析依赖，利用uglifyjs来完成，这种情况需要保留ES6模块才能实现，因此在使用这一特性的仓库中，<code>.babelrc</code>文件的配置为:<code>&quot;presets&quot;: [[&quot;env&quot;, { &quot;modules&quot;: false }], &quot;stage-0&quot;]</code>，就是打包的时候不要转换模块引入方式的含义。</p>
 <p>接下来就可以运行<code>npm start</code>，看一下进阶配置后的成果啦，吼吼，之后只要不进行<code>build</code>打包操作，通过<code>npm run dev</code>启动，不用重复打包<code>vendor</code>啦。生产环境打包使用的是<code>npm run build</code>。</p>
 <p>以上就是对<code>webpack4.x</code>配置的踩坑过程，期间参考了大量谷歌英文资料，希望能帮助大家更好地掌握<code>wepback</code>最新版本的配置，以上内容亲测跑通，有问题的话，欢迎加我微信(kashao3824)讨论，来<a href="https://github.com/wlx200510/webpack4.x-learn" target="_blank" rel="external"><code>github</code>地址</a>提<code>issue</code>也可，欢迎<code>fork/star</code>。</p>
+<p>我的博客即将搬运同步至腾讯云+社区，邀请大家一同入驻：<a href="https://cloud.tencent.com/developer/support-plan?invite_code=3o4rq79qmyasg" target="_blank" rel="external">https://cloud.tencent.com/developer/support-plan?invite_code=3o4rq79qmyasg</a></p>
             
 
         </div>
@@ -615,7 +616,7 @@ PS: 关于<code>loader</code>的详细说明可以参考<code>webpack3.x</code>�
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>my first artical about Hexo</p></div>
+                        <div class="media-content hide-xs font-merryweather"><p>my first artical about Hexo</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -634,7 +635,7 @@ PS: 关于<code>loader</code>的详细说明可以参考<code>webpack3.x</code>�
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>原来用list写的nav标签效果，博客转载到新网站。</p></div>
+                        <div class="media-content hide-xs font-merryweather"><p>原来用list写的nav标签效果，博客转载到新网站。</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -653,7 +654,7 @@ PS: 关于<code>loader</code>的详细说明可以参考<code>webpack3.x</code>�
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>还好有些github的使用基础，因此hexo博客的搭建用了一天就基本完成了，但这个过程中还是有两个小问题在文档上没有找到，还好通过查资料得到了解决，及时分享出来，希望让他人少走一些弯路。</p></div>
+                        <div class="media-content hide-xs font-merryweather"><p>还好有些github的使用基础，因此hexo博客的搭建用了一天就基本完成了，但这个过程中还是有两个小问题在文档上没有找到，还好通过查资料得到了解决，及时分享出来，希望让他人少走一些弯路。</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -672,7 +673,7 @@ PS: 关于<code>loader</code>的详细说明可以参考<code>webpack3.x</code>�
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>无论是工作还是面试中，元素居中总是一个高频的问题，不同情况下需要灵活地选取不同的方法，因此有必要对常用方法做一个简要的总结。</p></div>
+                        <div class="media-content hide-xs font-merryweather"><p>无论是工作还是面试中，元素居中总是一个高频的问题，不同情况下需要灵活地选取不同的方法，因此有必要对常用方法做一个简要的总结。</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -691,7 +692,7 @@ PS: 关于<code>loader</code>的详细说明可以参考<code>webpack3.x</code>�
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>记录目前VScode编译器的所有插件和快捷键，方便以后查找</p></div>
+                        <div class="media-content hide-xs font-merryweather"><p>记录目前VScode编译器的所有插件和快捷键，方便以后查找</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -710,7 +711,7 @@ PS: 关于<code>loader</code>的详细说明可以参考<code>webpack3.x</code>�
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>2016年个人经历，总结过去&amp;展望未来</p></div>
+                        <div class="media-content hide-xs font-merryweather"><p>2016年个人经历，总结过去&amp;展望未来</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -729,7 +730,7 @@ PS: 关于<code>loader</code>的详细说明可以参考<code>webpack3.x</code>�
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>《代码整洁之道》一书的诸多原则同时适用于JS，为了在工作中编写的代码有更多的可维护性，应该常常回顾此文章，思考并进步。</p></div>
+                        <div class="media-content hide-xs font-merryweather"><p>《代码整洁之道》一书的诸多原则同时适用于JS，为了在工作中编写的代码有更多的可维护性，应该常常回顾此文章，思考并进步。</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -748,7 +749,7 @@ PS: 关于<code>loader</code>的详细说明可以参考<code>webpack3.x</code>�
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>参加工作后，接触到更多的是sass的编写，这里把公司约定的CSS样式的编写习惯移步于此，方便查询并与大家分享</p></div>
+                        <div class="media-content hide-xs font-merryweather"><p>参加工作后，接触到更多的是sass的编写，这里把公司约定的CSS样式的编写习惯移步于此，方便查询并与大家分享</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -767,7 +768,7 @@ PS: 关于<code>loader</code>的详细说明可以参考<code>webpack3.x</code>�
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>JSUT FOR THE SPECIAL GIRL</p></div>
+                        <div class="media-content hide-xs font-merryweather"><p>JSUT FOR THE SPECIAL GIRL</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -786,7 +787,7 @@ PS: 关于<code>loader</code>的详细说明可以参考<code>webpack3.x</code>�
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>跟女朋友一起看最近最火的电影——爱乐之城。剧情悲中有喜，于我心有戚戚焉，有感而发，遂有此随笔</p></div>
+                        <div class="media-content hide-xs font-merryweather"><p>跟女朋友一起看最近最火的电影——爱乐之城。剧情悲中有喜，于我心有戚戚焉，有感而发，遂有此随笔</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
