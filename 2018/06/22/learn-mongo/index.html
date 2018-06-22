@@ -1,0 +1,927 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="卡少技术博客">
+    <title>mongoDB数据库学习总结 - 卡少技术博客</title>
+    <meta name="author" content="卡少">
+    
+    
+        <link rel="icon" href="http://geekarl.com/assets/images/avatar.jpg">
+    
+    
+    <meta name="description" content="MongoDB数据库是Node做后台时最常用的数据库形式之一，这是完整学习Node的关键一步，学习下这个数据库的底层命令，为mongoose学习打下基础吧。">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="mongoDB数据库学习总结">
+<meta property="og:url" content="http://geekarl.com/2018/06/22/learn-mongo/index.html">
+<meta property="og:site_name" content="卡少技术博客">
+<meta property="og:description" content="MongoDB数据库是Node做后台时最常用的数据库形式之一，这是完整学习Node的关键一步，学习下这个数据库的底层命令，为mongoose学习打下基础吧。">
+<meta property="og:image" content="http://geekarl.com/learn-mongo/example.png">
+<meta property="og:updated_time" content="2018-06-22T02:34:45.946Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mongoDB数据库学习总结">
+<meta name="twitter:description" content="MongoDB数据库是Node做后台时最常用的数据库形式之一，这是完整学习Node的关键一步，学习下这个数据库的底层命令，为mongoose学习打下基础吧。">
+<meta name="twitter:image" content="http://geekarl.com/learn-mongo/example.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="http://geekarl.com/assets/images/avatar.jpg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-pz4cc6y13wt2trzqa8l3n9v0yykr0sstdaheem7qj628nhjmhp9pfawvqawz.min.css">
+    <!--STYLES END-->
+    
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">卡少技术博客</a>
+    </div>
+    
+        
+            <a  class="header-right-picture "
+                href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/avatar.jpg" alt="作者的图片"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.jpg" alt="作者的图片"/>
+                </a>
+                <h4 class="sidebar-profile-name">卡少</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>最强的求知欲才能召唤最强的自己~carry on</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/ "
+                            
+                            title="首页"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-categories"
+                            
+                            title="分类"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-tags"
+                            
+                            title="标签"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-archives"
+                            
+                            title="归档"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link open-algolia-search"
+                             href="#search"
+                            
+                            title="搜索"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="#about"
+                            
+                            title="关于"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="https://github.com/wlx200510" target="_blank" rel="noopener" title="wlx200510">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">wlx200510</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="mailto:wanglixing@outlook.com" target="_blank" rel="noopener" title="outlook">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-envelope-o" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">outlook</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/atom.xml"
+                            
+                            title="RSS"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            mongoDB数据库学习总结
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-06-22T09:56:50+08:00">
+	
+		    6月 22, 2018
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术/">技术</a>
+
+
+    
+</div>
+
+    
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <!-- excerpt -->
+<h3>基本概念与安装</h3>
+<p>mongo &gt; 非关系性数据库 &gt; 集合 &gt; 文件</p>
+<ul>
+<li>Windows 用户向导：<a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/" target="_blank" rel="external">https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/</a></li>
+<li>Linux 用户向导：<a href="https://docs.mongodb.com/manual/administration/install-on-linux/" target="_blank" rel="external">https://docs.mongodb.com/manual/administration/install-on-linux/</a></li>
+<li>Mac 用户向导：<a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/" target="_blank" rel="external">https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/</a></li>
+</ul>
+<p>可视化的<code>mongo</code>数据库工具推荐：<a href="https://studio3t.com/" target="_blank" rel="external">MongoChef</a> 是另一款强大的<code>MongoDB</code>可视化管理工具，支持<code>Windows</code>、<code>Linux</code>和<code>Mac</code>。</p>
+<p><img src="learn-mongo/example.png" alt="操作界面"></p>
+<h3>基本的<code>shell</code>操作</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">show dbs  // 链接`mongo`数据库后显示所有非空的库</div><div class="line">use admin // 进入某一个库，如果不存在则新建</div><div class="line">show collections // 显示所在库的所有集合</div><div class="line">db // 显示当前所在的数据库</div><div class="line">exit // 退出至上一层，直至断开数据库链接</div><div class="line"></div><div class="line">db.集合名.insert(&#123;数据&#125;)         // 在库下对新建集合或已有集合插入数据(不存在则新建)</div><div class="line">db.集合名.update(&#123;查询&#125;, &#123;修改&#125;)  // 在库中的此集合下更新某一条数据</div><div class="line">db.集合名.remove(&#123;数据&#125;)         // 在库中的此集合下删除某一条数据</div><div class="line">db.集合名.find()                // 查找在库下此集合中的所有数据</div><div class="line">db.集合名.findOne()             // 查询库下此集合中第一个文件数据</div><div class="line">db.集合名.drop()                // 删除库下此集合</div></pre></td></tr></table></figure>
+<h3>使用<code>js</code>脚本来编写<code>mongoShell</code>命令</h3>
+<p>本质就是<code>mongo</code>支持直接通过脚本文件来执行一系列的命令，并且在这个脚本中默认注入了一些方法，如<code>connect</code>等</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> insertName = <span class="string">"karl"</span></div><div class="line"><span class="keyword">var</span> timeStamp = <span class="built_in">Date</span>.parse(<span class="keyword">new</span> <span class="built_in">Date</span>())</div><div class="line"><span class="keyword">var</span> jsonDatabase = &#123;<span class="string">"loginName"</span>: insertName, <span class="string">"timeStamp"</span>: timeStamp&#125;</div><div class="line"><span class="keyword">var</span> db = connect(<span class="string">'test'</span>) <span class="comment">// 这个含义是在mongo中`use test`</span></div><div class="line">db.name.insert(jsonDatabase)</div><div class="line"></div><div class="line">print(<span class="string">'login success'</span>)</div></pre></td></tr></table></figure>
+<p>把以上代码保存为<code>jsTask.js</code>, 在命令行中使用<code>mongo jsTask.js</code>即可 或者<code>load('./jsTask.js')</code></p>
+<p>如果<code>db.name.insert()</code>的参数是一个元素为json对象的数组，则是批量插入</p>
+<h3><code>update</code>修改器用法</h3>
+<blockquote>
+<p>在实际应用中，由于修改操作与关系性数据库不同，容易覆盖之前的所有数据，因此引入了修改器关键字，在此重点介绍</p>
+</blockquote>
+<p><code>update()</code>这个方法可以传入第三个参数，第三个参数可以理解为<code>options</code>的对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#123;   <span class="comment">// 这个是workmate的储存数据结构, 更新相关操作都是在这个基础上生成的</span></div><div class="line">    name:<span class="string">'MinJie'</span>,</div><div class="line">    <span class="attr">age</span>:<span class="number">20</span>,</div><div class="line">    <span class="attr">sex</span>:<span class="number">0</span>,</div><div class="line">    <span class="attr">job</span>:<span class="string">'UI设计'</span>,</div><div class="line">    <span class="attr">skill</span>:&#123;</div><div class="line">        <span class="attr">skillOne</span>:<span class="string">'PhotoShop'</span>,</div><div class="line">        <span class="attr">skillTwo</span>:<span class="string">'UI'</span>,</div><div class="line">        <span class="attr">skillThree</span>:<span class="string">'Word+Excel+PPT'</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">interest</span>: [<span class="string">'看电影'</span>, <span class="string">'读书'</span>],</div><div class="line">    <span class="attr">regeditTime</span>:<span class="keyword">new</span> <span class="built_in">Date</span>()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>单文件修改</li>
+</ul>
+<p><code>$set</code>修改器，用于修改指定的键值：<br>
+<code>db.workmate.update({&quot;name&quot;:&quot;MinJie&quot;},{$set:{&quot;sex&quot;:2,&quot;age&quot;:21}})</code><br>
+上面这条命令就可以把<code>MinJie</code>这条数据对应的<code>sex</code>和<code>age</code>的键值给更新了，其他内容保持不变。<br>
+<code>db.workmate.update({&quot;name&quot;:&quot;MinJie&quot;}, {$set:{skill.skillThree:&quot;PPT&quot;}})</code><br>
+这条命令说明<code>$set</code>支持通过<code>.</code>符号来修改更新内嵌的对象内容</p>
+<p><code>$unset</code>修改器，用于删除指定的键：<br>
+<code>db.workmate.update({&quot;name&quot;:&quot;MinJie&quot;}, {$unset:{&quot;age&quot;:''}})</code></p>
+<p><code>$inc</code>数字修改器，只针对数字项的计算修改，如在原来数字基础上减去5：<br>
+<code>db.workmate.update({&quot;name&quot;:&quot;MinJie&quot;}, {$inc:{&quot;age&quot;:-5}})</code></p>
+<p><code>options</code>中的两个参数<code>multi</code>和<code>upsert</code>：<br>
+<code>db.workmate.update({name:'xiaoWang'},{$set:{&quot;age&quot;:20}},{upsert:true})</code><br>
+用于更新集合中的键值对时，如果不存在此键，则执行插入操作，默认是不插入<br>
+<code>db.workmate.update({}, {$set:{&quot;interest&quot;:[]}}}, {multi: true})</code><br>
+用于在向表中更新新的键名时，使之应用于全部的文件，使每条数据都发生更改<br>
+注意简写：update的默认第三个参数表征<code>upsert</code>, 第四个参数表征<code>multi</code></p>
+<ul>
+<li>数组批量修改</li>
+</ul>
+<p><code>$push</code>修改器，用于追加数组/内嵌文档值：<br>
+为数组类型的键增加值 <code>db.workmate.update({name:'xiaoWang'}, {$push:{&quot;interest&quot;:'draw'}})</code><br>
+为内嵌文档内容增加值 <code>db.workmate.update({name:'xiaoWang'}, {$push:{&quot;skill.skillFour&quot;:'draw'}})</code></p>
+<p><code>$addToSet</code>修改器，当数组中不存在要更新的值时再触发追加操作：<br>
+用法示例(已经有<code>draw</code>则不触发) <code>db.workmate.update({name:'xiaoWang'}, {$addToSet:{&quot;interest&quot;:'draw'}})</code><br>
+使用<code>$ne</code>的等效语句 <code>db.workmate.update({name:'xiaoWang',&quot;interest&quot;:{$ne:'draw'}},{$push:{&quot;interest&quot;:'draw'}})</code></p>
+<p><code>$each</code>数组修改器，用于一次性插入多个数据到数组中：<br>
+现在要给xiaoWang,一次加入三个爱好，唱歌（Sing），跳舞（Dance），编码（Code）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> newInterset=[<span class="string">"Sing"</span>,<span class="string">"Dance"</span>,<span class="string">"Code"</span>]</div><div class="line">db.workmate.update(&#123;<span class="attr">name</span>: <span class="string">'xiaoWang'</span>&#125;, &#123;<span class="attr">$addToSet</span>:&#123;<span class="string">"interest"</span>:&#123;<span class="attr">$each</span>:newInterset&#125;&#125;&#125;)</div></pre></td></tr></table></figure>
+<p><code>$pop</code>数组删除修改器，通过传参数来决定从数组首位(-1)还是末尾(1)删除：<br>
+删除最后一个兴趣 <code>db.workmate.update({name:'xiaoWang'},{$pop:{&quot;interest&quot;:1}})</code></p>
+<p>数组定位修改可以用类似内嵌文档的语法：<br>
+把第二个兴趣值改成读书 <code>db.workmate.update({name: 'xiaoWang'}, {$set:{&quot;interest.1&quot;:'read'}})</code></p>
+<h3>应答式操作的修改方式</h3>
+<blockquote>
+<p>应答式写入就会给我们直接返回结果（报表），结果里边的包含项会很多，从而可以灵活地根据上一步的结果来决定下一步的结果</p>
+</blockquote>
+<ul>
+<li>之前的所有内容都是非应答式操作，也就是操作完之后没有反馈，并不知道是否成功</li>
+<li>需要引入<code>db.runCommand()</code>这个执行器，用于包裹执行命令，然后可以根据返回内容判断是否操作成功。</li>
+<li><code>db.listCommonds()</code>用于看执行器可以执行的命令，如<code>db.runCommand({ping:1})</code>看数据库链接是否成功</li>
+<li><code>findAndModify</code>也是执行器的命令之一，可以用于查找并触发删除或者修改等动作并通过执行器反馈，示例如下</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myModify=&#123;</div><div class="line">    <span class="attr">findAndModify</span>:<span class="string">"workmate"</span>, <span class="comment">// 填入要操作的集合名</span></div><div class="line">    query:&#123;<span class="attr">name</span>:<span class="string">'xiaoWang'</span>&#125;,</div><div class="line">    <span class="attr">update</span>:&#123;<span class="attr">$set</span>:&#123;<span class="attr">age</span>:<span class="number">18</span>&#125;&#125;, <span class="comment">// 表示修改该条查询到的数据</span></div><div class="line">    <span class="keyword">new</span>:<span class="literal">true</span>    <span class="comment">//更新完成，需要查看结果，如果为false不进行查看结果</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> ResultMessage=db.runCommand(myModify);</div><div class="line"> </div><div class="line">printjson(ResultMessage) <span class="comment">//打印JSON数据</span></div></pre></td></tr></table></figure>
+<p><code>findAndModify</code>可用的属性值：</p>
+<ol>
+<li>query：需要查询的条件/文档</li>
+<li>sort： 进行排序</li>
+<li>remove：[boolean]是否删除查找到的文档，值填写<code>true</code>，可以删除。(与<code>update</code>不可共存)</li>
+<li>new:[boolean]返回更新前的文档还是更新后的文档。</li>
+<li>fields：需要返回的字段</li>
+<li>upsert：没有这个值是否增加。</li>
+</ol>
+<p>接下来的课程的所有涉及删除和更新的操作都会用到<code>findAndModify</code>这个功能，从而保持数据操作的严谨性。</p>
+<h3><code>find</code>命令来查找数据</h3>
+<blockquote>
+<p><code>find</code>操作是数据库最常用的查询命令，其语法与关系性数据库差异是最大的，用例子来讲方便入手</p>
+</blockquote>
+<p><code>db.workmate.find({&quot;skill.skillOne&quot;:&quot;HTML+CSS&quot;}, {name: 1, _id: 0, job: 1})</code><br>
+<code>find</code>的第一个参数是要查询的<code>query</code>，后面的对象参数是指定返回来的字段，默认是全返回，<code>_id</code>是这条数据的默认<code>key</code>键，默认返回，如果不需要返回需指定此项是<code>0</code>或<code>false</code>，其他项需返回，则要指定为<code>1</code>或<code>true</code>。</p>
+<p><code>db.workmate.find({age:{$lte:30,$gte:25}},{name:true,age:true,&quot;skill.skillOne&quot;:true,_id:false})</code><br>
+上面这个命令用于查找出年龄大于25小于30的同事，这里用到了不等修饰符</p>
+<ul>
+<li>小于($lt):英文全称<code>less-than</code></li>
+<li>小于等于($lte)：英文全称<code>less-than-equal</code></li>
+<li>大于($gt):英文全称<code>greater-than</code></li>
+<li>大于等于($gte):英文全称<code>greater-than-equal</code></li>
+<li>不等于($ne):英文全称<code>not-equal</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> startDate= <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'01/01/2018'</span>);</div><div class="line">db.workmate.find(</div><div class="line">    &#123;<span class="attr">regeditTime</span>:&#123;<span class="attr">$gt</span>:startDate&#125;&#125;,</div><div class="line">    &#123;<span class="attr">name</span>:<span class="literal">true</span>,<span class="attr">age</span>:<span class="literal">true</span>,<span class="string">"skill.skillOne"</span>:<span class="literal">true</span>,<span class="attr">_id</span>:<span class="literal">false</span>&#125;</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>上面的命令用于找出注册时间大于1月1日的数据，可以看出用时间来比较很方便。</p>
+<blockquote>
+<p><code>find</code>同样支持多条件查询，其对应的关键字为：<code>$and、$or、$not</code>这三个</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">db.workmate.find(&#123;<span class="attr">$and</span>:[ <span class="comment">// 同时满足两个条件的数据</span></div><div class="line">    &#123;<span class="attr">age</span>:&#123;<span class="attr">$gte</span>:<span class="number">30</span>&#125;&#125;,</div><div class="line">    &#123;<span class="string">"skill.skillThree"</span>:<span class="string">'PHP'</span>&#125;</div><div class="line">]&#125;, &#123;<span class="attr">name</span>:<span class="number">1</span>,<span class="string">"skill.skillThree"</span>:<span class="number">1</span>,<span class="attr">age</span>:<span class="number">1</span>,<span class="attr">_id</span>:<span class="number">0</span>&#125;)</div><div class="line"></div><div class="line">db.workmate.find(&#123;<span class="attr">$or</span>:[ <span class="comment">// 只要满足一个条件即可</span></div><div class="line">    &#123;<span class="attr">age</span>:&#123;<span class="attr">$gte</span>:<span class="number">30</span>&#125;&#125;,</div><div class="line">    &#123;<span class="string">"skill.skillThree"</span>:<span class="string">'PHP'</span>&#125;</div><div class="line">]&#125;, &#123;<span class="attr">name</span>:<span class="number">1</span>,<span class="string">"skill.skillThree"</span>:<span class="number">1</span>,<span class="attr">age</span>:<span class="number">1</span>,<span class="attr">_id</span>:<span class="number">0</span>&#125;)</div><div class="line"></div><div class="line">db.workmate.find(&#123;</div><div class="line">    <span class="attr">age</span>:&#123; <span class="comment">// 筛选不满足条件的数据</span></div><div class="line">        $not:&#123; <span class="attr">$lte</span>:<span class="number">30</span>, <span class="attr">$gte</span>:<span class="number">20</span> &#125;</div><div class="line">    &#125;</div><div class="line">&#125;, &#123;<span class="attr">name</span>:<span class="number">1</span>,<span class="string">"skill.skillOne"</span>:<span class="number">1</span>,<span class="attr">age</span>:<span class="number">1</span>,<span class="attr">_id</span>:<span class="number">0</span>&#125;)</div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>find</code>的数组查询，即当储存的某一个键的值是数组时，有额外的查询方法和技巧</p>
+</blockquote>
+<p>现在我把之前的数据结构加以改变，增加一个<code>interests</code>数组类的储存</p>
+<p>基本查询(很少用，得知概念即可)：</p>
+<p>不带中括号的查询：为只要这一项是待匹配数据的数组中有的，就会找出来，常用的是<code>tag</code>标示。<br>
+<code>db.workmate.find({interest:'看电影'}, {name:1,interest:1,age:1,_id:0})</code></p>
+<p>带中括号的查询：必须是数组中的元素完全匹配才能找出来，也就是必须完全一致<br>
+<code>db.workmate.find({interest:['画画','聚会','看电影']}, {name:1,interest:1,age:1,_id:0})</code></p>
+<ul>
+<li><code>$all</code>-数组多项查询，用于同时查询数组中多个元素，类似非数组中的<code>$and</code>，但用法不同</li>
+<li><code>$in</code>-数组或查询，用于用多个元素来筛选数据，类似非数组中的<code>$or</code>，但用法不同</li>
+<li><code>$size</code>-数组数量查询，用于指定查出数组的长度为指定值的数据，数组查询特有</li>
+<li><code>$slice</code>-非查询指令，用于指定数组项的返回个数，用在第二个参数中，如显示前两项等要求</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">db.workmate.find(&#123;<span class="attr">age</span>:&#123;<span class="attr">$in</span>:[<span class="number">25</span>,<span class="number">33</span>]&#125;&#125;, <span class="comment">//传递一个数组，值在其中即为满足 类似$or 还有$nin是相反的作用</span></div><div class="line">    &#123;<span class="attr">name</span>:<span class="number">1</span>,<span class="string">"skill.skillOne"</span>:<span class="number">1</span>,<span class="attr">age</span>:<span class="number">1</span>,<span class="attr">_id</span>:<span class="number">0</span>&#125;</div><div class="line">)</div><div class="line">db.workmate.find( <span class="comment">// 查询出喜欢看电影并且喜欢看书的同事</span></div><div class="line">    &#123;<span class="attr">interest</span>:&#123;<span class="attr">$all</span>:[<span class="string">"看电影"</span>,<span class="string">"看书"</span>]&#125;&#125;,</div><div class="line">    &#123;<span class="attr">name</span>:<span class="number">1</span>,<span class="attr">interest</span>:<span class="number">1</span>,<span class="attr">age</span>:<span class="number">1</span>,<span class="attr">_id</span>:<span class="number">0</span>&#125; </div><div class="line">)</div><div class="line">db.workmate.find( <span class="comment">// 查询出兴趣数量为5个的同事</span></div><div class="line">    &#123;<span class="attr">interest</span>:&#123;<span class="attr">$size</span>:<span class="number">5</span>&#125;&#125;,</div><div class="line">    &#123;<span class="attr">name</span>:<span class="number">1</span>,<span class="attr">interest</span>:<span class="number">1</span>,<span class="attr">age</span>:<span class="number">1</span>,<span class="attr">_id</span>:<span class="number">0</span>&#125; </div><div class="line">)</div><div class="line">db.workmate.find(&#123;&#125;, <span class="comment">// 每个人的兴趣信息只显示前两项</span></div><div class="line">    &#123;<span class="attr">name</span>:<span class="number">1</span>,<span class="attr">interest</span>:&#123;<span class="attr">$slice</span>:<span class="number">2</span>&#125;,<span class="attr">age</span>:<span class="number">1</span>,<span class="attr">_id</span>:<span class="number">0</span>&#125; </div><div class="line">)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>学习使用<code>find</code>命令进行分页查询之前，首先看一下如何编写<code>js</code>脚本来进行数据查询，本质就是赋值后循环打印</p>
+</blockquote>
+<p>使用<code>forEach</code>方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> db = connect(<span class="string">"company"</span>)  <span class="comment">//进行链接对应的集合collections</span></div><div class="line"><span class="keyword">var</span> result = db.workmate.find() <span class="comment">//声明变量result，并把查询结果赋值给result</span></div><div class="line">result.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</div><div class="line">    printjson(result)  <span class="comment">//用json格式打印结果</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>使用<code>hasNext+while</code>的方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> db = connect(<span class="string">"company"</span>)  <span class="comment">//进行链接对应的集合collections</span></div><div class="line"><span class="keyword">var</span> result = db.workmate.find() <span class="comment">//声明变量result，并把查询结果赋值给result</span></div><div class="line"><span class="comment">//利用游标的hasNext()进行循环输出结果。</span></div><div class="line"><span class="keyword">while</span>(result.hasNext())&#123;</div><div class="line">    printjson(result.next())</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接下来就可以尝试通过写脚本来完成查询数据库的操作啦</p>
+<blockquote>
+<p>分页查询指令的学习，可以使用类似函数式的链式调用，可读性很强</p>
+</blockquote>
+<p><code>find</code>参数：</p>
+<ul>
+<li><code>query</code>：这个就是查询条件，MongoDB默认的第一个参数。</li>
+<li><code>fields</code>：（返回内容）查询出来后显示的结果样式，可以用true和false控制是否显示。</li>
+<li><code>limit</code>：返回的数量，后边跟数字，控制每次查询返回的结果数量。</li>
+<li><code>skip</code>:跳过多少个显示，和limit结合可以实现分页。</li>
+<li><code>sort</code>：排序方式，从小到大排序使用1，从大到小排序使用-1。</li>
+</ul>
+<p>使用传参数操作的脚本:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> db = connect(<span class="string">"company"</span>)</div><div class="line"><span class="keyword">var</span> findData = &#123;</div><div class="line">    <span class="attr">query</span>: &#123;<span class="attr">interest</span>: &#123;<span class="attr">$size</span>:<span class="number">3</span>&#125;&#125;, <span class="comment">// 兴趣数量3个</span></div><div class="line">    fields: &#123;<span class="attr">_id</span>: <span class="number">0</span>, <span class="attr">name</span>: <span class="number">1</span>, <span class="attr">sex</span>: <span class="number">1</span>, <span class="attr">interest</span>: &#123;<span class="attr">$slice</span>: <span class="number">4</span>&#125;&#125;,</div><div class="line">    <span class="attr">limit</span>: <span class="number">3</span>, <span class="comment">// 每页三个数据</span></div><div class="line">    skip: <span class="number">1</span>, <span class="comment">// 跳过第一个显示，如果取limit的值 就是下一页</span></div><div class="line">    sort: &#123;<span class="attr">age</span>: <span class="number">1</span>&#125; <span class="comment">//根据年龄从小到大排序</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> result = db.workmate.find(findData.query, findData.fields, findData.limit, findData.skip, findData.sort)</div><div class="line">result.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">json</span>)</span>&#123;</div><div class="line">    printjson(json)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>链式操作脚本:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> db = connect(<span class="string">"company"</span>)</div><div class="line"><span class="keyword">var</span> query = &#123;<span class="attr">interest</span>: <span class="string">'看电影'</span>&#125;, <span class="comment">// 兴趣包括看电影</span></div><div class="line">    fields = &#123;<span class="attr">_id</span>: <span class="number">0</span>, <span class="attr">name</span>: <span class="number">1</span>, <span class="attr">sex</span>: <span class="number">1</span>, <span class="attr">interest</span>: &#123;<span class="attr">$slice</span>: <span class="number">3</span>&#125;&#125;</div><div class="line"><span class="keyword">var</span> result = db.workmate.find(findData.query, findData.fields).limit(<span class="number">4</span>).skip(<span class="number">4</span>).sort(&#123;<span class="attr">age</span>: <span class="number">-1</span>&#125;)</div><div class="line">result.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">json</span>)</span>&#123;</div><div class="line">    printjson(json)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>$where</code>操作符，可以通过<code>js</code>语法来查询，方便，但要慎用，安全性和性能较低</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">db.workmate.find(&#123; <span class="attr">$where</span>: <span class="string">"this.interest.length &lt; 4"</span> &#125;)</div><div class="line"></div><div class="line">db.workmate.find( <span class="comment">// 查找年龄小于30的，this指向所检索数据对象</span></div><div class="line">    &#123;<span class="attr">$where</span>:<span class="string">"this.age&gt;30"</span>&#125;,</div><div class="line">    &#123;<span class="attr">name</span>:<span class="literal">true</span>,<span class="attr">age</span>:<span class="literal">true</span>,<span class="attr">_id</span>:<span class="literal">false</span>&#125;</div><div class="line">)</div></pre></td></tr></table></figure>
+<h3>mongoDB数据库权限管理</h3>
+<blockquote>
+<p>对于数据库，我们有必要根据不同的用户赋予不同的权限，还有设置用户名和密码，以及鉴权等操作，看一下基本的命令</p>
+</blockquote>
+<p>首先进入<code>admin</code>库中，进入方法是直接使用<code>use admin</code> 就可以。<br>
+进入后可以使用<code>show collections</code>来查看数据库中的集合。默认是只有一个集合的<code>system.version</code>。</p>
+<p>新建用户的脚本:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">db.createUser(&#123;</div><div class="line">    <span class="attr">user</span>:<span class="string">"karl"</span>,</div><div class="line">    <span class="attr">pwd</span>:<span class="string">"123456"</span>,</div><div class="line">    <span class="attr">customData</span>:&#123;</div><div class="line">        <span class="attr">name</span>:<span class="string">'geekarl'</span>,</div><div class="line">        <span class="attr">email</span>:<span class="string">'web@126.com'</span>,</div><div class="line">        <span class="attr">age</span>:<span class="number">28</span>,</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">roles</span>:[ <span class="comment">// 数据库用户角色只有两个选项 read 和 readWrite</span></div><div class="line">        &#123;</div><div class="line">            <span class="attr">role</span>:<span class="string">"readWrite"</span>,</div><div class="line">            <span class="attr">db</span>:<span class="string">"company"</span> <span class="comment">// 针对特定数据库</span></div><div class="line">        &#125;,</div><div class="line">        <span class="string">'read'</span> <span class="comment">// 针对其他数据库</span></div><div class="line">    ]</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>内置角色(了解即可)：</p>
+<ul>
+<li>数据库用户角色：read、readWrite；</li>
+<li>数据库管理角色：dbAdmin、dbOwner、userAdmin;</li>
+<li>集群管理角色：clusterAdmin、clusterManager、clusterMonitor、hostManage；</li>
+<li>备份恢复角色：backup、restore；</li>
+<li>所有数据库角色：readAnyDatabase、readWriteAnyDatabase、userAdminAnyDatabase、dbAdminAnyDatabase</li>
+<li>超级用户角色：root</li>
+<li>内部角色：__system</li>
+</ul>
+<p>查找和删除用户(user加s)：</p>
+<p><code>db.system.users.find()</code><br>
+<code>db.system.users.remove({user: 'karl'})</code></p>
+<p><code>mongoDB</code>的鉴权操作：<code>db.auth(&quot;karl&quot;, &quot;123456&quot;)</code> 成功返回1，失败返回0</p>
+<p>关闭重启<code>mongo</code>，以鉴权方式启动: <code>mongod --auth</code> 此后使用用户名和密码登陆后才能对<code>mongo</code>进行操作<br>
+<code>mongo -u karl -p 123456 127.0.0.1:27017/admin</code>然后就可以正常操作了</p>
+<p>以上是对<code>mongo</code>的操作进行权限保护，在工作中用后端应用连接数据库操作是一个很频繁且需要慎重的过程，因此这一块需要明确的认知</p>
+<h3><code>mongo</code>数据库的备份和恢复</h3>
+<blockquote>
+<p>这个工作大部分是<code>DBA</code>或者运维同学来操作，但如果做一个完整的项目，必须要有容错的手段和容灾备份。</p>
+</blockquote>
+<p><code>mongodump</code>为数据备份的操作命令，其<code>shell</code>中基本格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">mongodump</div><div class="line">    --host 127.0.0.1</div><div class="line">    --port 27017</div><div class="line">    --out D:/databack/backup</div><div class="line">    --collection myCollections</div><div class="line">    --db test</div><div class="line">    --username username</div><div class="line">    --password password</div></pre></td></tr></table></figure>
+<p>把当前<code>Mongo</code>的库备份到D盘下的<code>dataBack</code>文件夹(登陆者需要有相应的权限)：<br>
+<code>mongodump --host 127.0.0.1 --port 27017 --out D:/databack</code></p>
+<p>备份好之后就可以用于数据库的还原了，还原数据库的命令是<code>mongorestore</code>，在数据库出现意外时还原</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mongorestore</div><div class="line">    --host 127.0.0.1</div><div class="line">    --port 27017</div><div class="line">    --username username</div><div class="line">    --password password</div><div class="line">    &lt;path to the backup&gt;</div></pre></td></tr></table></figure>
+<p>使用命令进行恢复：<code>mongorestore --host 127.0.0.1 --port 27017 D:/databack/</code></p>
+<p>备份和恢复都可以做成脚本任务，备份可能需要运维定时间运行。脚本设置可以参考<a href="https://blog.csdn.net/huwei2003/article/details/44059797" target="_blank" rel="external">这里</a>，需要有<code>shell</code>基础。</p>
+<h3>数据库的索引</h3>
+<blockquote>
+<p>用于数据检索时，通过指定字段建立对应索引值，从而在检索<code>find</code>的命令执行时，相应字段的检索效率会成倍提升。</p>
+</blockquote>
+<p>显示索引: <code>db.randomInfo.getIndexes()</code> 会发现<code>_id</code>是唯一的索引</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[</div><div class="line">    &#123;</div><div class="line">        <span class="attr">"v"</span> : <span class="number">2</span>,</div><div class="line">        <span class="attr">"key"</span> : &#123;</div><div class="line">            <span class="attr">"_id"</span> : <span class="number">1</span></div><div class="line">        &#125;,</div><div class="line">        <span class="attr">"name"</span> : <span class="string">"_id_"</span>,</div><div class="line">        <span class="attr">"ns"</span> : <span class="string">"company.randomInfo"</span></div><div class="line">    &#125;</div><div class="line">]</div></pre></td></tr></table></figure>
+<p>为集合添加索引: <code>db.randomInfo.ensureIndex({username:1})</code> 把用户名建立索引，通过用户名来检索的速度提升<br>
+删除索引(): <code>db.randomInfo.dropIndex('randNum0_1');</code><br>
+这里需要注意的是删除时填写的值，并不是我们的字段名称(<code>key</code>)，而是我们索引查询表中的<code>name</code>值。<br>
+如果复合查询的两个字段都建立了索引，可以通过<code>hit</code>方法来指定以何种字段优先检索:<br>
+<code>var rs= db.randomInfo.find({username:'7xwb8y3',randNum0:565509}).hint({randNum0:1});</code></p>
+<p>整个简易教程到此结束，希望对入门<code>mongoDB</code>的人有一定帮助和借鉴~</p>
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/学习/">学习</a> <a class="tag tag--primary tag--small t-link" href="/tags/积累/">积累</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/25/webpack4-learn/" data-tooltip="webpack4配置入门和进阶" aria-label="下一篇: webpack4配置入门和进阶">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://geekarl.com/2018/06/22/learn-mongo/" title="分享到 Facebook">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://geekarl.com/2018/06/22/learn-mongo/" title="分享到 Twitter">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://geekarl.com/2018/06/22/learn-mongo/" title="分享到 Google+">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2018 卡少. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/25/webpack4-learn/" data-tooltip="webpack4配置入门和进阶" aria-label="下一篇: webpack4配置入门和进阶">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://geekarl.com/2018/06/22/learn-mongo/" title="分享到 Facebook">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://geekarl.com/2018/06/22/learn-mongo/" title="分享到 Twitter">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://geekarl.com/2018/06/22/learn-mongo/" title="分享到 Google+">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <i id="btn-close-shareoptions" class="fa fa-close"></i>
+    <ul class="share-options">
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://geekarl.com/2018/06/22/learn-mongo/">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i><span>分享到 Facebook</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://geekarl.com/2018/06/22/learn-mongo/">
+                    <i class="fa fa-twitter" aria-hidden="true"></i><span>分享到 Twitter</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://geekarl.com/2018/06/22/learn-mongo/">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i><span>分享到 Google+</span>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.jpg" alt="作者的图片"/>
+        
+            <h4 id="about-card-name">卡少</h4>
+        
+            <div id="about-card-bio"><p>最强的求知欲才能召唤最强的自己~carry on</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>MIUI前端工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                北京
+            </div>
+        
+    </div>
+</div>
+
+        
+            <div id="algolia-search-modal" class="modal-container">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="close-button"><i class="fa fa-close"></i></span>
+            <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+                <span class="searchby-algolia-text text-color-light text-small">by</span>
+                <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+            </a>
+            <i class="search-icon fa fa-search"></i>
+            <form id="algolia-search-form">
+                <input type="text" id="algolia-search-input" name="search"
+                    class="form-control input--large search-input" placeholder="Search "
+                    />
+            </form>
+        </div>
+        <div class="modal-body">
+            <div class="no-result text-color-light text-center">没有找到文章</div>
+            <div class="results">
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/04/13/hello-world/">
+                            <h3 class="media-heading">Hello World</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年4月13日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>my first artical about Hexo</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/05/14/nav-hover/">
+                            <h3 class="media-heading">对列表hover效果的小探讨</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年5月14日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>原来用list写的nav标签效果，博客转载到新网站。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/08/13/firstHEXO/">
+                            <h3 class="media-heading">使用HEXO搭建个人博客遇到的几个问题</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年8月13日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>还好有些github的使用基础，因此hexo博客的搭建用了一天就基本完成了，但这个过程中还是有两个小问题在文档上没有找到，还好通过查资料得到了解决，及时分享出来，希望让他人少走一些弯路。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/09/14/CSS-center/">
+                            <h3 class="media-heading">用CSS实现居中的总结</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月14日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>无论是工作还是面试中，元素居中总是一个高频的问题，不同情况下需要灵活地选取不同的方法，因此有必要对常用方法做一个简要的总结。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/10/25/techniques-about-VsCode/">
+                            <h3 class="media-heading">techniques about VsCode</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年10月25日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>记录目前VScode编译器的所有插件和快捷键，方便以后查找</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2016/12/31/personal-summarize/">
+                            <h3 class="media-heading">卡少2016年终总结</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年12月31日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>2016年个人经历，总结过去&amp;展望未来</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/11/JS-nice-habit/">
+                            <h3 class="media-heading">代码整洁之道——JS</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月11日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>《代码整洁之道》一书的诸多原则同时适用于JS，为了在工作中编写的代码有更多的可维护性，应该常常回顾此文章，思考并进步。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/12/CSS-Good-Technique/">
+                            <h3 class="media-heading">样式代码编写习惯约定——高逼格</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月12日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>参加工作后，接触到更多的是sass的编写，这里把公司约定的CSS样式的编写习惯移步于此，方便查询并与大家分享</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/14/For-My-Lover/">
+                            <h3 class="media-heading">情人节专题~你的谜底，我来揭开</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月14日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>JSUT FOR THE SPECIAL GIRL</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://geekarl.com/2017/02/18/comment-about-LALALAND/">
+                            <h3 class="media-heading">回首——爱乐之城</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2017年2月18日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><script src="/assets/js/APlayer.min.js"> </script><p>跟女朋友一起看最近最火的电影——爱乐之城。剧情悲中有喜，于我心有戚戚焉，有感而发，遂有此随笔</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p class="results-count text-medium"
+                data-message-zero="没有找到文章"
+                data-message-one="找到 1 篇文章"
+                data-message-other="找到 {n} 篇文章">
+                找到 35 篇文章
+            </p>
+        </div>
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-peofhqjkzcghmndknakluequy1y6owxdwpaqyju9ntl9zxnk7rdolb3rjjoj.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>
+    <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <script>
+        var algoliaClient = algoliasearch('NRRSUOXO5C', 'fc865619ea4d0f7dea75788f7f4965c3');
+        var algoliaIndex = algoliaClient.initIndex('geekarl-blog');
+    </script>
+
+
+    </body>
+</html>
